@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wang.server.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.wang.server.entity.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wang.server.entity.User" >
+    insert into user (id, `name`, birthday, 
+      area, job)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, 
+      #{area,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wang.server.entity.User" >
+    update user
+    set `name` = #{name,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, `name`, birthday, area, job
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, `name`, birthday, area, job
+    from user
+  </select>
+</mapper>
