@@ -1,24 +1,27 @@
 <!--  -->
 <template>
   <div>
-    email:dfasfasd
+    <BUtton @click="yonghu"></BUtton>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data () {
     return {
     };
   },
 
-  components: {},
-
-  computed: {},
-
-  mounted: {},
-
-  methods: {}
+  methods: {
+    yonghu(){
+      this.$axios.post('/panda/user/getUser').then(result => {
+        console.log(result);
+        
+      })
+    
+    }
+  }
 }
 
 </script>
