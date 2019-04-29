@@ -11,6 +11,12 @@
         </router-link>
       </ul>
     </nav>
+    <div>
+      <router-link to="/login">
+      注册
+      </router-link>
+      
+    </div>
   </header>
 </template>
 <script>

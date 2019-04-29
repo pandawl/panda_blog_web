@@ -8,8 +8,7 @@ import axios from 'axios'
 import qs from "qs"
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-
-import 'styles/index.css'
+import './assets/styles/index.css'
 
 Vue.config.productionTip = false
 

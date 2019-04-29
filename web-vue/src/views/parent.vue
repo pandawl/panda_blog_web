@@ -2,43 +2,41 @@
 <template>
   <div>
     i am parent
-    <button @click="handleClick('back')">返回上一页</button>
-    <button @click="handleClick('push')">返回上一页</button>
-    <button @click="handleClick('replace')">返回上一页</button>
-    <router-view/>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">slider1</div>
+        <div class="swiper-slide">slider2</div>
+        <div class="swiper-slide">slider3</div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
   </div>
-
 </template>
 
 <script>
+import Swiper from 'swiper'
+import "swiper/dist/css/swiper.min.css";
+import {reqUser} from '../api/index'
 export default {
-  data () {
-    return {
-    };
+  data() {
+    return {};
   },
-
   components: {},
-
-  computed: {},
-
-  mounted: {},
-
-  methods: {
-    handleClick(type){
-      if(type === 'back'){
-        this.$router.back()//this.$router.go(-1)//返回上一页
-      }else if (type === 'push'){
-        this.$router.push('/login')// mame:'login跳转
-      }else if (type === 'replace'){
-        this.$router.replace({
-            name: '/login'
-        })// mame:'login 替换
+  mounted(){
+    //创建一个swiper实例对象
+    new Swiper('.swiper-container',{
+      loop: true,//循环
+      //分页器
+      pagination: {
+        el: '.swiper-pagination'
       }
-
-    }
+    }),
+    reqUser(5)
   }
-}
-
+};
 </script>
-<style lang='scss' scoped>
+<style lang='scss' scoped> 
+.swiper-container{
+  background-color: aqua
+}
 </style>
