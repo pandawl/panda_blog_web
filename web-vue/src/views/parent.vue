@@ -2,14 +2,7 @@
 <template>
   <div>
     i am parent
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">slider1</div>
-        <div class="swiper-slide">slider2</div>
-        <div class="swiper-slide">slider3</div>
-      </div>
-      <div class="swiper-pagination"></div>
-    </div>
+
   </div>
 </template>
 
@@ -23,20 +16,11 @@ export default {
   },
   components: {},
   mounted(){
-    //创建一个swiper实例对象
-    new Swiper('.swiper-container',{
-      loop: true,//循环
-      //分页器
-      pagination: {
-        el: '.swiper-pagination'
-      }
-    }),
-    reqUser(5)
   }
 };
 </script>
-<style lang='scss' scoped> 
+<style lang='scss' scoped>
 .swiper-container{
-  background-color: aqua
+  background-color: rgb(10, 162, 233)
 }
 </style>

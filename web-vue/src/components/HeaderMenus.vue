@@ -1,123 +1,42 @@
 <template>
-  <header class="header-navigation"  ref="header" id="header">
-    <nav>
-      <div class="logo"><a href="/">panda个人博客</a></div>
-      <!--移动端时显示菜单按钮-->
-      <h2 ref="mnavh" v-bind:class="{'open':!isShowNav}" @click="handleClick" id="mnavh"><span class="navicon"></span>
-      </h2>
-      <ul ref="startlist" id="starlist">
-        <router-link tag="li" :to="item.url" v-for="(item, index) in navs" :itemIndex="index" :key="index" >
-          {{item.content}}
-        </router-link>
-      </ul>
-    </nav>
-    <div>
-      <router-link to="/login">
-      注册
-      </router-link>
-      
-    </div>
-  </header>
+  <div>
+    <el-menu
+      class="header_panda"
+      mode="horizontal"
+      background-color="#1E9FFF"
+      text-color="#fff"
+      active-text-color="#ffd04b"
+      router
+    >
+      <el-menu-item class="header_index_panda" index="/named_view">网站首页</el-menu-item>
+      <el-menu-item index="/login">技术杂谈</el-menu-item>
+      <el-menu-item index="3">生活笔记</el-menu-item>
+      <el-menu-item index="4">日志系统</el-menu-item>
+      <el-menu-item index="4">我的书单</el-menu-item>
+      <el-menu-item index="5">留言板</el-menu-item>
+      <el-menu-item index="6">关于我</el-menu-item>
+
+    </el-menu>
+  </div>
 </template>
 <script>
 export default {
-  name: 'HeaderMenus',
-  mounted () {
-    window.addEventListener('scroll', this.throttle(this.handleScroll, 200))
-  },
-  destroyed () {
-    window.removeEventListener('scroll', this.throttle(this.handleScroll, 200))
-  },
-  data () {
-    return {
-      switchHandle: false,
-      isShowNav: true,
-      navs: [
-        {
-          url: '/index',
-          content: '网站首页',
-          isSelected: false
-        },
-        {
-          url: '/blogs/category/0',
-          content: '文章',
-          isSelected: false
-        },
-        {
-          url: '/comments/0',
-          content: '留言',
-          isSelected: false
-        },
-        {
-          url: '/about',
-          content: '关于我',
-          isSelected: false
-        }
-      ]
-    }
-  },
-  methods: {
-    handleScroll () {
-      if (document.documentElement.scrollTop > 70) {
-        if (!this.switchHandle) {
-          this.switchHandle = true
-          this.$refs.header.style.top = '-60px'
-        }
-      } else {
-        if (this.switchHandle) {
-          this.switchHandle = false
-          this.$refs.header.style.top = '0px'
-        }
-      }
-    },
-    handleClick () {
-      this.isShowNav = !this.isShowNav
-      var _startlist = this.$refs.startlist
-      if ((!_startlist.style.display) || _startlist.style.display === 'none') {
-        _startlist.style.display = 'block'
-      } else {
-        _startlist.style.display = 'none'
-      }
-    },
-    throttle (func, delay) {
-      let timer = null
-      let startTime = Date.now()
-      return function () {
-        let curTime = Date.now()
-        let remaining = delay - (curTime - startTime)
-        const context = this
-        const args = arguments
-        clearTimeout(timer)
-        if (remaining <= 0) {
-          func.apply(context, args)
-          startTime = Date.now()
-        } else {
-          timer = setTimeout(func, remaining)
-        }
-      }
-    }
+  name: "HeaderMenus",
+  data() {
+    return {};
   }
-}
+};
 </script>
 
 <style scoped>
-#starlist li{
-  cursor: pointer;
-  padding-left: 20px;
-  padding-right: 20px;
-  text-align: center;
-  border-radius: 1px
+.header_index_panda {
+  margin-left: 16.7%;
 }
-#starlist li:hover{
-  /*background: #4AF2A1;*/
-  /*color:#ADFFD5;*/
-  transition: .3s;
-  background-color: rgba(0,0,0,0.1);
-  font-weight: bolder;
+.header_search_panda {
+  margin-left: 14%;
 }
-.router-link-active{
-  /*background: #4AF2A1;*/
-  /*color: #ADFFD5*/
-  color: #f56c6c;
+.index-select-button-panda{
+   background-color: aqua;
+
 }
 </style>

@@ -14,13 +14,13 @@ export default [
             showLogin: true
         }
     },
-    {
+/*     {
         //动态路由 http://localhost:8080/panda/hh#/  {{$route.params.name}}
         path: '/panda/:name',
         component: () =>
             import ('@/views/index.vue'),
         props: true //里面的参数name 传入到组建中
-    },
+    }, */
     {
         //嵌套路由
         path: '/parent',
@@ -36,9 +36,9 @@ export default [
         //命名路由 <router-link :to="{name: 'about'}">about<router-link>
 
         path: '/',
-        name: 'parent',
+        name: 'index',
         component: () =>
-            import ('@/views/parent.vue')
+            import ('@/views/index.vue')
     },
     {
         //命名视图

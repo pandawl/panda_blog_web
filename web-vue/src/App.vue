@@ -1,9 +1,8 @@
 <template>
   <div id="app">
-    
-    <header-menus v-show="!$route.meta.showLogin"/>
+    <header-menus/>
     <router-view/>
-   <footer-menus/>
+   <!-- <footer-menus/> -->
   </div>
 </template>
 
