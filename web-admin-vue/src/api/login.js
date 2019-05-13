@@ -1,5 +1,8 @@
-
+import request from '../utils/request'
 export function login(data) {
-  this.$axios.post('/panda/user/getUser',data)
-
+    return request({
+        url: '/panda/user/getUser',
+        method: 'post',
+        data
+    })
 }
