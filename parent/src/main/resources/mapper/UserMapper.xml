@@ -13,9 +13,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wang.server.entity.User" >
-    insert into user (id, `name`, birthday, 
+    insert into user (id, `name`, birthday,
       area, job)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR},
       #{area,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.wang.server.entity.User" >
@@ -32,6 +32,11 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
+    select id, `name`, birthday, area, job
+    from user
+  </select>
+
+  <select id="selectByUserName" resultMap="BaseResultMap" >
     select id, `name`, birthday, area, job
     from user
   </select>

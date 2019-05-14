@@ -27,8 +27,7 @@ public class UserController {
     @RequestMapping(value = "/getUser", method = RequestMethod.POST)
     public String getUser(String id){
     User user = new User();
-    user.setName("panda");
-    user.setJob("程序猿");
+
       return  ResultUtils.generateResultStr(ResultCode.SUCCESS, "操作成功", user);
     }
 }

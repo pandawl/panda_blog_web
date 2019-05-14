@@ -1,8 +1,6 @@
 <template>
 
   <div>
-    <panda-sidebar class="sidebar-container"/>
-    <panda-header class="main-container"/>
 
   </div>
 </template>
