@@ -23,7 +23,7 @@ public class UserController {
       return  ResultUtils.generateResultStr(ResultCode.SUCCESS, "操作成功", null);
     }
 
-@ResponseBody
+    @ResponseBody
     @RequestMapping(value = "/getUser", method = RequestMethod.POST)
     public String getUser(String id){
     User user = new User();

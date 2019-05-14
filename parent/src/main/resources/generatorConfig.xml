@@ -5,7 +5,7 @@
 <generatorConfiguration>
 
     <!--classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 可选 -->
-    <classPathEntry location="D:\apache-maven-3.3.9-bin\repository\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar"/>
+    <classPathEntry location="D:\Develop\Environment\apache-maven-3.3.9-bin\repository\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar"/>
 
     <!-- 一个数据库一个context,defaultModelType="flat" 大数据字段，不分表 -->
     <context id="MysqlTables" targetRuntime="MyBatis3Simple" defaultModelType="flat">
@@ -36,8 +36,8 @@
 
         <!-- jdbc连接-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/person?serverTimezone=UTC" userId="root"
-                        password="root"/>
+                        connectionURL="jdbc:mysql://188.131.223.181:3306/panda_blog?serverTimezone=UTC" userId="root"
+                        password="panda"/>
 
         <!-- 类型转换 -->
         <javaTypeResolver>
@@ -64,7 +64,7 @@
         </javaClientGenerator>
 
         <!-- table可以有多个,每个数据库中的表都可以写一个table，tableName表示要匹配的数据库表,也可以在tableName属性中通过使用%通配符来匹配所有数据库表,只有匹配的表才会自动生成文件 enableSelectByPrimaryKey相应的配置表示是否生成相应的接口 -->
-        <table tableName="user" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="resource" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"
                enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true"
                enableDeleteByPrimaryKey="true">

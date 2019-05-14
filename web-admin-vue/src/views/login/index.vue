@@ -57,7 +57,7 @@
 
 <script>
 import { validUsername } from "../../utils/validate";
-
+import {login} from '../../api/login'
 export default {
   name: "index",
   data() {
@@ -104,15 +104,18 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.$store
-            .dispatch("LoginByUsername", this.loginForm)
+          this.$axios({
+            method: "post",
+            url: "/panda/user/getUser",
+            data: this.loginForm
+          })
             .then(() => {
               this.$router.push({ path: "/" }); //登录成功之后重定向到首页
             })
             .catch(err => {
-              this.$message.error(err.message); //登录失败提示错误
-            }); 
-            /* this.$router.push({ path: "/" }); */
+              console.log("登录错误");
+            });
+          /* this.$router.push({ path: "/" }); */
         } else {
           console.log("error submit!!");
           return false;
