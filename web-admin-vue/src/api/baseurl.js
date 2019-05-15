@@ -1,3 +1,3 @@
-const baseUrl = 'http://localhost:9999'
+const baseUrl = 'http://localhost:9999/panda'
 
 export default baseUrl
