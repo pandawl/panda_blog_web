@@ -7,6 +7,8 @@ import store from './store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/iconfont/iconfont.js'
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 import axios from 'axios'
 import qs from 'qs'
 
@@ -30,6 +32,10 @@ axios.interceptors.request.use(function(config) {
     // 对请求错误做些什么
     return Promise.reject(error);
 });
+Vue.use(mavonEditor)
+new Vue({
+    'el': '#main'
+})
 
 /* eslint-disable no-new */
 new Vue({

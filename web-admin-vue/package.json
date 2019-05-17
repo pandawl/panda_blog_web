@@ -16,6 +16,7 @@
     "element-ui": "^2.8.2",
     "express": "^4.16.4",
     "js-cookie": "^2.2.0",
+    "mavon-editor": "^2.7.4",
     "moment": "^2.24.0",
     "mysql": "^2.17.1",
     "qs": "^6.7.0",

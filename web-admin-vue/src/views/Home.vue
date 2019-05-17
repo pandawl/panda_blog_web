@@ -10,7 +10,7 @@
           <el-menu-item index="/blog/list">博客列表</el-menu-item>
           <el-menu-item index="/blog/edit">博客管理</el-menu-item>
 
-          <el-menu-item index="1-3">选项3</el-menu-item>
+          <el-menu-item index="/blog/tags">标签管理</el-menu-item>
 
           <el-menu-item index="1-4">选项4</el-menu-item>
         </el-submenu>
