@@ -2,8 +2,8 @@ package com.wang.server.controller;
 
 import com.wang.server.common.util.ResultCode;
 import com.wang.server.common.util.ResultUtils;
-import com.wang.server.entity.Blog;
 import com.wang.server.service.BlogService;
+import com.wang.server.vo.BlogVo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,10 +23,11 @@ public class ManageBlogController {
     private BlogService blogService;
 
     @PostMapping(value = "/add")
-    public String addBlog(Blog blog){
+    public String addBlog(BlogVo blog){
         if (null ==blog || StringUtils.isEmpty(blog.getTitle()) ||StringUtils.isEmpty(blog.getContent())){
             return ResultUtils.generateResultStr(ResultCode.PARAM_ERROR, "博客标题、内容不能为空", 0);
         }
+        System.out.println(blog.toString());
         int count = blogService.insert(blog);
         if (count == 0){
             return ResultUtils.generateResultStr(ResultCode.DATA_ERROR, "插入异常", 0);
