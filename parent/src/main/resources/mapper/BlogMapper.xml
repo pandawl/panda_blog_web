@@ -3,35 +3,35 @@
 <mapper namespace="com.wang.server.dao.BlogMapper" >
   <resultMap id="BaseResultMap" type="com.wang.server.entity.Blog" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="category_id" property="category_id" jdbcType="INTEGER" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="summary" property="summary" jdbcType="VARCHAR" />
-    <result column="img_url" property="img_url" jdbcType="VARCHAR" />
+    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
     <result column="author" property="author" jdbcType="VARCHAR" />
     <result column="code" property="code" jdbcType="INTEGER" />
-    <result column="view_count" property="view_count" jdbcType="INTEGER" />
-    <result column="like_count" property="like_count" jdbcType="INTEGER" />
-    <result column="comment_count" property="comment_count" jdbcType="INTEGER" />
-    <result column="is_deleted" property="is_deleted" jdbcType="TINYINT" />
-    <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+    <result column="view_count" property="viewCount" jdbcType="INTEGER" />
+    <result column="like_count" property="likeCount" jdbcType="INTEGER" />
+    <result column="comment_count" property="commentCount" jdbcType="INTEGER" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from blog
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.wang.server.entity.Blog" >
+  <insert id="insert" parameterType="com.wang.server.entity.Blog"  useGeneratedKeys="true" keyProperty="id">
     insert into blog (id, category_id, title, 
       summary, img_url, author, 
       code, view_count, like_count, 
       comment_count, is_deleted, create_time, 
       update_time, content)
-    values (#{id,jdbcType=INTEGER}, #{category_id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
-      #{summary,jdbcType=VARCHAR}, #{img_url,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
-      #{code,jdbcType=INTEGER}, #{view_count,jdbcType=INTEGER}, #{like_count,jdbcType=INTEGER}, 
-      #{comment_count,jdbcType=INTEGER}, #{is_deleted,jdbcType=TINYINT}, #{create_time,jdbcType=TIMESTAMP}, 
-      #{update_time,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+    values (#{id,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+      #{summary,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR},
+      #{code,jdbcType=INTEGER}, #{viewCount,jdbcType=INTEGER}, #{likeCount,jdbcType=INTEGER},
+      #{commentCount,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.wang.server.entity.Blog" >
     update blog

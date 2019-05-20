@@ -11,22 +11,19 @@
       <el-input v-model="blog.title"></el-input>
     </el-form-item>
 
-      <el-form-item label="分类" prop="categoryId">
-        <el-select v-model="blog.category_id" placeholder="请选择文章分类">
-          <el-option label="技术" value="1"></el-option>
-          <el-option label="生活笔记" value="2"></el-option>
-          <el-option label="其他" value="3"></el-option>
-        </el-select>
-      </el-form-item>
+    <el-form-item label="分类" prop="categoryId">
+      <el-select v-model="blog.categoryId" placeholder="请选择文章分类">
+        
+        <el-option :label="category.category_name" :value="category.id" v-for="category in categorys" :key="category.id"></el-option>
+      </el-select>
+  
+    </el-form-item>
 
-      <el-form-item label="标签" prop="tags">
-        <el-checkbox-group v-model="blog.tags">
-          <el-checkbox label="1">Java</el-checkbox>
-          <el-checkbox label="2" value="1">MySQL</el-checkbox>
-          <el-checkbox label="3" value="2">设计模式</el-checkbox>
-          <el-checkbox label="4" value="3">算法</el-checkbox>
-        </el-checkbox-group>
-      </el-form-item>
+    <el-form-item label="标签" prop="tags">
+      <el-checkbox-group v-model="blog.tags"  @change="hehe">
+        <el-checkbox :label="tag.id"   v-for="tag in checkedItem" :key="tag.id">{{tag.tag_name}}</el-checkbox>
+      </el-checkbox-group>
+    </el-form-item>
 
     <el-form-item label="立即发布">
       <el-switch v-model="blog.code"></el-switch>
@@ -55,7 +52,7 @@ export default {
     return {
       blog: {
         title: "", // 标题
-        category_id: '', //分类
+        categoryId: "", //分类
         code: 1, //立即发布
         tags: [], //标签
         summary: "", // 概要
@@ -64,15 +61,15 @@ export default {
         content: ""
       },
       categorys: [],
-      tagList: [],
+      checkedItem: [],
       rules: {
         title: [
           { required: true, message: "请输入标题", trigger: "blur" },
           { min: 1, max: 20, message: "长度在 1 到 20 个字符", trigger: "blur" }
-        ],/* 
+        ],
         categoryId: [
           { required: true, message: "请选择分类", trigger: "change" }
-        ], */
+        ],
         date1: [
           {
             type: "date",
@@ -104,9 +101,12 @@ export default {
     };
   },
   methods: {
-     
+      hehe(){
+          console.log(this.blog.tags)
+      },
     saveBlog() {
       this.blog.code = this.blog.code === true ? 0 : 1;
+      console.log(this.blog)
       saveBlog(this.blog).then(res => {
         if (res.data.resultCode == 200) {
           this.$message({
@@ -126,18 +126,18 @@ export default {
         }
       });
     },
-    reset() {}
+ 
   },
   components: {},
   created() {
-    /* getList().then(res => {
+    getList().then(res => {
       this.categorys = res.data.resultJson;
     });
 
       getTagList().then(res => {
-      this.tagList = res.data.resultJson;
+      this.checkedItem = res.data.resultJson;
     
-    }); */
+    });
   }
 };
 </script>

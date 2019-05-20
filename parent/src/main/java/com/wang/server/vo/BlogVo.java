@@ -1,6 +1,7 @@
 package com.wang.server.vo;
 
 import com.wang.server.entity.Blog;
+import lombok.Data;
 
 import java.util.List;
 
@@ -9,9 +10,9 @@ import java.util.List;
  * @Date: 2019-05-19 18:52
  * @Description:
  */
+@Data
 public class BlogVo extends Blog {
 
-    private Integer categoryId;
 
     private List<Integer> tags;
 }

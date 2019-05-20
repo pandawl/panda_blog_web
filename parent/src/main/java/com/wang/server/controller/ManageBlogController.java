@@ -22,14 +22,15 @@ public class ManageBlogController {
     @Autowired
     private BlogService blogService;
 
+
     @PostMapping(value = "/add")
     public String addBlog(BlogVo blog){
         if (null ==blog || StringUtils.isEmpty(blog.getTitle()) ||StringUtils.isEmpty(blog.getContent())){
             return ResultUtils.generateResultStr(ResultCode.PARAM_ERROR, "博客标题、内容不能为空", 0);
         }
-        System.out.println(blog.toString());
+
         int count = blogService.insert(blog);
-        if (count == 0){
+        if (count <= 0){
             return ResultUtils.generateResultStr(ResultCode.DATA_ERROR, "插入异常", 0);
         }
         return ResultUtils.generateResultStr(ResultCode.SUCCESS, "新增成功", 0);

@@ -1,6 +1,7 @@
 package com.wang.server.service;
 
 import com.wang.server.entity.Blog;
+import com.wang.server.vo.BlogVo;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface BlogService {
 
     int deleteByPrimaryKey(Integer id);
 
-    int insert(Blog record);
+    int insert(BlogVo record);
 
     Blog selectByPrimaryKey(Integer id);
 
