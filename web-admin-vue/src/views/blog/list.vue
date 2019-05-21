@@ -27,19 +27,13 @@
       </el-form>
     </el-col>
     <!-- 列表 -->
-    <el-table :data="tableList" v-loading="listLoading" border element-loading-text="拼命加载中" style="width: 100%;">
-      <el-table-column prop="id" label="序号" width="65">
-      </el-table-column>
-      <el-table-column prop="title" label="标题">
-      </el-table-column>
-      <el-table-column prop="title" min-width="150px" label="标题">
-      </el-table-column>
-      <el-table-column prop="viewCount" label="阅读数" width="65">
-      </el-table-column>
-      <el-table-column prop="updateTime" label="修改时间" width="160px">
-      </el-table-column>
-      <el-table-column :formatter="formatCode" label="状态" width="120">
-      </el-table-column>
+    <el-table :data="tableList" style="width: 100%;">
+      <el-table-column prop="id" label="序号" width="65"></el-table-column>
+      <el-table-column prop="title" label="标题"></el-table-column>
+      <el-table-column prop="summary" min-width="150px" label="标题"></el-table-column>
+      <el-table-column prop="viewCount" label="阅读数" width="65"></el-table-column>
+      <el-table-column prop="updateTime" label="修改时间" width="160px"></el-table-column>
+      <el-table-column :formatter="formatCode" label="状态" width="120"></el-table-column>
       <el-table-column prop="operation" label="操作 ">
         <template slot-scope="scope">
           <el-button size="small" type="primary" @click="handleUpdate(scope.row)">编辑</el-button>
@@ -62,7 +56,9 @@ export default {
   },
   data() {
     return {
-      tableData: [],
+      value: "",
+      searchName: "",
+      tableList: [],
       status: [
         {
           statusId: 1,
@@ -71,18 +67,27 @@ export default {
         {
           statusId: 2,
           label: "禁用"
-        },
+        }
       ]
     };
   },
   methods: {
-    doFilter() {
-
+    handleUpdate() {},
+    deleteUpdate() {},
+    formatCode: function(row, colum) {
+      return row.code === 0
+        ? "已发布"
+        : row.code === 1
+        ? "删除"
+        : row.code === 2
+        ? "草稿"
+        : "未知";
     },
+    doFilter() {},
     getBlogs() {
       getBlogs().then(res => {
         if (res.data.resultCode == 200) {
-          this.tableData = res.data.resultJson;
+          this.tableList = res.data.resultJson;
         }
       });
     },
