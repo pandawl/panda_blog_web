@@ -1,10 +1,15 @@
 <!--  -->
 <template>
-  <div></div>
+  <div>
+    <Lbox/>
+    <Rbox/>
+  </div>
 </template>
 
 <script>
-import LeftMenus from "../components/LeftMenus.vue";
+
+import Lbox from '../components/lbox/Lbox'
+import Rbox from '../components/rbox/Rbox'
 
 export default {
   data() {
@@ -12,17 +17,20 @@ export default {
   },
 
   components: {
-    LeftMenus,
+    Lbox,
+    Rbox
 
   },
 
-  computed: {},
-
-  mounted: {},
-
-  methods: {}
+  
 };
 </script>
 <style lang='scss' scoped>
-
+div {
+  width: 1200px;
+ 
+  margin: auto;
+   margin-top: 5px;
+  overflow: hidden;
+}
 </style>

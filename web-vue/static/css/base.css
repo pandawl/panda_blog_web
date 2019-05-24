@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0
+}
+
+body {
+    font: 15px "Microsoft YaHei", Arial, Helvetica, sans-serif;
+    color: #333;
+    background: #E9EAED;
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+.topnews {
+    display: block;
+    margin: 20px 0;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    max-height: 110px;
+}
+
+.imgscale img {
+    width: 100%;
+    -moz-transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+    transition: all 0.5s;
+}
+
+.imgscale:hover img {
+    transform: scale(1.1);
+}
+
+.topnews img {
+    opacity: .7;
+}
+
+.topnews span {
+    bottom: 0;
+    position: absolute;
+    bottom: 30%;
+    left: 0;
+    right: 0;
+    color: #FFF;
+    text-align: center;
+    font-size: 15px;
+    padding: 0 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-height: 22px;
+}
+
+.topnews:hover img {
+    opacity: .9;
+    transform: scale(1.1);
+}
+
+.whitebg {
+    background: #fff;
+    border-radius: 3px;
+    padding: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.lbox {
+    width: 75% !important;
+    float: left;
+    overflow: hidden
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+
+/* rbox */
+
+.rbox {
+    width: 23.5% !important;
+    float: right;
+    overflow: hidden;
+}
+
+#weixin {
+    position: relative
+}
+
+#weixin i {
+    display: block;
+    position: absolute;
+    bottom: 55px;
+    right: 0
+}
+
+#weixin i img {
+    height: 100px;
+    display: none
+}
+
+#weixin:hover i img {
+    display: block
+}
+
+.card {
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, .1), inset 0px 1px 1px rgba(0, 0, 0, .7);
+    border-radius: 3px;
+    background: url(../images/quote-bg.png) no-repeat top right rgba(42, 42, 42, 1);
+    height: 260px;
+    overflow: hidden;
+    margin-bottom: 20px
+}
+
+.card h2 {
+    font-size: 22px;
+    margin: 10px;
+    color: #89919a;
+    font-weight: normal;
+    padding-bottom: 10px;
+}
+
+.card p {
+    font-size: 12px;
+    padding: 0 0 0 20px;
+    line-height: 28px;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, .5);
+    color: #d0d2d4;
+    -webkit-animation: animations2 5s ease-in-out 5s;
+    -moz-animation: animations2 5s ease-in-out 5s;
+    -o-animation: animations2 5s ease-in-out 5s;
+    -ms-animation: animations2 5s ease-in-out 5s;
+    animation: animations2 5s ease-in-out 5s;
+}

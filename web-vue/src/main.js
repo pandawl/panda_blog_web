@@ -9,8 +9,7 @@ import qs from "qs"
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import App from './App'
-import './assets/styles/index.css'
-import './assets/css/iconfont/iconfont.css'
+
 
 
 
@@ -18,6 +17,7 @@ Vue.config.productionTip = false
 
 Vue.prototype.$axios = axios;
 Vue.prototype.HOST = '/api'
+
 
 axios.defaults.baseURL = 'http://localhost:8888';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
