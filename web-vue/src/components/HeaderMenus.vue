@@ -36,7 +36,7 @@ export default {
   right:50px;
 }
 el-menu{
-   width: 1200px;
+  width: 1200px;
   margin: auto;
   overflow: hidden;
 }
@@ -46,6 +46,6 @@ el-menu::before {
     height: 5px;
     position: absolute;
     top: 0;
-    width: 100%;
+    width: 1200px;
 }
 </style>

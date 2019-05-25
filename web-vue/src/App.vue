@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <header-menus/>
+    <div class="header-menus">
+      <header-menus/>
+    </div>
+    
     <router-view/>
    <!-- <footer-menus/> -->
   </div>
