@@ -27,10 +27,11 @@ export default {
 </script>
 <style lang='scss' scoped>
 div {
-  width: 1200px;
+  width: 80%;
  
   margin: auto;
-   margin-top: 5px;
+   margin-top: 10px;
   overflow: hidden;
 }
+
 </style>

@@ -1,6 +1,6 @@
 <template>
   
-  <div>
+  <div class="header_pa">
     <el-menu
       class="header_panda"
       mode="horizontal"
@@ -9,14 +9,14 @@
       active-text-color="#ffd04b"
       router
     > 
-      <el-menu-item class="header_index_panda" index="/index">不完整の旋律博客</el-menu-item>
-      <el-menu-item index="#">技术</el-menu-item>
-      <el-menu-item index="/login">技术杂谈</el-menu-item>
-      <el-menu-item index="3">生活笔记</el-menu-item>
-      <el-menu-item index="4">日志系统</el-menu-item>
-      <el-menu-item index="4">我的书单</el-menu-item>
-      <el-menu-item index="5">留言板</el-menu-item>
-      <el-menu-item index="6">关于我</el-menu-item>
+      <el-menu-item class="header_index_panda" index="/">不完整の旋律博客</el-menu-item>
+      <el-menu-item index="/">技术</el-menu-item>
+      <el-menu-item index="/">技术杂谈</el-menu-item>
+      <el-menu-item index="/">生活笔记</el-menu-item>
+      <el-menu-item index="/">日志系统</el-menu-item>
+      <el-menu-item index="/">我的书单</el-menu-item>
+      <el-menu-item index="/">留言板</el-menu-item>
+      <el-menu-item index="/blog/detail/2">关于我</el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -30,22 +30,23 @@ export default {
 </script>
 
 <style scoped>
-.header_index_panda {
-  margin-left: 10%;
-  font-size: 22px;
-  right:50px;
+.header_pa{
+  width: 80%;
+  margin: auto;
 }
+.header_index_panda {
+  font-size: 22px;
+  padding:0;
+  text-align: left;
+  margin-right: 50px;
+  /* right:50px; */
+}
+
+/* 
 el-menu{
-  width: 1200px;
+  width: 80%;
   margin: auto;
   overflow: hidden;
-}
-el-menu::before {
-    background: #000 linear-gradient(to left, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);
-    content: "";
-    height: 5px;
-    position: absolute;
-    top: 0;
-    width: 1200px;
-}
+} */
+
 </style>

@@ -6,12 +6,13 @@
         
         
         <!--单图-->
-        <li>
-          <h3 class="blogtitle"><a href="/" target="_blank">【个人博客网站制作】自己不会个人博客网站制作，你会选择用什么博客程序源码？</a></h3>
-          <span class="blogpic imgscale"><i><a href="/">原创模板</a></i><a href="/" title=""><img src="../../../static/images/b01.jpg" alt=""></a></span>
-          <p class="blogtext">这些开源的博客程序源码，都是经过很多次版本测试的，都有固定的使用人群。我所知道的主流的博客程序有，Z-blog，Emlog，WordPress，Typecho等，免费的cms系统有，织梦cms（dedecms），phpcms，帝国cms（EmpireCMS）！... </p>
-          <p class="bloginfo"><i class="avatar"><img src="images/avatar.jpg"></i><span>杨青青</span><span>2018-10-28</span><span>【<a href="/">原创模板</a>】</span></p>
+       <li v-for="blog in blogs" :key="blog.id" :blogDetail="blog">
+          <h3 class="blogtitle"><router-link :to="`/blog/detail/${blog.id}`" >{{blog.title}}</router-link></h3>
+          <span class="blogpic imgscale"><i><a href="/">{{blog.categoryName}}</a></i><a href="/" title=""><img src="../../../static/images/b01.jpg" :alt="blog.title"></a></span>
+          <p class="blogtext">{{blog.summary}}... </p>
+          <p class="bloginfo"><i class="avatar"><img src="images/avatar.jpg"></i><span>panda</span><span>{{blog.updateTime}}</span><span>【<a href="/">{{blog.categoryName}}</a>】</span></p>
           <a href="/" class="viewmore">阅读更多</a> </li>
+
 
   
       </ul>
@@ -30,10 +31,17 @@ export default {
   components: {},
   props: {},
   data() {
-    return {};
+    return {
+      blogs: [],
+      blogDetail: {}
+    };
   },
   mounted(){
-    getList()
+    getList().then(
+      res=>{
+        this.blogs = res.data.resultJson
+      }
+    )
   }
 
 };
@@ -43,5 +51,6 @@ export default {
 
 .bloglist{
    float: left;
+   width: 96%;
  }
 </style>

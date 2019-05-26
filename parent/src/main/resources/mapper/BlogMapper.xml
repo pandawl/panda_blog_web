@@ -57,8 +57,10 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select id, category_id, title, summary, img_url, author, code, view_count, like_count, 
-    comment_count, is_deleted, create_time, update_time, content
-    from blog
+    select b.id, c.category_name categoryName , b.title, b.summary, b.img_url, b.author, b.code, b.view_count, b.like_count,
+    b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content
+    from blog b
+    left join category c on  b.category_id = c.id
+
   </select>
 </mapper>
