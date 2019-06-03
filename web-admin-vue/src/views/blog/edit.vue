@@ -58,7 +58,8 @@ export default {
         summary: "", // 概要
         author: "panda", //
         idDeleted: 0, //
-        content: ""
+        content: "",
+        url: ""
       },
       categorys: [],
       checkedItem: [],
@@ -105,6 +106,8 @@ export default {
           console.log(this.blog.tags)
       },
     saveBlog() {
+      this.blog.content = this.$refs.md.d_render;
+      console.log(this.blog.content)
       this.blog.code = this.blog.code === true ? 0 : 1;
       console.log(this.blog)
       saveBlog(this.blog).then(res => {
