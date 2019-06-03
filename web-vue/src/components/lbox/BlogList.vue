@@ -17,32 +17,61 @@
   
       </ul>
       <!--pagelist-->
-      <div class="pagelist"><a title="Total record">&nbsp;<b>67</b> </a>&nbsp;&nbsp;&nbsp;<b>1</b>&nbsp;<a href="/download/index_2.html">2</a>&nbsp;<a href="/download/index_3.html">3</a>&nbsp;<a href="/download/index_2.html">下一页</a>&nbsp;<a href="/download/index_3.html">尾页</a></div>
-      <!--pagelist end--> 
-    </div>
+          <Pager
+            v-if="!dataChanged" 
+            ref="pager"
+            :pageSize="pageSize" 
+            :curPage="curPage" 
+            :total="total"  
+            @setPage="gotoPage"
+            @setRowNum="changeRowNum" />
   </div>
+  </div>
+  
 </template>
 
 <script>
 import {getList} from '../../api/blog'
+import Pager from '../Pager'
 export default {
   name: "",
 
-  components: {},
+  components: {Pager},
   props: {},
   data() {
     return {
       blogs: [],
-      blogDetail: {}
+      blogDetail: {},  
+       curPage:1,//当前页
+            total:0,//总共页数
+            pageSize:10,//每页记录数 
+            dataChanged:false
+
     };
   },
   mounted(){
-    getList().then(
+    getList(this.curPage,this.pageSize).then(
       res=>{
         this.blogs = res.data.resultJson
       }
     )
-  }
+  },methods:{
+         refresh(){//用于刷新组件，需手动调用
+              this.dataChanged = true
+                this.$nextTick(() => {
+                this.dataChanged = false
+                })
+           },
+
+               gotoPage(curPage){
+                 getList()
+          
+         },
+         changeRowNum(pageSize){
+              
+           }
+        }
+  
 
 };
 </script>

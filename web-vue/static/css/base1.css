@@ -1716,7 +1716,7 @@ a.curPage {
 }
 
 
-/*cloud*/
+/* /*cloud*/
 
 .cloud ul a {
     line-height: 24px;
@@ -1779,7 +1779,7 @@ a.curPage {
     text-shadow: #000 1px 1px 1px
 }
 
-
+*/
 /*
 
 daohang.html
@@ -2331,4 +2331,68 @@ about
 
 .pagelist.mt20 {
     margin-top: 20px;
+}
+
+
+/* 标签云 */
+
+.cloud ul a {
+    line-height: 24px;
+    height: 24px;
+    display: block;
+    background: #999;
+    float: left;
+    padding: 3px 11px;
+    margin: 10px 10px 0 0;
+    border-radius: 8px;
+    -moz-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+    color: #FFF
+}
+
+.cloud ul a:nth-child(8n-7) {
+    background: #8A9B0F
+}
+
+.cloud ul a:nth-child(8n-6) {
+    background: #EB6841
+}
+
+.cloud ul a:nth-child(8n-5) {
+    background: #3FB8AF
+}
+
+.cloud ul a:nth-child(8n-4) {
+    background: #FE4365
+}
+
+.cloud ul a:nth-child(8n-3) {
+    background: #FC9D9A
+}
+
+.cloud ul a:nth-child(8n-2) {
+    background: #EDC951
+}
+
+.cloud ul a:nth-child(8n-1) {
+    background: #C8C8A9
+}
+
+.cloud ul a:nth-child(8n) {
+    background: #83AF9B
+}
+
+.cloud ul a:first-child {
+    background: #036564
+}
+
+.cloud ul a:last-child {
+    background: #3299BB
+}
+
+.cloud ul a:hover {
+    border-radius: 0;
+    text-shadow: #000 1px 1px 1px
 }
