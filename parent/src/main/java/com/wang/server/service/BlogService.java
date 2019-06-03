@@ -1,9 +1,8 @@
 package com.wang.server.service;
 
+import com.github.pagehelper.PageInfo;
 import com.wang.server.entity.Blog;
 import com.wang.server.vo.BlogVo;
-
-import java.util.List;
 
 /**
  * @Auther: wl
@@ -18,7 +17,7 @@ public interface BlogService {
 
     Blog selectByPrimaryKey(Integer id);
 
-    List<Blog> selectAll();
+    PageInfo<Blog> selectAll(Integer pageNum, Integer pageSize);
 
     int updateByPrimaryKey(Blog record);
 }

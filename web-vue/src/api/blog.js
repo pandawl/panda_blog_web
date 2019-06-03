@@ -1,10 +1,10 @@
 import request from './request'
 
-export const getList = (curPage, pageSize) => {
+export const getList = (pageNum, pageSize) => {
     return request({
         url: 'blog/list',
         method: 'POST',
-        params: { curPage, pageSize }
+        params: { pageNum, pageSize }
     })
 }
 

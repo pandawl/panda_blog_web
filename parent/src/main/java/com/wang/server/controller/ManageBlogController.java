@@ -37,8 +37,8 @@ public class ManageBlogController {
     }
 
     @PostMapping("/list")
-    public String getBlogs(){
-        return ResultUtils.generateResultStr(ResultCode.SUCCESS, "查询成功", blogService.selectAll());
+    public String getBlogs(Integer pageNum,Integer pageSize){
+        return ResultUtils.generateResultStr(ResultCode.SUCCESS, "查询成功", blogService.selectAll(pageNum,pageSize));
     }
 
     @PostMapping("/delete")

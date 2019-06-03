@@ -20,8 +20,8 @@ public class BlogController {
     @Autowired
     private BlogService blogService;
     @PostMapping("/list")
-    public String getList(){
+    public String getList(Integer pageNum,Integer pageSize){
 
-        return ResultUtils.generateResultStr(ResultCode.SUCCESS,"查询成功", blogService.selectAll());
+        return ResultUtils.generateResultStr(ResultCode.SUCCESS,"查询成功", blogService.selectAll(pageNum,pageSize));
     }
 }

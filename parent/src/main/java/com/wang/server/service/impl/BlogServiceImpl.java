@@ -1,5 +1,7 @@
 package com.wang.server.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wang.server.dao.BlogMapper;
 import com.wang.server.dao.BlogTagsMapper;
 import com.wang.server.entity.Blog;
@@ -37,12 +39,12 @@ public class BlogServiceImpl implements BlogService {
     public int insert(BlogVo record) {
         record.setCreateTime(new Date());
         int count = blogMapper.insert(record);
-        if (count <= 0){
-           return 0;
+        if (count <= 0) {
+            return 0;
         }
 
-        if (record.getTags().size() > 0){
-            for (int i = 0; i <record.getTags().size() ; i++) {
+        if (record.getTags().size() > 0) {
+            for (int i = 0; i < record.getTags().size(); i++) {
                 BlogTags blogTags = new BlogTags();
                 blogTags.setBlog_id(record.getId());
                 blogTags.setTag_id(record.getTags().get(i));
@@ -60,8 +62,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<Blog> selectAll() {
-        return blogMapper.selectAll();
+    public PageInfo<Blog> selectAll(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Blog> blogs = blogMapper.selectAll();
+        PageInfo<Blog> info = new PageInfo<>(blogs);
+        return info;
     }
 
     @Override
