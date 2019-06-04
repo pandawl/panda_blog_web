@@ -22,3 +22,17 @@ export const getBlog = (id) => {
         params: { id }
     })
 }
+export const getCategoryList = () => {
+    return request({
+        url: 'manage/category/list',
+        method: 'POST',
+        params: {}
+    })
+}
+export const getTagList = () => {
+    return request({
+        url: 'manage/tag/list',
+        method: 'POST',
+        params: {}
+    })
+}

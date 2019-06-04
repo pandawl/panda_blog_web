@@ -24,4 +24,10 @@ public class BlogController {
 
         return ResultUtils.generateResultStr(ResultCode.SUCCESS,"查询成功", blogService.selectAll(pageNum,pageSize));
     }
+
+    @PostMapping("/getblog")
+    public String getBlog(Integer id){
+
+        return ResultUtils.generateResultStr(ResultCode.SUCCESS,"查询成功", blogService.selectByPrimaryKey(id));
+    }
 }

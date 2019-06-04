@@ -1177,6 +1177,12 @@ a.iconfont.icon-weixin {
     background: url(../images/c04.png) no-repeat center;
 }
 
+a.iconfont.icon-github {
+    color: #07AF12;
+    background: url(../images/c05.png) no-repeat center;
+    background-size: 32px;
+}
+
 #weixin {
     position: relative
 }

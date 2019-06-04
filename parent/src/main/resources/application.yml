@@ -27,6 +27,14 @@ spring:
       min-idle: 0
     timeout: 0
     password:
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署
+  freemarker:
+    cache: false    #页面不加载缓存，修改即时生效
+
 
 logging:
   level.com.wang.server.dao: debug
+
+debug: true

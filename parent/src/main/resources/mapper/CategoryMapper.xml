@@ -3,10 +3,10 @@
 <mapper namespace="com.wang.server.dao.CategoryMapper" >
   <resultMap id="BaseResultMap" type="com.wang.server.entity.Category" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="category_name" property="category_name" jdbcType="VARCHAR" />
+    <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
-    <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from category

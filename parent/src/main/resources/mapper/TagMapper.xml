@@ -3,11 +3,11 @@
 <mapper namespace="com.wang.server.dao.TagMapper" >
   <resultMap id="BaseResultMap" type="com.wang.server.entity.Tag" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="tag_name" property="tag_name" jdbcType="VARCHAR" />
-    <result column="tag_desc" property="tag_desc" jdbcType="VARCHAR" />
+    <result column="tag_name" property="tagName" jdbcType="VARCHAR" />
+    <result column="tag_desc" property="tagDesc" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="TINYINT" />
-    <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tag

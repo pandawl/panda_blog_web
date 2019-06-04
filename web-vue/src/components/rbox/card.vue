@@ -19,10 +19,10 @@
         </li>
         <li>
           <a
-            href="http://wpa.qq.com/msgrd?v=3&uin=476847113&site=qq&menu=yes"
+            href="https://github.com/WangLeiHH"
             target="_blank"
-            class="iconfont icon---"
-            title="QQ联系我"
+            class="iconfont icon-github"
+            title="GitHub"
           ></a>
         </li>
         <li id="weixin">

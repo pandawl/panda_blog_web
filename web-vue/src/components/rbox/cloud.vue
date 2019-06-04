@@ -2,12 +2,12 @@
      <div class="whitebg cloud">
       <h2 class="htitle">标签云</h2>
       <ul>
-        <a href="" target="_blank">个人博客模板</a> <a href="" target="_blank">css动画</a> <a href="" target="_blank">布局</a> <a href="" target="_blank">今夕何夕</a> <a href="" target="_blank">SEO</a> <a href="" target="_blank">女程序员</a> <a href="" target="_blank">小世界</a> <a href="" target="_blank">个人博客</a> <a href="" target="_blank">网页设计</a>
+        <a v-for="(tag) in tags" :key="tag.id"  href="" target="_blank">{{tag.tagName}}</a>       
       </ul>
     </div>
 </template>
-
 <script>
+import {getTagList} from '../../api/blog'
 export default {
    name: '',
     
@@ -15,12 +15,17 @@ export default {
   props:{},
   data(){
     return {
+      tags:[]
     }
   },
   watch:{},
   computed:{},
   methods:{},
-  created(){},
+  created(){
+        getTagList().then(res=>{
+      this.tags = res.data.resultJson
+    })
+  },
   mounted(){}
 }
 </script>

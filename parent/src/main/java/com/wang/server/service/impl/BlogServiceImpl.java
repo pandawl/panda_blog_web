@@ -58,7 +58,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Blog selectByPrimaryKey(Integer id) {
-        return null;
+        return blogMapper.selectByPrimaryKey(id);
     }
 
     @Override
