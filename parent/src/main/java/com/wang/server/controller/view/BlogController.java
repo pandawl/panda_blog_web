@@ -1,4 +1,4 @@
-package com.wang.server.controller;
+package com.wang.server.controller.view;
 
 import com.wang.server.common.util.ResultCode;
 import com.wang.server.common.util.ResultUtils;
@@ -21,7 +21,6 @@ public class BlogController {
     private BlogService blogService;
     @PostMapping("/list")
     public String getList(Integer pageNum,Integer pageSize){
-
         return ResultUtils.generateResultStr(ResultCode.SUCCESS,"查询成功", blogService.selectAll(pageNum,pageSize));
     }
 

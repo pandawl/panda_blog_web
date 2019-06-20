@@ -15,4 +15,8 @@ public class BlogVo extends Blog {
 
 
     private List<Integer> tags;
+
+    private Blog last;
+
+    private Blog next;
 }

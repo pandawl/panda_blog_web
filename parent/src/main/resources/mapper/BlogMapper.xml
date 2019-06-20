@@ -64,4 +64,10 @@
     left join category c on  b.category_id = c.id order by b.id desc
 
   </select>
+    <select id="getLast" resultType="com.wang.server.entity.Blog">
+     select id, title from blog where id &lt;#{id,jdbcType=INTEGER} ORDER BY id DESC LIMIT 1;
+   </select>
+    <select id="getNext" resultType="com.wang.server.entity.Blog">
+     select id, title from blog where id &gt;#{id,jdbcType=INTEGER}  LIMIT 1;
+    </select>
 </mapper>

@@ -15,7 +15,7 @@ public interface BlogService {
 
     int insert(BlogVo record);
 
-    Blog selectByPrimaryKey(Integer id);
+    BlogVo selectByPrimaryKey(Integer id);
 
     PageInfo<Blog> selectAll(Integer pageNum, Integer pageSize);
 

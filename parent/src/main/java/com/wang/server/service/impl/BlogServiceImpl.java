@@ -57,8 +57,20 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Blog selectByPrimaryKey(Integer id) {
-        return blogMapper.selectByPrimaryKey(id);
+    public BlogVo selectByPrimaryKey(Integer id) {
+        Blog blog = blogMapper.selectByPrimaryKey(id);
+        BlogVo blogVo = convertBlogToVO(blog);
+        //上一篇 前端显示为倒叙
+        Blog last = blogMapper.getNext(id);
+        if (null != last){
+            blogVo.setLast(last);
+        }
+        //下一篇
+        Blog next = blogMapper.getLast(id);
+        if (null != next){
+            blogVo.setNext(next);
+        }
+        return blogVo;
     }
 
     @Override
@@ -72,5 +84,26 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public int updateByPrimaryKey(Blog record) {
         return 0;
+    }
+
+    private BlogVo convertBlogToVO(Blog blog){
+        BlogVo blogVo = new BlogVo();
+        blogVo.setId(blog.getId());
+        blogVo.setCategoryId(blog.getCategoryId());
+        blogVo.setTitle(blog.getTitle());
+        blogVo.setSummary(blog.getSummary());
+        blogVo.setImgUrl(blog.getImgUrl());
+        blogVo.setAuthor(blog.getAuthor());
+        blogVo.setCode(blog.getCode());
+        blogVo.setViewCount(blog.getViewCount());
+        blogVo.setLikeCount(blog.getLikeCount());
+        blogVo.setCommentCount(blog.getCommentCount());
+        blogVo.setIsDeleted(blog.getIsDeleted());
+        blogVo.setCreateTime(blog.getCreateTime());
+        blogVo.setUpdateTime(blog.getUpdateTime());
+        blogVo.setContent(blog.getContent());
+        blogVo.setCategoryName(blog.getCategoryName());
+
+        return blogVo;
     }
 }

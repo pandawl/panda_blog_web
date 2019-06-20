@@ -1,4 +1,4 @@
-package com.wang.server.controller;
+package com.wang.server.controller.manage;
 
 import com.wang.server.common.util.ResultCode;
 import com.wang.server.common.util.ResultUtils;

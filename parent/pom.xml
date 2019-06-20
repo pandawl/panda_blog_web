@@ -118,6 +118,13 @@
 			<artifactId>spring-web</artifactId>
 			<version>4.3.20.RELEASE</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>5.9.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

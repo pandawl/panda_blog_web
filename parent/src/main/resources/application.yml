@@ -17,16 +17,7 @@ spring:
       min-idle: 5
       soft-min-evictable-idle-time-millis: 300000
       time-between-eviction-runs-millis: 60000
-  redis:
-    host: 123.56.87.111
-    port: 6379
-    pool:
-      max-idle: 8
-      max-wait: -1
-      max-active: 8
-      min-idle: 0
-    timeout: 0
-    password:
+
   devtools:
     restart:
       enabled: true  #设置开启热部署

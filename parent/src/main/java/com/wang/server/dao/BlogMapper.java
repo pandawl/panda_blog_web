@@ -13,4 +13,8 @@ public interface BlogMapper {
     List<Blog> selectAll();
 
     int updateByPrimaryKey(Blog record);
+
+    Blog getLast(Integer id);
+
+    Blog getNext(Integer id);
 }
