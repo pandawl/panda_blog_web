@@ -41,24 +41,38 @@
         </template>
       </el-table-column>
     </el-table>
+    <Pager
+      v-if="!dataChanged"
+      ref="pager"
+      :pageSize="pageSize"
+      :curPage="curPage"
+      :total="total"
+      @setPage="gotoPage"
+      @setRowNum="changeRowNum"
+    />
   </div>
 </template>
 
 <script>
 import { getBlogs, deleteBlogById } from "../../api/blog";
+import Pager from "../../components/Pager";
 export default {
   name: "",
 
-  components: {},
+  components: { Pager },
 
   created() {
-    this.getBlogs();
+    this.getBlog();
   },
   data() {
     return {
       value: "",
       searchName: "",
       tableList: [],
+      curPage: 1, //当前页
+      total: 0, //总共页数
+      pageSize: 10, //每页记录数
+      dataChanged: false,
       status: [
         {
           statusId: 1,
@@ -73,6 +87,13 @@ export default {
   },
   methods: {
     handleUpdate() {},
+    refresh() {
+      //用于刷新组件，需手动调用
+      this.dataChanged = true;
+      this.$nextTick(() => {
+        this.dataChanged = false;
+      });
+    },
     deleteUpdate() {},
     formatCode: function(row, colum) {
       return row.code === 0
@@ -84,11 +105,15 @@ export default {
         : "未知";
     },
     doFilter() {},
-    getBlogs() {
-      getBlogs().then(res => {
+    getBlog() {
+      getBlogs(this.curPage, this.pageSize).then(res => {
         if (res.data.resultCode == 200) {
-          this.tableList = res.data.resultJson;
+          this.tableList = res.data.resultJson.list;
+          this.curPage = res.data.resultJson.pageNum;
+          this.total = res.data.resultJson.pages;
+          this.pageSize = res.data.resultJson.pageSize;
         }
+        this.refresh();
       });
     },
     handleDelete(id) {
@@ -110,6 +135,25 @@ export default {
           });
         }
       });
+    },
+    gotoPage(curPage) {
+      getBlogs(curPage, this.pageSize).then(res => {
+        this.tableList = res.data.resultJson.list;
+        this.curPage = res.data.resultJson.pageNum;
+        this.total = res.data.resultJson.pages;
+        this.pageSize = res.data.resultJson.pageSize;
+        this.refresh();
+      });
+    },
+    changeRowNum(pageSize) {
+      this.pageSize = pageSize;
+       getBlogs(this.curPage, this.pageSize).then(res => {
+      this.tableList = res.data.resultJson.list;
+      this.curPage = res.data.resultJson.pageNum;
+      this.total = res.data.resultJson.pages;
+      this.pageSize = res.data.resultJson.pageSize;
+      this.refresh();
+    });
     }
   }
 };

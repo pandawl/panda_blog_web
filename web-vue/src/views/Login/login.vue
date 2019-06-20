@@ -19,8 +19,7 @@ export default {
 
   methods: {
     handlerSubmit(){
-      console.log(userName);
-      console.log(password);
+     
       
         userName: this.userName
         password: this.password

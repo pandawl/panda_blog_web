@@ -8,6 +8,7 @@
       <ul class="linkmore">
         <li>
           <a href="http://www.yangqq.com" target="_blank" class="iconfont icon-zhuye" title="网站地址"></a>
+        
         </li>
         <li>
           <a
@@ -28,7 +29,7 @@
         <li id="weixin">
           <a href="#" target="_blank" class="iconfont icon-weixin" title="关注我的微信"></a>
           <i>
-            <img src="../../../static/images/wx.png">
+            <img src="../../../static/images/wx.jpg">
           </i>
         </li>
       </ul>

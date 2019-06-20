@@ -10,12 +10,12 @@
       router
     > 
       <el-menu-item class="header_index_panda" index="/">不完整の旋律博客</el-menu-item>
-      <el-menu-item index="/">技术</el-menu-item>
+  <!--     <el-menu-item index="/">技术</el-menu-item>
       <el-menu-item index="/">技术杂谈</el-menu-item>
       <el-menu-item index="/">生活笔记</el-menu-item>
       <el-menu-item index="/">日志系统</el-menu-item>
       <el-menu-item index="/">我的书单</el-menu-item>
-      <el-menu-item index="/">留言板</el-menu-item>
+      <el-menu-item index="/">留言板</el-menu-item> -->
       <el-menu-item index="/blog/detail/2">关于我</el-menu-item>
     </el-menu>
   </div>

@@ -14,14 +14,14 @@
     <el-form-item label="分类" prop="categoryId">
       <el-select v-model="blog.categoryId" placeholder="请选择文章分类">
         
-        <el-option :label="category.category_name" :value="category.id" v-for="category in categorys" :key="category.id"></el-option>
+        <el-option :label="category.categoryName" :value="category.id" v-for="category in categorys" :key="category.id"></el-option>
       </el-select>
   
     </el-form-item>
 
     <el-form-item label="标签" prop="tags">
       <el-checkbox-group v-model="blog.tags"  @change="hehe">
-        <el-checkbox :label="tag.id"   v-for="tag in checkedItem" :key="tag.id">{{tag.tag_name}}</el-checkbox>
+        <el-checkbox :label="tag.id"   v-for="tag in checkedItem" :key="tag.id">{{tag.tagName}}</el-checkbox>
       </el-checkbox-group>
     </el-form-item>
 
@@ -107,9 +107,7 @@ export default {
       },
     saveBlog() {
       this.blog.content = this.$refs.md.d_render;
-      console.log(this.blog.content)
       this.blog.code = this.blog.code === true ? 0 : 1;
-      console.log(this.blog)
       saveBlog(this.blog).then(res => {
         if (res.data.resultCode == 200) {
           this.$message({
@@ -135,6 +133,7 @@ export default {
   created() {
     getList().then(res => {
       this.categorys = res.data.resultJson;
+      console.log(this.categorys);
     });
 
       getTagList().then(res => {

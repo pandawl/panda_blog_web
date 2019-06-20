@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="hh">
+        <h1>不完整的旋律</h1>
+        <p><ins>fdsafaf</ins>我是段落</p>
+        <h1>biubiubiu</h1>
+        <p>王heheheh</p>
+        <a href="www.baidu.com" title="百度">baidu</a>
+    </div>
+    <div id="ch">
+
+    </div>
+</body>
+<style>
+    #hh {
+        border-width: thin;
+        border-style: solid;
+        border-color: aquamarine;
+        width: 600px;
+        padding-right: 50px;
+        padding-left: 100;
+        padding-bottom: 50px;
+        margin-left: 100px;
+        text-align: center;
+        background-image: url(./1.jpg);
+        background-repeat: no-repeat;
+        background-size: 300px;
+    }
+    
+    a:hover {
+        color: red;
+    }
+    
+    a:link {
+        color: green;
+    }
+    
+    a:visited {
+        color: #000;
+    }
+    
+    p::first-letter {
+        font-size: 3em;
+    }
+    
+    p::first-line {
+        font-style: italic;
+    }
+    
+    #ch {
+        position: absolute;
+        left: 500px;
+        width: 100px;
+        height: 100px;
+        background-color: palevioletred;
+        transition: transform 2s;
+    }
+    
+    #ch:hover {
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+    }
+</style>
+
+</html>
