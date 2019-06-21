@@ -28,13 +28,13 @@
     </p>
     <div class="con_text" v-html="blog.content"></div>
     <div class="nextinfo">
-      <p>
+      <p >
         上一篇：
-        <router-link :to="'/blog/detail/'+last.id">{{last.title}}</router-link>
-      </p>
-      <p>
+        <router-link  tag="a" :to="'/blog/detail/'+blog.last.id">{{blog.last.title}}</router-link>
+      </p> 
+       <p >
         下一篇：
-        <router-link :to="'/blog/detail/'+next.id">{{next.title}}</router-link>
+        <router-link  tag="a" :to="'/blog/detail/'+blog.next.id">{{blog.next.title}}</router-link>
       </p>
     </div>
   </div>
@@ -47,9 +47,9 @@ export default {
   props: {},
   data() {
     return {
-      blog: {},
-      last: {},
-      next: {}
+      blog: {
+
+      },
     };
   },
   computed: {},
@@ -63,8 +63,7 @@ export default {
     initData(id) {
       getBlog(id).then(res => {
         this.blog = res.data.resultJson;
-        this.last = res.data.resultJson.last;
-        this.next = res.data.resultJson.next;
+       
       });
     }
   },
@@ -72,8 +71,7 @@ export default {
     this.blog.blogid = this.$route.params.id;
     getBlog(this.blog.blogid).then(res => {
       this.blog = res.data.resultJson;
-      this.last = res.data.resultJson.last;
-      this.next = res.data.resultJson.next;
+    
     });
   },
   mounted() {},

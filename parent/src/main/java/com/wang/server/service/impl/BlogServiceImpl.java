@@ -60,15 +60,24 @@ public class BlogServiceImpl implements BlogService {
     public BlogVo selectByPrimaryKey(Integer id) {
         Blog blog = blogMapper.selectByPrimaryKey(id);
         BlogVo blogVo = convertBlogToVO(blog);
+
+        //当上一篇或下一篇不存在时，设定id为-1000
+        Blog noBlog = new Blog();
+        noBlog.setId(-1000);
+        noBlog.setTitle("");
         //上一篇 前端显示为倒叙
         Blog last = blogMapper.getNext(id);
         if (null != last){
             blogVo.setLast(last);
+        }else {
+            blogVo.setLast(noBlog);
         }
         //下一篇
         Blog next = blogMapper.getLast(id);
         if (null != next){
             blogVo.setNext(next);
+        }else {
+            blogVo.setLast(noBlog);
         }
         return blogVo;
     }

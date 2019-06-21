@@ -102,6 +102,7 @@ export default {
     };
   },
   methods: {
+　
       hehe(){
           console.log(this.blog.tags)
       },
@@ -109,6 +110,7 @@ export default {
       this.blog.content = this.$refs.md.d_render;
       this.blog.code = this.blog.code === true ? 0 : 1;
       saveBlog(this.blog).then(res => {
+        console.log(this.blog)
         if (res.data.resultCode == 200) {
           this.$message({
             message: res.data.resultMessage,
