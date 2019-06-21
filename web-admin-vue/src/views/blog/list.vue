@@ -37,7 +37,7 @@
       <el-table-column prop="operation" label="操作 ">
         <template slot-scope="scope">
           <el-button size="small" type="primary" @click="handleUpdate(scope.row)">编辑</el-button>
-          <el-button size="small" type="danger" @click="deleteUpdate(scope.row)">删除</el-button>
+          <el-button size="small" type="danger" @click="handleDelete(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -94,7 +94,9 @@ export default {
         this.dataChanged = false;
       });
     },
-    deleteUpdate() {},
+    deleteUpdate(id) {
+      console.log(id)
+    },
     formatCode: function(row, colum) {
       return row.code === 0
         ? "已发布"
@@ -125,7 +127,7 @@ export default {
             showClose: true,
             duration: 1000
           });
-          this.getBlogs();
+          this.getBlog();
         } else {
           this.$message({
             message: res.data.resultMessage || "删除失败，请联系管理员",

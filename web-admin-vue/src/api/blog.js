@@ -1,8 +1,28 @@
-import baseurl from './baseurl'
-import axios from 'axios'
+import request from '../utils/request'
 
-export const saveBlog = params => { return axios.post(`${baseurl}/manage/blog/add`, params) }
+export const saveBlog = (params) => {
 
-export const getBlogs = (pageNum, pageSize) => { return axios.post(`${baseurl}/manage/blog/list`, { pageNum, pageSize }) }
+    return request({
+        url: '/manage/blog/add',
+        method: 'POST',
+        params: params
+    })
+}
 
-export const deleteBlogById = (params) => { return axios.post(`${baseurl}/manage/blog/delete`, params) }
+export const getBlogs = (pageNum, pageSize) => {
+
+    return request({
+        url: '/manage/blog/list',
+        method: 'POST',
+        params: { pageNum, pageSize }
+    })
+}
+
+export const deleteBlogById = (params) => {
+    return request({
+        url: '/manage/blog/delete',
+        method: 'POST',
+        params: params
+    })
+
+}

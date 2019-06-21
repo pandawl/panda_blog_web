@@ -1,7 +1,7 @@
 <template>
   <el-container style="height: 100vh; border: 1px solid #eee">
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-      <el-menu router="" :default-openeds="['1']">
+      <el-menu router :default-openeds="['1']">
         <el-submenu index="1">
           <template slot="title">
             <i class="el-icon-folder"></i>博客管理
@@ -48,7 +48,9 @@
       </el-header>
 
       <el-main>
-        <router-view></router-view>
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
       </el-main>
     </el-container>
   </el-container>

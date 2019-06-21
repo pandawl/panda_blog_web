@@ -26,7 +26,7 @@
       <b>简介</b>
       {{blog.summary}}
     </p>
-    <div class="con_text" v-html="blog.content"></div>
+    <div style="overflow:auto" class="con_text" v-html="blog.content"></div>
     <div class="nextinfo">
       <p >
         上一篇：
