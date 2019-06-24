@@ -6,7 +6,7 @@ import com.google.gson.JsonParser;
 import org.apache.commons.lang.StringUtils;
 
 public class ResultUtils {
-	
+
 	public static <T> Result<T> generateResult(ResultCode code, String message, T resultJson) {
 		message = StringUtils.isNotBlank(message) ? message : "";
 		Result<T> result = new Result<T>(code.getCode(), message, resultJson);
@@ -15,6 +15,10 @@ public class ResultUtils {
 
 	public static <T> String generateResultStr(ResultCode code, String message, T resultJson) {
 		return generateResult(code, message, resultJson).toString();
+	}
+
+	public static <T> String resultFail(ResultCode code, String message) {
+		return generateResult(code, message,null).toString();
 	}
 
 	public static boolean isResultSuccess(String resultStr) {
@@ -33,10 +37,10 @@ public class ResultUtils {
 		json.addProperty("url", url);
 		return json.toString();
 	}
-	
+
 	public static void main(String[] args) {
 		Result<String> result = generateResult(ResultCode.DATA_ERROR, "hehe", "123");
 		System.out.println(result);
 	}
-	
+
 }

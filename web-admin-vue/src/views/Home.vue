@@ -12,7 +12,7 @@
 
           <el-menu-item index="/blog/tags">标签管理</el-menu-item>
 
-          <el-menu-item index="1-4">选项4</el-menu-item>
+          <el-menu-item index="/blog/categorys">分类管理</el-menu-item>
         </el-submenu>
         <el-submenu index="2">
           <template slot="title">
@@ -49,7 +49,7 @@
 
       <el-main>
         <keep-alive>
-          <router-view></router-view>
+          <router-view ></router-view>
         </keep-alive>
       </el-main>
     </el-container>
@@ -72,14 +72,13 @@
 <script>
 export default {
   data() {
-    const item = {
-      date: "2016-05-02",
-      name: "王小虎",
-      address: "上海市普陀区金沙江路 1518 弄"
-    };
     return {
-      tableData: Array(20).fill(item)
+
     };
+  },
+
+  methods: {
+
   }
 };
 </script>

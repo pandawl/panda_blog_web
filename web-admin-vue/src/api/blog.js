@@ -5,7 +5,7 @@ export const saveBlog = (params) => {
     return request({
         url: '/manage/blog/add',
         method: 'POST',
-        params: params
+        params
     })
 }
 

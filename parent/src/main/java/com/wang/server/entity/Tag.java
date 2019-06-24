@@ -7,13 +7,13 @@ import java.util.Date;
 
 @Data
 public class Tag implements Serializable {
+
     private Integer id;
+
 
     private String tagName;
 
     private String tagDesc;
-
-    private Byte type;
 
     private Date createTime;
 

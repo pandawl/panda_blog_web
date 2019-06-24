@@ -3,9 +3,10 @@ package com.wang.server.service.impl;
 import com.wang.server.dao.TagMapper;
 import com.wang.server.entity.Tag;
 import com.wang.server.service.TagService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,31 +17,39 @@ import java.util.List;
 @Service
 public class TagServiceImpl implements TagService {
 
-    @Autowired
+    @Resource
     private TagMapper tagMapper;
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
-        return 0;
+        return tagMapper.deleteByPrimaryKey(id);
     }
 
     @Override
     public int insert(Tag record) {
-        return 0;
+        Tag tag = tagMapper.selectByName(record.getTagName());
+        if (null !=tag){
+            return -1;
+        }
+        record.setCreateTime(new Date());
+        record.setUpdateTime(new Date());
+        return tagMapper.insert(record);
     }
 
     @Override
     public Tag selectByPrimaryKey(Integer id) {
-        return null;
+        Tag tag = tagMapper.selectByPrimaryKey(id);
+        return tag;
     }
 
     @Override
-    public List<Tag> selectAll() {
-        return tagMapper.selectAll();
+    public List<Tag> selectAll(String search) {
+        return tagMapper.selectAll(search);
     }
 
     @Override
     public int updateByPrimaryKey(Tag record) {
-        return 0;
+        record.setUpdateTime(new Date());
+        return tagMapper.updateByPrimaryKey(record);
     }
 }

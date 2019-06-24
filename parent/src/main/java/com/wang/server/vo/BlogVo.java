@@ -2,6 +2,7 @@ package com.wang.server.vo;
 
 import com.wang.server.entity.Blog;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @Description:
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class BlogVo extends Blog {
 
 

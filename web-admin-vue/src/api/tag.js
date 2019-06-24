@@ -6,11 +6,40 @@ export const getTagList = () => {
         method: 'POST',
     })
 }
-
-export const add = () => {
+export const getTagById = (id) => {
     return request({
-        url: '/manage/category/add',
+        url: '/manage/tag/selete',
         method: 'POST',
-        params: {}
+        params: {id}
+    })
+}
+
+export const getTag = (search) => {
+    return request({
+        url: '/manage/tag/list',
+        method: 'POST',
+        params: {search}
+    })
+}
+
+export const add = (tag) => {
+    return request({
+        url: '/manage/tag/add',
+        method: 'POST',
+        params: tag
+    })
+}
+export const deleteTag = (id) => {
+    return request({
+        url: '/manage/tag/delete',
+        method: 'POST',
+        params: {id}
+    })
+}
+export const update = (params) => {
+    return request({
+        url: '/manage/tag/update',
+        method: 'POST',
+        params
     })
 }

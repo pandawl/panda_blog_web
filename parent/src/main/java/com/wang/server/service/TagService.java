@@ -17,7 +17,7 @@ public interface TagService {
 
     Tag selectByPrimaryKey(Integer id);
 
-    List<Tag> selectAll();
+    List<Tag> selectAll(String search);
 
     int updateByPrimaryKey(Tag record);
 }

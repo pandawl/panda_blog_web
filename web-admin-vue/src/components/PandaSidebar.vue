@@ -28,9 +28,6 @@
           PandaSidebarItem
         },
 
-        methods: {
-
-        }
     }
 </script>
 

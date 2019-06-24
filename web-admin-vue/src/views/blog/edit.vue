@@ -13,10 +13,10 @@
 
     <el-form-item label="分类" prop="categoryId">
       <el-select v-model="blog.categoryId" placeholder="请选择文章分类">
-        
+
         <el-option :label="category.categoryName" :value="category.id" v-for="category in categorys" :key="category.id"></el-option>
       </el-select>
-  
+
     </el-form-item>
 
     <el-form-item label="标签" prop="tags">
@@ -129,7 +129,7 @@ export default {
         }
       });
     },
- 
+
   },
   components: {},
   created() {
@@ -140,7 +140,7 @@ export default {
 
       getTagList().then(res => {
       this.checkedItem = res.data.resultJson;
-    
+
     });
   }
 };

@@ -6,6 +6,8 @@
 <configuration>
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+
+        <setting name="useGeneratedKeys" value="true"/>
     </settings>
     <!-- 配置mybatis的分页插件PageHelper -->
     <plugins>

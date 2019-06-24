@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <home/>
+    <home v-if="isReload"/>
   </div>
 </template>
 
@@ -9,6 +9,25 @@ import Home from "./views/Home";
 
 export default {
   name: "App",
+  data(){
+    return {
+      isReload: true
+    }
+  },
+  provide() {
+    return {
+      reload: this.reload
+    };
+  },
+
+  methods:{
+     reload() {
+      this.isReload = false;
+      this.$nextTick(function() {
+        this.isReload = true;
+      });
+    }
+   },
   components: {
     Home,
 
@@ -17,7 +36,8 @@ export default {
 </script>
 
 <style>
-html,body{
+html,
+body {
   padding: 0;
   margin: 0;
 }

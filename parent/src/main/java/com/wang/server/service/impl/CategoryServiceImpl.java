@@ -3,9 +3,9 @@ package com.wang.server.service.impl;
 import com.wang.server.dao.CategoryMapper;
 import com.wang.server.entity.Category;
 import com.wang.server.service.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    @Autowired
+    @Resource
     private CategoryMapper categoryMapper;
 
     @Override
