@@ -7,12 +7,12 @@
       <p>Email：18209298931@126.com</p>
       <ul class="linkmore">
         <li>
-          <a href="http://www.yangqq.com" target="_blank" class="iconfont icon-zhuye" title="网站地址"></a>
+          <a href="http://www.wangleihh.cn" target="_blank" class="iconfont icon-zhuye" title="网站地址"></a>
         
         </li>
         <li>
           <a
-            href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=HHh9cn95b3F1cHVye1xtbTJ-c3E"
+            href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=LRocHRUcGBwfG21cXANOQkA"
             target="_blank"
             class="iconfont icon-youxiang"
             title="我的邮箱"
