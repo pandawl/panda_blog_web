@@ -47,6 +47,7 @@
 import { saveBlog } from "../../api/blog";
 import { getList } from "../../api/category";
 import { getTagList } from "../../api/tag";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -109,7 +110,7 @@ export default {
     saveBlog() {
       this.blog.content = this.$refs.md.d_render;
       this.blog.code = this.blog.code === true ? 0 : 1;
-      saveBlog(this.blog).then(res => {
+      axios.post("http://www.wangleihh.cn:9999/panda/manage/blog/add",this.blog).then(res => {
         console.log(this.blog)
         if (res.data.resultCode == 200) {
           this.$message({

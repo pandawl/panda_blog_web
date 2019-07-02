@@ -58,6 +58,6 @@ public class TagController {
             ResultUtils.resultFail(ResultCode.PARAM_ERROR,"参数异常");
         }
 
-        return ResultUtils.generateResultStr(ResultCode.SUCCESS, "新增成功", tagService.updateByPrimaryKey(tag));
+        return ResultUtils.generateResultStr(ResultCode.SUCCESS, "修改成功", tagService.updateByPrimaryKey(tag));
     }
 }

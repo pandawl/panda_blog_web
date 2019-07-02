@@ -6,6 +6,7 @@ import com.wang.server.service.CategoryService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,26 +22,35 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
-        return 0;
+        return categoryMapper.deleteByPrimaryKey(id);
     }
 
     @Override
     public int insert(Category record) {
+
+        Category category = categoryMapper.selectByName(record.getCategoryName());
+        if (null !=category){
+            return -1;
+        }
+        record.setCreateTime(new Date());
+        record.setUpdateTime(new Date());
+        categoryMapper.insert(record);
         return 0;
     }
 
     @Override
     public Category selectByPrimaryKey(Integer id) {
-        return null;
+        return categoryMapper.selectByPrimaryKey(id);
     }
 
     @Override
-    public List<Category> selectAll() {
-        return categoryMapper.selectAll();
+    public List<Category> selectAll(String search) {
+        return categoryMapper.selectAll(search);
     }
 
     @Override
     public int updateByPrimaryKey(Category record) {
-        return 0;
+        record.setUpdateTime(new Date());
+        return categoryMapper.updateByPrimaryKey(record);
     }
 }

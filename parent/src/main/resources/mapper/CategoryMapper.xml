@@ -13,26 +13,35 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.wang.server.entity.Category" >
-    insert into category (id, category_name, remark, 
+    insert into category ( category_name, remark,
       create_time, update_time)
-    values (#{id,jdbcType=INTEGER}, #{category_name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{create_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP})
+    values (#{record.categoryName,jdbcType=VARCHAR}, #{record.remark,jdbcType=VARCHAR},
+      #{record.createTime}, #{record.updateTime})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.wang.server.entity.Category" >
     update category
-    set category_name = #{category_name,jdbcType=VARCHAR},
-      remark = #{remark,jdbcType=VARCHAR},
-      create_time = #{create_time,jdbcType=TIMESTAMP},
-      update_time = #{update_time,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+    set category_name = #{record.categoryName},
+      remark = #{record.remark},
+      create_time = #{record.createTime},
+      update_time = #{record.updateTime}
+    where id = #{record.id}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select id, category_name, remark, create_time, update_time
+    select id, category_name, remark
     from category
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select id, category_name, remark, create_time, update_time
     from category
+    <where>
+      category_name like '%${search}%'
+
+    </where>
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap">
+    select id, category_name, remark, create_time, update_time
+    from category
+    where category_name = #{name}
   </select>
 </mapper>

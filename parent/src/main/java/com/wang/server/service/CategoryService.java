@@ -17,7 +17,7 @@ public interface CategoryService {
 
     Category selectByPrimaryKey(Integer id);
 
-    List<Category> selectAll();
+    List<Category> selectAll(String search);
 
     int updateByPrimaryKey(Category record);
 }

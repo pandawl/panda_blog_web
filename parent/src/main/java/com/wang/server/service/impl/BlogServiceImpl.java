@@ -77,7 +77,7 @@ public class BlogServiceImpl implements BlogService {
         if (null != next){
             blogVo.setNext(next);
         }else {
-            blogVo.setLast(noBlog);
+            blogVo.setNext(noBlog);
         }
         return blogVo;
     }
