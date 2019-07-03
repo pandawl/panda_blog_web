@@ -35,24 +35,30 @@
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.wang.server.entity.Blog">
     update blog
-    set category_id = #{category_id,jdbcType=INTEGER},
+    set category_id = #{categoryId,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
       summary = #{summary,jdbcType=VARCHAR},
-      img_url = #{img_url,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
       author = #{author,jdbcType=VARCHAR},
       code = #{code,jdbcType=INTEGER},
-      view_count = #{view_count,jdbcType=INTEGER},
-      like_count = #{like_count,jdbcType=INTEGER},
-      comment_count = #{comment_count,jdbcType=INTEGER},
-      is_deleted = #{is_deleted,jdbcType=TINYINT},
-      create_time = #{create_time,jdbcType=TIMESTAMP},
-      update_time = #{update_time,jdbcType=TIMESTAMP},
+      view_count = #{viewCount,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      comment_count = #{commentCount,jdbcType=INTEGER},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-   select b.id, c.category_name categoryName , b.title, b.summary, b.img_url, b.author, b.code, b.view_count, b.like_count,
+   select b.id,b.category_id, c.category_name categoryName , b.title, b.summary, b.img_url, b.author, b.code, b.view_count, b.like_count,
     b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content
+    from blog b
+    left join category c on  b.category_id = c.id
+    where b.id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+   select b.id,b.category_id, c.category_name categoryName , b.title, b.summary, b.img_url, b.author, b.code, b.view_count, b.like_count,
+    b.comment_count, b.is_deleted, b.content
     from blog b
     left join category c on  b.category_id = c.id
     where b.id = #{id,jdbcType=INTEGER}
@@ -61,7 +67,17 @@
     select b.id, c.category_name categoryName , b.title, b.summary, b.img_url, b.author, b.code, b.view_count, b.like_count,
     b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content
     from blog b
-    left join category c on  b.category_id = c.id order by b.id desc
+    left join category c on  b.category_id = c.id
+    <where>
+        <if test="search.value != null">
+          and b.code = #{search.value}
+        </if>
+        <if test="search.searchName != null and search.searchName != ''">
+          and b.title like '%${search.searchName}%'
+        </if>
+    </where>
+
+    order by b.id desc
 
   </select>
     <select id="getLast" resultType="com.wang.server.entity.Blog">

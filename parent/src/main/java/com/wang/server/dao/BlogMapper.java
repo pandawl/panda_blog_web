@@ -1,6 +1,9 @@
 package com.wang.server.dao;
 
 import com.wang.server.entity.Blog;
+import com.wang.server.vo.SearchvVo;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface BlogMapper {
@@ -10,7 +13,9 @@ public interface BlogMapper {
 
     Blog selectByPrimaryKey(Integer id);
 
-    List<Blog> selectAll();
+    Blog selectById(Integer id);
+
+    List<Blog> selectAll(@Param("search") SearchvVo search);
 
     int updateByPrimaryKey(Blog record);
 

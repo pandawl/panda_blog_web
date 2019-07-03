@@ -9,12 +9,12 @@ export const saveBlog = (params) => {
     })
 }
 
-export const getBlogs = (pageNum, pageSize) => {
+export const getBlogs = (pageNum, pageSize, value, searchName) => {
 
     return request({
         url: '/manage/blog/list',
         method: 'POST',
-        params: { pageNum, pageSize }
+        params: { pageNum, pageSize, value, searchName }
     })
 }
 
@@ -25,4 +25,12 @@ export const deleteBlogById = (params) => {
         params: params
     })
 
+}
+
+export const getBlog = (id) => {
+    return request({
+        url: '/manage/blog/getblog',
+        method: 'POST',
+        params: { id }
+    })
 }

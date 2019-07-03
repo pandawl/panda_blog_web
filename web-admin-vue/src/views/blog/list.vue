@@ -14,15 +14,18 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-input placeholder="姓名" v-model="searchName"></el-input>
+          <el-input placeholder="标题" v-model="searchName"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="doFilter()">
+          <el-button type="primary" @click="search(value,searchName)">
             <i class="el-icon-search"></i>搜索
+          </el-button>
+            <el-button type="primary" @click="reset()">
+            <i class="el-icon-search"></i>重置
           </el-button>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary">新增</el-button>
+          <el-button type="primary" @click="add()">新增</el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -36,7 +39,7 @@
       <el-table-column :formatter="formatCode" label="状态" width="120"></el-table-column>
       <el-table-column prop="operation" label="操作 ">
         <template slot-scope="scope">
-          <el-button size="small" type="primary" @click="handleUpdate(scope.row)">编辑</el-button>
+          <el-button size="small" type="primary" @click="handleUpdate(scope.row.id)">编辑</el-button>
           <el-button size="small" type="danger" @click="handleDelete(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
@@ -74,19 +77,46 @@ export default {
       pageSize: 10, //每页记录数
       dataChanged: false,
       status: [
-        {
-          statusId: 1,
-          label: "启用"
+         {
+          statusId: 0,
+          label: "草稿"
         },
         {
+          statusId: 1,
+          label: "已发布"
+        },
+       
+        {
           statusId: 2,
-          label: "禁用"
+          label: "已删除"
         }
       ]
     };
   },
   methods: {
-    handleUpdate() {},
+    handleUpdate(id) {
+      this.$router.push("/blog/edit/"+id);
+    },
+    add() {
+      this.$router.push("/blog/edit/");
+    },
+    reset(){
+      this.getBlog();
+      this.value = "";
+      this.searchName = "";
+    },
+    search(value,searchName){
+ 
+      getBlogs(this.curPage, this.pageSize,value,searchName).then(res => {
+        if (res.data.resultCode == 200) {
+          this.tableList = res.data.resultJson.list;
+          this.curPage = res.data.resultJson.pageNum;
+          this.total = res.data.resultJson.pages;
+          this.pageSize = res.data.resultJson.pageSize;
+        }
+        this.refresh();
+      });
+    },
     refresh() {
       //用于刷新组件，需手动调用
       this.dataChanged = true;
@@ -95,15 +125,15 @@ export default {
       });
     },
     deleteUpdate(id) {
-      console.log(id)
+     
     },
     formatCode: function(row, colum) {
       return row.code === 0
-        ? "已发布"
-        : row.code === 1
-        ? "删除"
-        : row.code === 2
         ? "草稿"
+        : row.code === 1
+        ? "已发布"
+        : row.code === 2
+        ? "删除"
         : "未知";
     },
     doFilter() {},

@@ -10,6 +10,10 @@
     delete from blog_tags
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByBlogId" parameterType="java.lang.Integer" >
+    delete from blog_tags
+    where blog_id = #{id,jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="com.wang.server.entity.BlogTags" >
     insert into blog_tags (id, tag_id, blog_id
       )
@@ -30,5 +34,10 @@
   <select id="selectAll" resultMap="BaseResultMap" >
     select id, tag_id, blog_id
     from blog_tags
+  </select>
+  <select id="selectByBlogId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select id, tag_id, blog_id
+    from blog_tags
+    where blog_id = #{id,jdbcType=INTEGER}
   </select>
 </mapper>

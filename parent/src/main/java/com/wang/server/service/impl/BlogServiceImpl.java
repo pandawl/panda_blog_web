@@ -8,10 +8,12 @@ import com.wang.server.entity.Blog;
 import com.wang.server.entity.BlogTags;
 import com.wang.server.service.BlogService;
 import com.wang.server.vo.BlogVo;
+import com.wang.server.vo.SearchvVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,22 +39,45 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public int insert(BlogVo record) {
-        record.setCreateTime(new Date());
-        int count = blogMapper.insert(record);
-        if (count <= 0) {
-            return 0;
-        }
 
-        if (record.getTags().size() > 0) {
-            for (int i = 0; i < record.getTags().size(); i++) {
-                BlogTags blogTags = new BlogTags();
-                blogTags.setBlog_id(record.getId());
-                blogTags.setTag_id(record.getTags().get(i));
-                blogTagsMapper.insert(blogTags);
+        //修改
+        if (record.getId() != null){
+            record.setUpdateTime(new Date());
+            int count = blogMapper.updateByPrimaryKey(record);
+            if (count <= 0) {
+                return 0;
+            }
+                blogTagsMapper.deleteByBlogId(record.getId());
+            if (record.getTags().size() > 0) {
+                for (int i = 0; i < record.getTags().size(); i++) {
+                    BlogTags blogTags = new BlogTags();
+                    blogTags.setBlog_id(record.getId());
+                    blogTags.setTag_id(record.getTags().get(i));
+                    blogTagsMapper.insert(blogTags);
+                }
+
+            }
+            return 1;
+            //新增
+        }else {
+            record.setCreateTime(new Date());
+            int count = blogMapper.insert(record);
+            if (count <= 0) {
+                return 0;
             }
 
+            if (record.getTags().size() > 0) {
+                for (int i = 0; i < record.getTags().size(); i++) {
+                    BlogTags blogTags = new BlogTags();
+                    blogTags.setBlog_id(record.getId());
+                    blogTags.setTag_id(record.getTags().get(i));
+                    blogTagsMapper.insert(blogTags);
+                }
+
+            }
+            return 1;
         }
-        return 1;
+
 
     }
 
@@ -83,9 +108,9 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public PageInfo<Blog> selectAll(Integer pageNum, Integer pageSize) {
+    public PageInfo<Blog> selectAll(Integer pageNum, Integer pageSize, SearchvVo search) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Blog> blogs = blogMapper.selectAll();
+        List<Blog> blogs = blogMapper.selectAll(search);
         PageInfo<Blog> info = new PageInfo<>(blogs);
         return info;
     }
@@ -93,6 +118,22 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public int updateByPrimaryKey(Blog record) {
         return 0;
+    }
+
+    @Override
+    public BlogVo selectByid(Integer id) {
+        Blog blog = blogMapper.selectById(id);
+        List<BlogTags> tags = blogTagsMapper.selectByBlogId(id);
+        List<Integer> tagIds = new ArrayList<>();
+        for (BlogTags tag : tags) {
+            tagIds.add(tag.getTag_id());
+        }
+
+        BlogVo blogVo = convertBlogToVO(blog);
+        blogVo.setTags(tagIds);
+
+
+        return blogVo;
     }
 
     private BlogVo convertBlogToVO(Blog blog){

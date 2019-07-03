@@ -19,9 +19,9 @@
           <p class="blogtext">{{blog.summary}}...</p>
           <p class="bloginfo">
             <i class="avatar">
-              <img src="images/avatar.jpg">
+              <img src="../../../static/images/avatar.jpg">
             </i>
-            <span>panda</span>
+            <span>散落记忆里的时光</span>
             <span>{{blog.updateTime}}</span>
             <span>
               【

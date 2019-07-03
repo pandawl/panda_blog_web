@@ -3,6 +3,7 @@ package com.wang.server.service;
 import com.github.pagehelper.PageInfo;
 import com.wang.server.entity.Blog;
 import com.wang.server.vo.BlogVo;
+import com.wang.server.vo.SearchvVo;
 
 /**
  * @Auther: wl
@@ -17,7 +18,15 @@ public interface BlogService {
 
     BlogVo selectByPrimaryKey(Integer id);
 
-    PageInfo<Blog> selectAll(Integer pageNum, Integer pageSize);
+    PageInfo<Blog> selectAll(Integer pageNum, Integer pageSize, SearchvVo search);
 
     int updateByPrimaryKey(Blog record);
+
+    /**
+     * 回显
+     * @param id
+     * @return
+     */
+    BlogVo selectByid(Integer id);
+
 }

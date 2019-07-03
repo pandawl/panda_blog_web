@@ -33,9 +33,12 @@ axios.interceptors.request.use(function(config) {
     return Promise.reject(error);
 });
 Vue.use(mavonEditor)
-new Vue({
-    'el': '#main'
-})
+    /* new Vue({
+        'el': '#main',
+        data() {
+            return { value: '' }
+        }
+    }) */
 
 /* eslint-disable no-new */
 new Vue({

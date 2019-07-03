@@ -12,7 +12,7 @@
     <h1 class="con_tilte">{{blog.title}}</h1>
     <p class="bloginfo">
       <i class="avatar">
-        <img src="images/avatar.jpg">
+        <img src="images/avatar.jpg" />
       </i>
       <span>panda</span>
       <span>{{blog.createTime}}</span>
@@ -26,15 +26,26 @@
       <b>简介</b>
       {{blog.summary}}
     </p>
-    <div style="overflow:auto" class="con_text" v-html="blog.content"></div>
+    <div style="overflow:auto" class="con_text">
+      <mavon-editor
+        class="md"
+        :value="blog.content"
+        :subfield="false"
+        :defaultOpen="'preview'"
+        :toolbarsFlag="false"
+        :editable="false"
+        :scrollStyle="true"
+        :ishljs="true"
+      ></mavon-editor>
+    </div>
     <div class="nextinfo">
-      <p >
+      <p>
         上一篇：
-        <router-link  tag="a" :to="'/blog/detail/'+blog.last.id">{{blog.last.title}}</router-link>
-      </p> 
-       <p >
+        <router-link class="article_link" tag="a" :to="'/blog/detail/'+last.id">{{last.title}}</router-link>
+      </p>
+      <p>
         下一篇：
-        <router-link  tag="a" :to="'/blog/detail/'+blog.next.id">{{blog.next.title}}</router-link>
+        <router-link class="article_link" tag="a" :to="'/blog/detail/'+next.id">{{next.title}}</router-link>
       </p>
     </div>
   </div>
@@ -42,14 +53,20 @@
 
 <script>
 import { getBlog } from "../../api/blog";
+import marked from "marked";
+//import '@/assets/css/markdown/dark.css' //引入代码高亮的css
+import hljs from "highlight.js";
+
+//封装成一个指令
+
 export default {
   components: {},
   props: {},
   data() {
     return {
-      blog: {
-
-      },
+      blog: {},
+      last: {},
+      next: {}
     };
   },
   computed: {},
@@ -63,18 +80,23 @@ export default {
     initData(id) {
       getBlog(id).then(res => {
         this.blog = res.data.resultJson;
-       
+        this.last = res.data.resultJson.last;
+        this.next = res.data.resultJson.next;
+        this.blog.content = marked(res.data.resultJson.content);
       });
     }
   },
-  created() {
+  created() {},
+  mounted() {
     this.blog.blogid = this.$route.params.id;
     getBlog(this.blog.blogid).then(res => {
       this.blog = res.data.resultJson;
-    
+      this.last = res.data.resultJson.last;
+      this.next = res.data.resultJson.next;
+
+      this.blog.content = marked(res.data.resultJson.content);
     });
   },
-  mounted() {},
   beforeCreate() {}, //生命周期 - 创建之前
   beforeMount() {}, //生命周期 - 挂载之前
   beforeUpdate() {}, //生命周期 - 更新之前
@@ -86,4 +108,10 @@ export default {
 </script>
 <style lang='scss' scoped>
 //@import url(); 引入公共css类
+.article_link{
+  color: #00a67c;
+}
+.article_link:hover{
+  color: #b807cf;
+}
 </style>

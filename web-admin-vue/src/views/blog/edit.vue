@@ -44,7 +44,7 @@
   </el-form>
 </template>
 <script>
-import { saveBlog } from "../../api/blog";
+import { saveBlog,getBlog } from "../../api/blog";
 import { getList } from "../../api/category";
 import { getTagList } from "../../api/tag";
 import axios from "axios";
@@ -108,9 +108,10 @@ export default {
           console.log(this.blog.tags)
       },
     saveBlog() {
-      this.blog.content = this.$refs.md.d_render;
-      this.blog.code = this.blog.code === true ? 0 : 1;
-      axios.post("http://www.wangleihh.cn:9999/panda/manage/blog/add",this.blog).then(res => {
+     // this.blog.content = this.$refs.md.d_render;
+
+      this.blog.code = this.blog.code === true ? 1 : 0;
+      axios.post("http://www.wanglei.cn:9999/panda/manage/blog/add",this.blog).then(res => {
         console.log(this.blog)
         if (res.data.resultCode == 200) {
           this.$message({
@@ -130,19 +131,35 @@ export default {
         }
       });
     },
+      initData(id) {
+      getBlog(id).then(res => {
+        this.blog = res.data.resultJson;
+        this.blog.code = res.data.resultJson.code === 1 ? true :false;
+      
+       
+      });
+    }
 
   },
+
   components: {},
   created() {
     getList().then(res => {
       this.categorys = res.data.resultJson;
-      console.log(this.categorys);
+    
     });
 
       getTagList().then(res => {
       this.checkedItem = res.data.resultJson;
 
     });
+     
+      let id = this.$route.params.id;
+      if(id !=null){
+          this.initData(id);
+      }
+      
+    
   }
 };
 </script>

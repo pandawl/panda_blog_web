@@ -48,7 +48,7 @@
       </el-form>
     </el-col>
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="id" label="日期" width="180"></el-table-column>
+      <el-table-column prop="id" label="id" width="180"></el-table-column>
       <el-table-column prop="categoryName" label="名称" width="180"></el-table-column>
       <el-table-column prop="updateTime" label="更新时间"></el-table-column>
       <el-table-column label="操作">
