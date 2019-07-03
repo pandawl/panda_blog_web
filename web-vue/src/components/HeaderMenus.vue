@@ -9,7 +9,7 @@
       active-text-color="#ffd04b"
       router
     > 
-      <el-menu-item class="header_index_panda" index="/">不完整の旋律博客</el-menu-item>
+      <el-menu-item class="header_index_panda" index="/">散落记忆里的时光</el-menu-item>
   <!--     <el-menu-item index="/">技术</el-menu-item>
       <el-menu-item index="/">技术杂谈</el-menu-item>
       <el-menu-item index="/">生活笔记</el-menu-item>

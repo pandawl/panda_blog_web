@@ -24,12 +24,13 @@ export default [{
         component: () =>
             import ('../views/blog/edit.vue'),
         name: '博客',
-        meta: { title: '', icon: 'form' },
+        meta: { title: '', icon: 'form', keepAlive: true },
         children: [{
             path: ':id',
             component: () =>
                 import ('../views/blog/edit.vue'),
             name: '博客编辑',
+
         }]
 
     },
@@ -40,7 +41,7 @@ export default [{
         name: '标签',
         meta: { title: '标签', icon: 'form' },
 
-    },{
+    }, {
         path: '/blog/categorys',
         component: () =>
             import ('../views/category/index.vue'),

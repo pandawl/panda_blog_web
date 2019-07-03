@@ -12,7 +12,7 @@
     <h1 class="con_tilte">{{blog.title}}</h1>
     <p class="bloginfo">
       <i class="avatar">
-        <img src="images/avatar.jpg" />
+        <img src="../../../static/images/wl.jpg" />
       </i>
       <span>panda</span>
       <span>{{blog.createTime}}</span>

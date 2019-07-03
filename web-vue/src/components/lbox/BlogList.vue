@@ -13,16 +13,16 @@
               <a href="/">{{blog.categoryName}}</a>
             </i>
             <a href="/" title>
-              <img src="../../../static/images/b01.jpg" :alt="blog.title">
+              <img src="../../../static/images/b02.jpg" :alt="blog.title">
             </a>
           </span>
           <p class="blogtext">{{blog.summary}}...</p>
           <p class="bloginfo">
             <i class="avatar">
-              <img src="../../../static/images/avatar.jpg">
+              <img src="../../../static/images/wl.jpg">
             </i>
             <span>散落记忆里的时光</span>
-            <span>{{blog.updateTime}}</span>
+            <span>{{blog.createTime}}</span>
             <span>
               【
               <a href="/">{{blog.categoryName}}</a>】

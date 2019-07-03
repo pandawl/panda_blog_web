@@ -13,15 +13,18 @@
 
     <el-form-item label="分类" prop="categoryId">
       <el-select v-model="blog.categoryId" placeholder="请选择文章分类">
-
-        <el-option :label="category.categoryName" :value="category.id" v-for="category in categorys" :key="category.id"></el-option>
+        <el-option
+          :label="category.categoryName"
+          :value="category.id"
+          v-for="category in categorys"
+          :key="category.id"
+        ></el-option>
       </el-select>
-
     </el-form-item>
 
     <el-form-item label="标签" prop="tags">
-      <el-checkbox-group v-model="blog.tags"  @change="hehe">
-        <el-checkbox :label="tag.id"   v-for="tag in checkedItem" :key="tag.id">{{tag.tagName}}</el-checkbox>
+      <el-checkbox-group v-model="blog.tags" @change="hehe">
+        <el-checkbox :label="tag.id" v-for="tag in checkedItem" :key="tag.id">{{tag.tagName}}</el-checkbox>
       </el-checkbox-group>
     </el-form-item>
 
@@ -34,7 +37,7 @@
 
     <el-form-item>
       <div id="main">
-        <mavon-editor ref="md" v-model="blog.content"/>
+        <mavon-editor ref="md" @imgAdd="imgAdd" v-model="blog.content" @change="mavonChangeHandle" />
       </div>
     </el-form-item>
     <el-form-item>
@@ -44,7 +47,7 @@
   </el-form>
 </template>
 <script>
-import { saveBlog,getBlog } from "../../api/blog";
+import { saveBlog, getBlog } from "../../api/blog";
 import { getList } from "../../api/category";
 import { getTagList } from "../../api/tag";
 import axios from "axios";
@@ -62,12 +65,48 @@ export default {
         content: "",
         url: ""
       },
+      toolbars: {
+        bold: true, // 粗体
+        italic: true, // 斜体
+        header: true, // 标题
+        underline: true, // 下划线
+        strikethrough: true, // 中划线
+        mark: false, // 标记
+        superscript: false, // 上角标
+        subscript: false, // 下角标
+        quote: true, // 引用
+        ol: true, // 有序列表
+        ul: true, // 无序列表
+        link: true, // 链接
+        imagelink: true, // 图片链接
+        code: true, // code
+        table: true, // 表格
+        fullscreen: true, // 全屏编辑
+        readmodel: false, // 沉浸式阅读
+        htmlcode: true, // 展示html源码
+        help: false, // 帮助
+        /* 1.3.5 */
+        undo: true, // 上一步
+        redo: false, // 下一步
+        trash: false, // 清空
+        save: false, // 保存（触发events中的save事件）
+        /* 1.4.2 */
+        navigation: false, // 导航目录
+        /* 2.1.8 */
+        alignleft: true, // 左对齐
+        aligncenter: true, // 居中
+        alignright: true, // 右对齐
+        /* 2.2.1 */
+        subfield: true, // 单双栏模式
+        preview: true, // 预览
+        boxShadow: false
+      },
       categorys: [],
       checkedItem: [],
       rules: {
         title: [
           { required: true, message: "请输入标题", trigger: "blur" },
-          { min: 1, max: 20, message: "长度在 1 到 20 个字符", trigger: "blur" }
+          { min: 1, max: 50, message: "长度在 1 到 50 个字符", trigger: "blur" }
         ],
         categoryId: [
           { required: true, message: "请选择分类", trigger: "change" }
@@ -103,63 +142,89 @@ export default {
     };
   },
   methods: {
-　
-      hehe(){
-          console.log(this.blog.tags)
-      },
+
+    imgAdd(pos, file) {
+      // 上传图片
+      
+let config = {
+   // headers:{'Content-Type':'multipart/form-data'}
+};
+      var formData = new FormData();
+      formData.append("file", file);
+      console.log(formData)
+      console.log(file)
+      axios
+        .post(
+          "http://localhost:9999/panda/manage/img/upload", //请求地址
+          file
+        )
+        .then(url => {
+          // console.log(JSON.stringify(url))
+          // 第二步.将返回的url替换到文本原位置![...](./0) -> ![...](url)
+          /**
+           * $vm 指为mavonEditor实例，可以通过如下两种方式获取
+           * 1.  通过引入对象获取: `import {mavonEditor} from ...` 等方式引入后，`$vm`为`mavonEditor`
+           * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
+           * 3. 由于vue运行访问的路径只能在static下，so，我就把图片保存到它这里了
+           */
+          this.$refs.md.$img2Url(
+            pos,
+            "http://localhost:9999/static/image/" + url.imageUrl
+          );
+        });
+    },
+    hehe() {
+      console.log(this.blog.tags);
+    },
     saveBlog() {
-     // this.blog.content = this.$refs.md.d_render;
+      // this.blog.content = this.$refs.md.d_render;
 
       this.blog.code = this.blog.code === true ? 1 : 0;
-      axios.post("http://www.wanglei.cn:9999/panda/manage/blog/add",this.blog).then(res => {
-        console.log(this.blog)
-        if (res.data.resultCode == 200) {
-          this.$message({
-            message: res.data.resultMessage,
-            type: "success",
-            showClose: true,
-            duration: 1000
-          });
-          this.$router.push("/blog/list");
-        } else {
-          this.$message({
-            message: res.data.resultMessage,
-            type: "error",
-            showClose: true,
-            duration: 1000
-          });
-        }
-      });
+      // axios.post("http://www.wangleihh.cn:9999/panda/manage/blog/add",this.blog).then(res => {
+      axios
+        .post("http://localhost:9999/panda/manage/blog/add", this.blog)
+        .then(res => {
+          console.log(this.blog);
+          if (res.data.resultCode == 200) {
+            this.$message({
+              message: res.data.resultMessage,
+              type: "success",
+              showClose: true,
+              duration: 1000
+            });
+            this.$router.push("/blog/list");
+          } else {
+            this.$message({
+              message: res.data.resultMessage,
+              type: "error",
+              showClose: true,
+              duration: 1000
+            });
+          }
+        });
     },
-      initData(id) {
+    initData(id) {
       getBlog(id).then(res => {
         this.blog = res.data.resultJson;
-        this.blog.code = res.data.resultJson.code === 1 ? true :false;
-      
-       
+        this.blog.code = res.data.resultJson.code === 1 ? true : false;
       });
     }
-
   },
 
   components: {},
   created() {
     getList().then(res => {
       this.categorys = res.data.resultJson;
-    
     });
 
-      getTagList().then(res => {
+    getTagList().then(res => {
       this.checkedItem = res.data.resultJson;
-
     });
-     
-      let id = this.$route.params.id;
-      if(id !=null){
-          this.initData(id);
-      }
-      
-    
+
+    let id = this.$route.params.id;
+    if (id != null) {
+      this.initData(id);
+    }
   }
 };
 </script>
