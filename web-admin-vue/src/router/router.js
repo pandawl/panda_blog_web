@@ -49,4 +49,12 @@ export default [{
         meta: { title: '分类', icon: 'form' },
 
     },
+    {
+        path: '/blog/img',
+        component: () =>
+            import ('../views/img/index.vue'),
+        name: '图片',
+        meta: { title: '图片', icon: 'form' },
+
+    },
 ]

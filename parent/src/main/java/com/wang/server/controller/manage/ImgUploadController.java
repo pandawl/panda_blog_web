@@ -22,14 +22,14 @@ public class ImgUploadController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
-    public String uploadImage(@RequestParam(value="miniurl", required=false) MultipartFile miniurl, HttpServletRequest request) {
+    public String uploadImage(@RequestParam(value="file", required=false) MultipartFile file, HttpServletRequest request) {
 
-        if(miniurl.isEmpty()) {
+        if(file.isEmpty()) {
             return "error";
         }
 
         try {
-            String fileUrl=qiniuService.saveImage(miniurl);
+            String fileUrl=qiniuService.saveImage(file);
             return "success, imageUrl = " + fileUrl;
         } catch (IOException e) {
             e.printStackTrace();

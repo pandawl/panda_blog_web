@@ -19,7 +19,7 @@
             <i class="el-icon-s-tools"></i>系统管理
           </template>
           <el-menu-item-group>
-            <el-menu-item index="2-1">日志管理</el-menu-item>
+            <el-menu-item index="/blog/img">日志管理</el-menu-item>
             <el-menu-item index="2-2">访问管理</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
