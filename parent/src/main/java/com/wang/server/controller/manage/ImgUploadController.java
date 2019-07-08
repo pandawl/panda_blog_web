@@ -1,5 +1,7 @@
 package com.wang.server.controller.manage;
 
+import com.wang.server.common.util.ResultCode;
+import com.wang.server.common.util.ResultUtils;
 import com.wang.server.service.QiniuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,15 +27,16 @@ public class ImgUploadController {
     public String uploadImage(@RequestParam(value="file", required=false) MultipartFile file, HttpServletRequest request) {
 
         if(file.isEmpty()) {
-            return "error";
+          return ResultUtils.generateResultStr(ResultCode.PARAM_ERROR, "图片不能为空", 0);
+
         }
 
         try {
             String fileUrl=qiniuService.saveImage(file);
-            return "success, imageUrl = " + fileUrl;
+            return ResultUtils.generateResultStr(ResultCode.SUCCESS, "新增成功", fileUrl);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "fail";
+        return ResultUtils.generateResultStr(ResultCode.DATA_ERROR, "图片保存异常", 0);
     }
 }

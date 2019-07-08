@@ -1,15 +1,18 @@
 <!--  -->
 <template>
   <div>
-    <Lbox/>
-    <Rbox/>
+    <div class="head_aricle">
+      <Lbox />
+      <Rbox />
+    </div>
+  
   </div>
 </template>
 
 <script>
+import Lbox from "../components/lbox/Lbox";
+import Rbox from "../components/rbox/Rbox";
 
-import Lbox from '../components/lbox/Lbox'
-import Rbox from '../components/rbox/Rbox'
 
 export default {
   data() {
@@ -19,19 +22,15 @@ export default {
   components: {
     Lbox,
     Rbox
-
-  },
-
-  
+  }
 };
 </script>
 <style lang='scss' scoped>
-div {
+.head_aricle {
   width: 80%;
- 
+
   margin: auto;
-   margin-top: 10px;
+  margin-top: 10px;
   overflow: hidden;
 }
-
 </style>

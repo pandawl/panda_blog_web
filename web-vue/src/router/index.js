@@ -29,7 +29,7 @@ const router = new Router({
 //     })
 //不能控制页面跳转 路由跳转之后操作
 router.afterEach((to, from) => {
-
+        window.scrollTo(0, 0);
     })
     /**
      * -----导航流程-----------

@@ -38,7 +38,7 @@ export const getImg = (file) => {
     return request({
         url: '/manage/img/upload',
         method: 'POST',
-        params: file,
+        data: file,
         headers: { 'Content-Type': 'multipart/form-data' },
 
     })
