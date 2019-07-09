@@ -30,4 +30,36 @@ public class BlogController {
 
         return ResultUtils.generateResultStr(ResultCode.SUCCESS,"查询成功", blogService.selectByPrimaryKey(id));
     }
+
+
+    @PostMapping("/tag/list")
+    public String getTagList(Integer pageNum, Integer pageSize, Integer search){
+        return ResultUtils.generateResultStr(ResultCode.SUCCESS,"查询成功", blogService.selectByTag(pageNum,pageSize,search));
+    }
+
+    @PostMapping("/category/list")
+    public String getCategoryList(Integer pageNum, Integer pageSize, Integer search){
+        return ResultUtils.generateResultStr(ResultCode.SUCCESS,"查询成功", blogService.selectByCategory(pageNum,pageSize,search));
+    }
+
+    /**
+     * 文章归档
+     * @param pageNum
+     * @param pageSize
+     * @param search
+     * @return
+     */
+    @PostMapping("/time")
+    public String getBlogByTime(Integer pageNum, Integer pageSize, Integer search){
+        return ResultUtils.generateResultStr(ResultCode.SUCCESS,"查询成功", blogService.selectByCategory(pageNum,pageSize,search));
+    }
+
+    /**
+     * 获取归档时间
+     * @return
+     */
+    @PostMapping("/gettime")
+    public String getBlogTime(){
+        return ResultUtils.generateResultStr(ResultCode.SUCCESS,"查询成功", blogService.getBlogTime());
+    }
 }

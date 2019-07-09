@@ -5,6 +5,8 @@ import com.wang.server.entity.Blog;
 import com.wang.server.vo.BlogVo;
 import com.wang.server.vo.SearchvVo;
 
+import java.util.List;
+
 /**
  * @Auther: wl
  * @Date: 2019/5/15 15:58
@@ -29,4 +31,11 @@ public interface BlogService {
      */
     BlogVo selectByid(Integer id);
 
+    PageInfo<Blog> selectByTag(Integer pageNum, Integer pageSize, Integer search);
+
+    PageInfo<Blog> selectByCategory(Integer pageNum, Integer pageSize, Integer search);
+
+    PageInfo<Blog> getBlogByTime(Integer pageNum, Integer pageSize, String search);
+
+    List<String> getBlogTime();
 }

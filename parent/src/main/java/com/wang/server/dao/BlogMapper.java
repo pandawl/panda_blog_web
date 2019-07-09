@@ -22,4 +22,12 @@ public interface BlogMapper {
     Blog getLast(Integer id);
 
     Blog getNext(Integer id);
+
+    List<Blog> selectByTag( Integer search);
+
+    List<Blog> selectByCategory( Integer search);
+
+    List<Blog> getBlogByTime( String search);
+
+    List<String> getBlogTime( );
 }

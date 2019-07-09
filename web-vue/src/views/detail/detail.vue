@@ -114,4 +114,16 @@ export default {
 .article_link:hover{
   color: #b807cf;
 }
+.markdown-body h1{
+   margin: 20px -20px 20px -24px;
+    padding: 10px 20px 9px 10px;
+    line-height: 30px;
+    border-left: 4px solid #00a67c;
+    background-color: #fbfbfb;
+}
+.markdown-body h1 {
+  padding-bottom: 0.3em;
+  font-size: 1.5em;
+  border-bottom: 1px solid #c9a30a !important;
+}
 </style>

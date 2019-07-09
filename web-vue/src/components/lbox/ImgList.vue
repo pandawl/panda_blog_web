@@ -43,7 +43,8 @@ export default {
         { id: 1, url: "../../../static/images/1.jpg" },
         { id: 2, url: "../../../static/images/2.jpg" },
         { id: 3, url: "../../../static/images/3.jpg" },
-        { id: 4, url: "../../../static/images/4.jpg" }
+        { id: 4, url: "../../../static/images/4.jpg" },
+    
       ]
     };
   },

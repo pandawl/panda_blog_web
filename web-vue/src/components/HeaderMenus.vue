@@ -16,7 +16,7 @@
       <el-menu-item index="/">日志系统</el-menu-item>
       <el-menu-item index="/">我的书单</el-menu-item>
       <el-menu-item index="/">留言板</el-menu-item> -->
-      <el-menu-item index="/blog/detail/2">关于我</el-menu-item>
+      <el-menu-item index="/blog/about">关于我</el-menu-item>
     </el-menu>
   </div>
 </template>

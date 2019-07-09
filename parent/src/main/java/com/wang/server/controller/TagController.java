@@ -28,7 +28,7 @@ public class TagController {
     }
 
     /**根据id查询**/
-    @PostMapping("/selete")
+    @PostMapping("/select")
     public String selete(Integer id){
         return ResultUtils.generateResultStr(ResultCode.SUCCESS, "查询成功", tagService.selectByPrimaryKey(id));
     }

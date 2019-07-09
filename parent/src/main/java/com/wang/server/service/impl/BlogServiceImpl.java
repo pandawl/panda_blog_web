@@ -136,6 +136,31 @@ public class BlogServiceImpl implements BlogService {
         return blogVo;
     }
 
+    @Override
+    public PageInfo<Blog> selectByTag(Integer pageNum, Integer pageSize, Integer search) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Blog> blogs = blogMapper.selectByTag(search);
+        PageInfo<Blog> info = new PageInfo<>(blogs);
+        return info;
+    }
+    @Override
+    public PageInfo<Blog> selectByCategory(Integer pageNum, Integer pageSize, Integer search) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Blog> blogs = blogMapper.selectByCategory(search);
+        PageInfo<Blog> info = new PageInfo<>(blogs);
+        return info;
+    }
+
+    @Override
+    public PageInfo<Blog> getBlogByTime(Integer pageNum, Integer pageSize, String search) {
+        return null;
+    }
+
+    @Override
+    public List<String> getBlogTime() {
+        return blogMapper.getBlogTime();
+    }
+
     private BlogVo convertBlogToVO(Blog blog){
         BlogVo blogVo = new BlogVo();
         blogVo.setId(blog.getId());

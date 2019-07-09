@@ -86,4 +86,35 @@
     <select id="getNext" resultType="com.wang.server.entity.Blog">
      select id, title from blog where id &gt;#{id,jdbcType=INTEGER}  LIMIT 1;
     </select>
+    <select id="selectByTag" resultType="com.wang.server.entity.Blog">
+        select b.id, c.category_name categoryName , b.title, b.summary, b.img_url, b.author, b.code, b.view_count, b.like_count,
+        b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content,tag.tag_name
+        from blog b
+        left join blog_tags t on  b.id = t.blog_id
+        left join category c on  b.category_id = c.id
+        left join tag on t.tag_id = tag.id
+        <where>
+
+                and t.tag_id = #{search}
+
+        </where>
+        order by b.id desc
+    </select>
+    <select id="selectByCategory" resultType="com.wang.server.entity.Blog">
+        select b.id, c.category_name categoryName , b.title, b.summary, b.img_url, b.author, b.code, b.view_count, b.like_count,
+        b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content
+        from blog b
+        left join category c on  b.category_id = c.id
+        <where>
+            and b.category_id = #{search}
+        </where>
+        order by b.id desc
+
+    </select>
+    <select id="getBlogByTime" resultType="com.wang.server.entity.Blog">
+
+    </select>
+    <select id="getBlogTime" resultType="java.lang.String">
+        	SELECT DISTINCT CONCAT(YEAR(create_time),'年',MONTH(create_time),'月') AS `month` FROM blog ORDER BY month desc
+    </select>
 </mapper>

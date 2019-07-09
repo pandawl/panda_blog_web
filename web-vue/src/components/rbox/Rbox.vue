@@ -1,11 +1,11 @@
 <template>
   <div class="rbox">
-   <card/>
-   <category/>
-    
-    <notice/>
-    <paihang/>
-    <cloud/>
+    <card />
+    <category />
+    <cloud />
+    <pigeonhole />
+    <notice />
+    <paihang />
   </div>
 </template>
 
@@ -13,12 +13,13 @@
 import card from "./card";
 import notice from "./notice";
 import paihang from "./paihang";
-import cloud from './cloud'
-import category from './category'
+import cloud from "./cloud";
+import category from "./category";
+import pigeonhole from "./pigeonhole";
 export default {
   name: "",
 
-  components: { card, notice,paihang,cloud,category },
+  components: { card, notice, paihang, cloud, category, pigeonhole },
   props: {},
   data() {
     return {};

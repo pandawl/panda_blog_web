@@ -2,7 +2,7 @@
      <div class="whitebg cloud">
       <h2 class="htitle">分类</h2>
       <ul >
-        <a v-for="(category) in categorys" :key="category.id"  href="" target="_blank">{{category.categoryName}}</a>       
+        <router-link v-for="(category) in categorys" :key="category.id"  :to="`/blog/category/${category.id}`" >{{category.categoryName}}</router-link>      
       </ul>
     </div>
 </template>

@@ -2,7 +2,7 @@
      <div class="whitebg cloud">
       <h2 class="htitle">标签云</h2>
       <ul>
-        <a v-for="(tag) in tags" :key="tag.id"  href="" target="_blank">{{tag.tagName}}</a>       
+        <router-link v-for="(tag) in tags" :key="tag.id"  :to="`/blog/taglist/${tag.id}`" >{{tag.tagName}}</router-link>       
       </ul>
     </div>
 </template>

@@ -85,6 +85,24 @@ export default [
         name: 'detail',
         component: () =>
             import ('@/views/detail/index'),
+    },
+    {
+        path: '/blog/about/',
+        name: 'about',
+        component: () =>
+            import ('@/views/aboutme/index'),
+    },
+    {
+        path: '/blog/taglist/:id',
+        name: 'taglist',
+        component: () =>
+            import ('../views/tags/index'),
+    },
+    {
+        path: '/blog/category/:id',
+        name: 'taglist',
+        component: () =>
+            import ('../views/category/index'),
     }
 
 ]
