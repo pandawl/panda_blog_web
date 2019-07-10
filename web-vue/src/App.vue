@@ -3,9 +3,9 @@
     <div class="header-menus">
       <header-menus/>
     </div>
-    
+
     <router-view/>
-    <footer-menus/> 
+    <footer-menus/>
   </div>
 </template>
 
@@ -17,15 +17,31 @@ export default {
   components: {
     HeaderMenus,
     FooterMenus
-  },
-  
+  },  mounted() {
+     // 创建cnzz统计js
+    const script = document.createElement('script');
+    script.src = `https://s95.cnzz.com/z_stat.php?id=1277804844&web_id=1277804844`;
+    script.language = 'JavaScript';
+    script.id='cnzz';
+    document.body.appendChild(script)
+  },  watch: {
+    $route() {
+      if (window._czc) {
+        let location = window.location;
+        let contentUrl = location.pathname + location.hash;
+        let refererUrl = "/";
+        window._czc.push(["_trackPageview", contentUrl, refererUrl]);
+      }
+    }
+  }
+
 };
 </script>
 
 <style scoped>
 .header-menus{
   background: rgb(30, 159, 255);
-  margin-top:5px; 
+  margin-top:5px;
   height: 60px;
 }
 #app::before {

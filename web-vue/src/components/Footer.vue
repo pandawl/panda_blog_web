@@ -31,12 +31,16 @@
         </p>
         <p>
           Copyright ©
-          <a href="http://www.wangleihh.cn" target="_blank">www.wangleihh.cn"</a> All Rights Reserved. 备案号：
+          <a href="http://www.wangleihh.cn" target="_blank">www.wangleihh.cn"</a> All Rights Reserved. 丨托管于
+           <a href="https://cloud.tencent.com/" target="_blank">腾讯云 </a>&
+          <a href="https://www.qiniu.com/" target="_blank"> 七牛云</a>
+          |
           <a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备19027302号</a>
         </p>
+        <div id="cnzz_protocol"></div>
         <div class="info">
            <p>
-               青葱岁月 我装饰过谁的梦 流年往事 谁又影响了我的整个生命  
+               青葱岁月 我装饰过谁的梦 流年往事 谁又影响了我的整个生命
            </p>
         </div>
       </div>
@@ -52,7 +56,7 @@ export default {
   name: "Footer"
 };
 </script>
- 
+
 <style scoped>
 .line {
   width: 10em;

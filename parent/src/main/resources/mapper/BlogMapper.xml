@@ -16,22 +16,23 @@
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
         <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+        <result column="html_content" property="htmlContent" jdbcType="LONGVARCHAR"/>
     </resultMap>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from blog
     where id = #{id,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.wang.server.entity.Blog" useGeneratedKeys="true" keyProperty="id">
-    insert into blog (id, category_id, title, 
-      summary, img_url, author, 
-      code, view_count, like_count, 
-      comment_count, is_deleted, create_time, 
-      update_time, content)
+    insert into blog (id, category_id, title,
+      summary, img_url, author,
+      code, view_count, like_count,
+      comment_count, is_deleted, create_time,
+      update_time, content,html_content)
     values (#{id,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
       #{summary,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR},
       #{code,jdbcType=INTEGER}, #{viewCount,jdbcType=INTEGER}, #{likeCount,jdbcType=INTEGER},
       #{commentCount,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP},
-      #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+      #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR},#{htmlContent,jdbcType=LONGVARCHAR})
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.wang.server.entity.Blog">
     update blog
@@ -46,26 +47,27 @@
       comment_count = #{commentCount,jdbcType=INTEGER},
       is_deleted = #{isDeleted,jdbcType=TINYINT},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      content = #{content,jdbcType=LONGVARCHAR}
+      content = #{content,jdbcType=LONGVARCHAR},
+      html_content = #{htmlContent,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
    select b.id,b.category_id, c.category_name categoryName , b.title, b.summary, b.img_url, b.author, b.code, b.view_count, b.like_count,
-    b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content
+    b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content,b.html_content
     from blog b
     left join category c on  b.category_id = c.id
     where b.id = #{id,jdbcType=INTEGER}
   </select>
     <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
    select b.id,b.category_id, c.category_name categoryName , b.title, b.summary, b.img_url, b.author, b.code, b.view_count, b.like_count,
-    b.comment_count, b.is_deleted, b.content
+    b.comment_count, b.is_deleted, b.content,b.html_content
     from blog b
     left join category c on  b.category_id = c.id
     where b.id = #{id,jdbcType=INTEGER}
   </select>
     <select id="selectAll" resultMap="BaseResultMap">
     select b.id, c.category_name categoryName ,b.category_id, b.title, b.summary, b.img_url, b.author, b.code, b.view_count, b.like_count,
-    b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content
+    b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content,b.html_content
     from blog b
     left join category c on  b.category_id = c.id
     <where>
@@ -88,7 +90,7 @@
     </select>
     <select id="selectByTag" resultType="com.wang.server.entity.Blog">
         select b.id, c.category_name categoryName , b.category_id,b.title, b.summary, b.img_url, b.author, b.code, b.view_count, b.like_count,
-        b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content,tag.tag_name
+        b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content,tag.tag_name,b.html_content
         from blog b
         left join blog_tags t on  b.id = t.blog_id
         left join category c on  b.category_id = c.id
@@ -102,7 +104,7 @@
     </select>
     <select id="selectByCategory" resultType="com.wang.server.entity.Blog">
         select b.id, c.category_name categoryName ,b.category_id, b.title, b.summary, b.img_url, b.author, b.code, b.view_count, b.like_count,
-        b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content
+        b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content,b.html_content
         from blog b
         left join category c on  b.category_id = c.id
         <where>
@@ -113,7 +115,7 @@
     </select>
     <select id="getBlogByTime" resultType="com.wang.server.entity.Blog">
         select b.id, c.category_name categoryName ,b.category_id, b.title, b.summary, b.img_url, b.author, b.code, b.view_count, b.like_count,
-        b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content
+        b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content,b.html_content
         from blog b
         left join category c on  b.category_id = c.id
         <where>

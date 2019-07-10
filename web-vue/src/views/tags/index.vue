@@ -31,7 +31,7 @@
               </span>
             </p>
            <router-link :to="`/blog/detail/${blog.id}`" class="viewmore">阅读更多</router-link>
-         
+
           </li>
         </ul>
         <h2 v-show="!article" style="text-align: center;">该标签下暂无文章~~~</h2>
@@ -81,7 +81,7 @@ var img =  new Image()
 img.src = "../../../static/images/horse.png"
 img.onload = function(){
 	var ss = new createjs.SpriteSheet({
-		"images": ["../../../static/images/horse.png"], 
+		"images": ["../../../static/images/horse.png"],
 		"frames": [
 			[519,1352,468,225,0,-39.5,-6.05],
 			[525,694,405,225,0,-39.5,-6.05],
@@ -135,11 +135,11 @@ function stageBreakHandler(event){
       this.initData(id);
     },
    blogs:{handler(){
-  
+
      this.article = this.blogs.length >0  ?true :false
      this.loading = this.blogs.length >0  ?false :true
-  
-   }} 
+
+   }}
   },
   methods: {
     refresh() {
@@ -192,7 +192,7 @@ function stageBreakHandler(event){
   }
 };
 </script>
- 
+
 <style scoped>
 .left {
   float: left;

@@ -27,9 +27,9 @@
       {{blog.summary}}
     </p>
     <div style="overflow:auto" class="con_text">
-      <mavon-editor
+     <mavon-editor
         class="md"
-        :value="blog.content"
+        :value="blog.htmlContent"
         :subfield="false"
         :defaultOpen="'preview'"
         :toolbarsFlag="false"
@@ -37,6 +37,7 @@
         :scrollStyle="true"
         :ishljs="true"
       ></mavon-editor>
+
     </div>
     <div class="nextinfo">
       <p>
@@ -114,16 +115,6 @@ export default {
 .article_link:hover{
   color: #b807cf;
 }
-.markdown-body h1{
-   margin: 20px -20px 20px -24px;
-    padding: 10px 20px 9px 10px;
-    line-height: 30px;
-    border-left: 4px solid #00a67c;
-    background-color: #fbfbfb;
-}
-.markdown-body h1 {
-  padding-bottom: 0.3em;
-  font-size: 1.5em;
-  border-bottom: 1px solid #c9a30a !important;
-}
+
+
 </style>

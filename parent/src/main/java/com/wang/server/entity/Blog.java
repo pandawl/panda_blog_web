@@ -35,6 +35,8 @@ public class Blog implements Serializable {
 
     private String content;
 
+    private String htmlContent;
+
     private String categoryName;
 
     private static final long serialVersionUID = 1L;

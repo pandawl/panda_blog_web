@@ -63,9 +63,10 @@ export default {
         author: "panda", //
         idDeleted: 0, //
         content: "",
-        url: ""
+        url: "",
+        htmlContent:"",
       },
-    
+
       categorys: [],
       checkedItem: [],
       rules: {
@@ -110,10 +111,10 @@ export default {
 
     $imgAdd(pos, $file) {
       // 上传图片
-     
+
       var formData = new FormData();
       formData.append("file",$file)
- 
+
         getImg(formData).then(res => {
           // console.log(JSON.stringify(url))
           // 第二步.将返回的url替换到文本原位置![...](./0) -> ![...](url)
@@ -123,7 +124,7 @@ export default {
            * 2. 通过$refs获取: html声明ref : `<mavon-editor ref=md ></mavon-editor>，`$vm`为 `this.$refs.md`
            * 3. 由于vue运行访问的路径只能在static下，so，我就把图片保存到它这里了
            */
-          
+
                let _res = res.data.resultJson;
                console.log(_res);
         // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
@@ -134,12 +135,12 @@ export default {
       console.log(this.blog.tags);
     },
     saveBlog() {
-      // this.blog.content = this.$refs.md.d_render;
+       this.blog.htmlContent = this.$refs.md.d_render;
 
       this.blog.code = this.blog.code === true ? 1 : 0;
-      // axios.post("http://www.wangleihh.cn:9999/panda/manage/blog/add",this.blog).then(res => {
+      //www.wangleihh.cn localhost
       axios
-        .post("http://www.wangleihh.cn:9999/panda/manage/blog/add", this.blog)
+        .post("http://localhost:9999/panda/manage/blog/add", this.blog)
         .then(res => {
           console.log(this.blog);
           if (res.data.resultCode == 200) {

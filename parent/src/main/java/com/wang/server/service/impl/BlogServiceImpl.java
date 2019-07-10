@@ -61,6 +61,7 @@ public class BlogServiceImpl implements BlogService {
             //新增
         }else {
             record.setCreateTime(new Date());
+            record.setUpdateTime(new Date());
             int count = blogMapper.insert(record);
             if (count <= 0) {
                 return 0;
@@ -186,6 +187,7 @@ public class BlogServiceImpl implements BlogService {
         blogVo.setUpdateTime(blog.getUpdateTime());
         blogVo.setContent(blog.getContent());
         blogVo.setCategoryName(blog.getCategoryName());
+        blogVo.setHtmlContent(blog.getHtmlContent());
 
         return blogVo;
     }
