@@ -36,6 +36,13 @@ export const getBlogByCategory = (pageNum, pageSize, search) => {
         params: { pageNum, pageSize, search }
     })
 }
+export const getBlogByTime = (pageNum, pageSize, search) => {
+    return request({
+        url: 'blog/time',
+        method: 'POST',
+        params: { pageNum, pageSize, search }
+    })
+}
 export const getTimeList = () => {
     return request({
         url: 'blog/gettime',

@@ -22,6 +22,7 @@ public class BlogController {
     private BlogService blogService;
     @PostMapping("/list")
     public String getList(Integer pageNum, Integer pageSize, SearchvVo search){
+
         return ResultUtils.generateResultStr(ResultCode.SUCCESS,"查询成功", blogService.selectAll(pageNum,pageSize,search));
     }
 
@@ -50,8 +51,8 @@ public class BlogController {
      * @return
      */
     @PostMapping("/time")
-    public String getBlogByTime(Integer pageNum, Integer pageSize, Integer search){
-        return ResultUtils.generateResultStr(ResultCode.SUCCESS,"查询成功", blogService.selectByCategory(pageNum,pageSize,search));
+    public String getBlogByTime(Integer pageNum, Integer pageSize, String search){
+        return ResultUtils.generateResultStr(ResultCode.SUCCESS,"查询成功", blogService.getBlogByTime(pageNum,pageSize,search));
     }
 
     /**

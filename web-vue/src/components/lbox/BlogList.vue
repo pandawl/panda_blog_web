@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div >
     <div class="whitebg bloglist">
       <h2 class="htitle">最新博文</h2>
-      <ul>
+     <canvas id="mycanvas" width="612" height="280" style="margin-left:200px" v-show="loading"></canvas>
+      <ul >
         <!--单图-->
         <li v-for="blog in blogs" :key="blog.id" :blogDetail="blog">
           <h3 class="blogtitle">
@@ -10,11 +11,11 @@
           </h3>
           <span class="blogpic imgscale">
             <i>
-              <a href="/">{{blog.categoryName}}</a>
+               <router-link :to="`/blog/category/${blog.categoryId}`">{{blog.categoryName}}</router-link>
             </i>
-            <a href="/" title>
-              <img src="../../../static/images/b02.jpg" :alt="blog.title">
-            </a>
+              <router-link :to="`/blog/detail/${blog.id}`">
+                <img src="../../../static/images/b02.jpg" :alt="blog.title" />
+              </router-link>
           </span>
           <p class="blogtext">{{blog.summary}}...</p>
           <p class="bloginfo">
@@ -25,12 +26,16 @@
             <span>{{blog.createTime}}</span>
             <span>
               【
-              <a href="/">{{blog.categoryName}}</a>】
+                <router-link :to="`/blog/category/${blog.categoryId}`">{{blog.categoryName}}</router-link>】
             </span>
           </p>
-          <a href="/" class="viewmore">阅读更多</a>
+          <router-link :to="`/blog/detail/${blog.id}`" class="viewmore">阅读更多</router-link>
         </li>
       </ul>
+  
+
+</div>
+
       <!--pagelist-->
       <Pager
         v-if="!dataChanged"
@@ -40,14 +45,16 @@
         :total="total"
         @setPage="gotoPage"
         @setRowNum="changeRowNum"
+        v-show="article"
       />
-    </div>
+    
   </div>
 </template>
 
 <script>
 import { getList } from "../../api/blog";
 import Pager from "../Pager";
+
 export default {
   name: "",
 
@@ -60,17 +67,71 @@ export default {
       curPage: 1, //当前页
       total: 0, //总共页数
       pageSize: 10, //每页记录数
-      dataChanged: false
+      dataChanged: false,
+      loading:false,
+      article: true,
     };
   },
   mounted() {
-    getList(this.curPage, this.pageSize).then(res => {
+
+var stage = new createjs.Stage("mycanvas")
+createjs.Ticker.addEventListener("tick", stageBreakHandler);
+var img =  new Image()
+img.src = "../../../static/images/horse.png"
+img.onload = function(){
+	var ss = new createjs.SpriteSheet({
+		"images": ["../../../static/images/horse.png"], 
+		"frames": [
+			[519,1352,468,225,0,-39.5,-6.05],
+			[525,694,405,225,0,-39.5,-6.05],
+			[402,1577,398,241,0,-37.5,-9.05],
+			[0,1565,402,239,0,-33.5,-8.05],
+			[521,920,430,233,0,-23.5,-14.05],
+			[520,0,465,228,0,-7.5,-22.05],
+			[515,238,479,228,0,-8.5,-24.05],
+			[508,470,500,224,0,-2.5,-26.05],
+			[0,470,508,231,0,-5.5,-20.05],
+			[0,238,515,232,0,-9.5,-17.05],
+			[0,0,520,238,0,-12.5,-11.05],
+			[0,920,521,219,0,-18.5,-11.05],
+			[0,701,525,219,0,-18.5,-11.05],
+			[0,1352,519,213,0,-28.5,-10.05],
+			[0,1139,520,213,0,-28.5,-10.05]
+		],
+		"animations" : {
+			"run": [0,14,"run"]
+		}
+	})
+
+	var sp = new createjs.Sprite(ss,"run")
+	stage.addChild(sp)
+	stage.update();
+}
+
+function stageBreakHandler(event){
+	stage.update();
+}
+
+
+
+ this.loading= true;
+   
+ getList(this.curPage, this.pageSize).then(res => { 
+     this.loading= false;  
       this.blogs = res.data.resultJson.list;
       this.curPage = res.data.resultJson.pageNum;
       this.total = res.data.resultJson.pages;
       this.pageSize = res.data.resultJson.pageSize;
       this.refresh();
     });
+ 
+  }, watch: {
+  
+   blogs:{handler(){
+       this.article = this.blogs.length >0  ?true :false
+      this.loading = this.blogs.length >0  ?false :true
+    
+   }} 
   },
   methods: {
     refresh() {
@@ -82,7 +143,9 @@ export default {
     },
 
     gotoPage(curPage) {
+       this.loading= true;
       getList(curPage, this.pageSize).then(res => {
+        this.loading= false;
         this.blogs = res.data.resultJson.list;
         this.curPage = res.data.resultJson.pageNum;
         this.total = res.data.resultJson.pages;
@@ -92,7 +155,9 @@ export default {
     },
     changeRowNum(pageSize) {
       this.pageSize = pageSize;
+       this.loading= true;
        getList(this.curPage, this.pageSize).then(res => {
+         this.loading= false;
       this.blogs = res.data.resultJson.list;
       this.curPage = res.data.resultJson.pageNum;
       this.total = res.data.resultJson.pages;
@@ -100,7 +165,7 @@ export default {
       this.refresh();
     });
     }
-  }
+  },
 };
 </script>
  
@@ -109,4 +174,6 @@ export default {
   float: left;
   width: 96%;
 }
+ 
+
 </style>

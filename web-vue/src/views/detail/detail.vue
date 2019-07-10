@@ -5,7 +5,7 @@
       <span class="con_nav">
         您现在的位置是：
         <a href="/">网站首页</a>>
-        <a href="/">{{blog.categoryName}}</a>
+          <router-link :to="`/blog/category/${blog.categoryId}`">{{blog.categoryName}}</router-link>
       </span>
       {{blog.categoryName}}
     </h2>
@@ -18,7 +18,7 @@
       <span>{{blog.createTime}}</span>
       <span>
         【
-        <a href="/">{{blog.categoryName}}</a>】
+          <router-link :to="`/blog/category/${blog.categoryId}`">{{blog.categoryName}}</router-link>】
       </span>
       <span>109990人已围观</span>
     </p>

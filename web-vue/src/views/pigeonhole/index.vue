@@ -2,7 +2,7 @@
   <div class="head_aricle">
     <div>
       <div class="whitebg bloglist left">
-        <h2 class="htitle">{{tagName}}</h2>
+        <h2 class="htitle">{{categoryName}}</h2>
         <canvas id="mycanvas" width="612" height="280" style="margin-left:200px" v-show="loading"></canvas>
         <ul v-show="article">
           <!--单图-->
@@ -12,9 +12,10 @@
             </h3>
             <span class="blogpic imgscale">
               <i>
-                <router-link :to="`/blog/category/${blog.categoryId}`">{{blog.categoryName}}</router-link>
+                 <router-link :to="`/blog/category/${blog.categoryId}`">{{blog.categoryName}}</router-link>
               </i>
-                 <router-link :to="`/blog/detail/${blog.id}`">
+    
+              <router-link :to="`/blog/detail/${blog.id}`">
                 <img src="../../../static/images/b02.jpg" :alt="blog.title" />
               </router-link>
             </span>
@@ -30,11 +31,10 @@
                  <router-link :to="`/blog/category/${blog.categoryId}`">{{blog.categoryName}}</router-link>】
               </span>
             </p>
-           <router-link :to="`/blog/detail/${blog.id}`" class="viewmore">阅读更多</router-link>
-         
+             <router-link :to="`/blog/detail/${blog.id}`" class="viewmore">阅读更多</router-link>
           </li>
         </ul>
-        <h2 v-show="!article" style="text-align: center;">该标签下暂无文章~~~</h2>
+        <h2 v-show="!article" style="text-align: center;">该分类下暂无文章~~~</h2>
         <!--pagelist-->
         <Pager
           v-if="!dataChanged"
@@ -53,7 +53,7 @@
 
 <script>
 import Rbox from "../../components/rbox/Rbox";
-import { getBlogByTag,getTag } from "../../api/blog";
+import {getBlogByTime,getCategory } from "../../api/blog";
 import Pager from "../../components/Pager";
 export default {
   name: "",
@@ -70,12 +70,13 @@ export default {
       pageSize: 10, //每页记录数
       dataChanged: false,
       article: true,
-      tagName: "",
-      loading:false
+      categoryName: "",
+      loading:false,
+      time:""
     };
   },
   mounted() {
-    var stage = new createjs.Stage("mycanvas")
+     var stage = new createjs.Stage("mycanvas")
 createjs.Ticker.addEventListener("tick", stageBreakHandler);
 var img =  new Image()
 img.src = "../../../static/images/horse.png"
@@ -116,18 +117,15 @@ function stageBreakHandler(event){
 
 
  this.loading= true;
-    let id = this.$route.params.id;
-       getBlogByTag(this.curPage, this.pageSize,id).then(res => {
-          this.loading= false;
+   let id = this.$route.params.id;
+   this.time = id;
+      getBlogByTime(this.curPage, this.pageSize,id).then(res => {
         this.blogs = res.data.resultJson.list;
         this.curPage = res.data.resultJson.pageNum;
         this.total = res.data.resultJson.pages;
         this.pageSize = res.data.resultJson.pageSize;
         this.refresh();
       });
-      getTag(id).then(res=>{
-        this.tagName= res.data.resultJson.tagName
-      })
   },
   watch: {
     $route(to, from) {
@@ -135,10 +133,10 @@ function stageBreakHandler(event){
       this.initData(id);
     },
    blogs:{handler(){
-  
+     
      this.article = this.blogs.length >0  ?true :false
-     this.loading = this.blogs.length >0  ?false :true
-  
+      this.loading = this.blogs.length >0  ?false :true
+    
    }} 
   },
   methods: {
@@ -151,24 +149,22 @@ function stageBreakHandler(event){
     },
     initData(id) {
        this.loading= true;
-      getBlogByTag(this.curPage, this.pageSize,id).then(res => {
-         this.loading= false;
+      getBlogByTime(this.curPage, this.pageSize,id).then(res => {
+        this.loading= false;
         this.blogs = res.data.resultJson.list;
         this.curPage = res.data.resultJson.pageNum;
         this.total = res.data.resultJson.pages;
         this.pageSize = res.data.resultJson.pageSize;
         this.refresh();
       });
-      getTag(id).then(res=>{
-        this.tagName= res.data.resultJson.tagName
-      })
+  
     },
 
     gotoPage(curPage) {
-      let id = this.$route.params.id;
        this.loading= true;
-      getBlogByTag(curPage, this.pageSize,id).then(res => {
-         this.loading= false;
+      let id = this.$route.params.id;
+      getBlogByTime(curPage, this.pageSize,id).then(res => {
+        this.loading= false;
         this.blogs = res.data.resultJson.list;
         this.curPage = res.data.resultJson.pageNum;
         this.total = res.data.resultJson.pages;
@@ -177,11 +173,11 @@ function stageBreakHandler(event){
       });
     },
     changeRowNum(pageSize) {
+       this.loading= true;
       this.pageSize = pageSize;
       let id = this.$route.params.id;
-       this.loading= true;
-      getBlogByTag(this.curPage, this.pageSize,id).then(res => {
-         this.loading= false;
+      getBlogByTime(this.curPage, this.pageSize,id).then(res => {
+        this.loading= false;
         this.blogs = res.data.resultJson.list;
         this.curPage = res.data.resultJson.pageNum;
         this.total = res.data.resultJson.pages;

@@ -17,7 +17,8 @@ export default {
   components: {
     HeaderMenus,
     FooterMenus
-  }
+  },
+  
 };
 </script>
 

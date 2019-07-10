@@ -3,7 +3,7 @@
      <div class="whitebg cloud">
       <h2 class="htitle">文章归档</h2>
       <ul >
-        <router-link v-for="(time) in times" :key="time"  :to="`/blog/category/${time}`" >{{time}}</router-link>      
+        <router-link v-for="(time) in times" :key="time"  :to="`/blog/pigeonhole/${time}`" >{{time}}</router-link>      
       </ul>
     </div>
 </template>

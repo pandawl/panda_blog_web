@@ -103,6 +103,12 @@ export default [
         name: 'taglist',
         component: () =>
             import ('../views/category/index'),
+    },
+    {
+        path: '/blog/pigeonhole/:id',
+        name: 'pigeonhole',
+        component: () =>
+            import ('../views/pigeonhole/index'),
     }
 
 ]

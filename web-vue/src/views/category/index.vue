@@ -3,6 +3,7 @@
     <div>
       <div class="whitebg bloglist left">
         <h2 class="htitle">{{categoryName}}</h2>
+        <canvas id="mycanvas" width="612" height="280" style="margin-left:200px" v-show="loading"></canvas>
         <ul v-show="article">
           <!--单图-->
           <li v-for="blog in blogs" :key="blog.id" :blogDetail="blog">
@@ -11,11 +12,12 @@
             </h3>
             <span class="blogpic imgscale">
               <i>
-                <a href="/">{{blog.categoryName}}</a>
+                 <router-link :to="`/blog/category/${blog.categoryId}`">{{blog.categoryName}}</router-link>
               </i>
-              <a href="/" title>
+    
+              <router-link :to="`/blog/detail/${blog.id}`">
                 <img src="../../../static/images/b02.jpg" :alt="blog.title" />
-              </a>
+              </router-link>
             </span>
             <p class="blogtext">{{blog.summary}}...</p>
             <p class="bloginfo">
@@ -26,10 +28,10 @@
               <span>{{blog.createTime}}</span>
               <span>
                 【
-                <a href="/">{{blog.categoryName}}</a>】
+                 <router-link :to="`/blog/category/${blog.categoryId}`">{{blog.categoryName}}</router-link>】
               </span>
             </p>
-            <a href="/" class="viewmore">阅读更多</a>
+             <router-link :to="`/blog/detail/${blog.id}`" class="viewmore">阅读更多</router-link>
           </li>
         </ul>
         <h2 v-show="!article" style="text-align: center;">该分类下暂无文章~~~</h2>
@@ -68,10 +70,52 @@ export default {
       pageSize: 10, //每页记录数
       dataChanged: false,
       article: true,
-      categoryName: ""
+      categoryName: "",
+      loading:false
     };
   },
   mounted() {
+     var stage = new createjs.Stage("mycanvas")
+createjs.Ticker.addEventListener("tick", stageBreakHandler);
+var img =  new Image()
+img.src = "../../../static/images/horse.png"
+img.onload = function(){
+	var ss = new createjs.SpriteSheet({
+		"images": ["../../../static/images/horse.png"], 
+		"frames": [
+			[519,1352,468,225,0,-39.5,-6.05],
+			[525,694,405,225,0,-39.5,-6.05],
+			[402,1577,398,241,0,-37.5,-9.05],
+			[0,1565,402,239,0,-33.5,-8.05],
+			[521,920,430,233,0,-23.5,-14.05],
+			[520,0,465,228,0,-7.5,-22.05],
+			[515,238,479,228,0,-8.5,-24.05],
+			[508,470,500,224,0,-2.5,-26.05],
+			[0,470,508,231,0,-5.5,-20.05],
+			[0,238,515,232,0,-9.5,-17.05],
+			[0,0,520,238,0,-12.5,-11.05],
+			[0,920,521,219,0,-18.5,-11.05],
+			[0,701,525,219,0,-18.5,-11.05],
+			[0,1352,519,213,0,-28.5,-10.05],
+			[0,1139,520,213,0,-28.5,-10.05]
+		],
+		"animations" : {
+			"run": [0,14,"run"]
+		}
+	})
+
+	var sp = new createjs.Sprite(ss,"run")
+	stage.addChild(sp)
+	stage.update();
+}
+
+function stageBreakHandler(event){
+	stage.update();
+}
+
+
+
+ this.loading= true;
    let id = this.$route.params.id;
       getBlogByCategory(this.curPage, this.pageSize,id).then(res => {
         this.blogs = res.data.resultJson.list;
@@ -87,12 +131,13 @@ export default {
   watch: {
     $route(to, from) {
       let id = this.$route.params.id;
-      console.log("开始加载数据")
       this.initData(id);
     },
    blogs:{handler(){
-     console.log(this.article)
+     
      this.article = this.blogs.length >0  ?true :false
+      this.loading = this.blogs.length >0  ?false :true
+    
    }} 
   },
   methods: {
@@ -104,7 +149,9 @@ export default {
       });
     },
     initData(id) {
+       this.loading= true;
       getBlogByCategory(this.curPage, this.pageSize,id).then(res => {
+        this.loading= false;
         this.blogs = res.data.resultJson.list;
         this.curPage = res.data.resultJson.pageNum;
         this.total = res.data.resultJson.pages;
@@ -117,8 +164,10 @@ export default {
     },
 
     gotoPage(curPage) {
+       this.loading= true;
       let id = this.$route.params.id;
       getBlogByCategory(curPage, this.pageSize,id).then(res => {
+        this.loading= false;
         this.blogs = res.data.resultJson.list;
         this.curPage = res.data.resultJson.pageNum;
         this.total = res.data.resultJson.pages;
@@ -127,9 +176,11 @@ export default {
       });
     },
     changeRowNum(pageSize) {
+       this.loading= true;
       this.pageSize = pageSize;
       let id = this.$route.params.id;
       getBlogByCategory(this.curPage, this.pageSize,id).then(res => {
+        this.loading= false;
         this.blogs = res.data.resultJson.list;
         this.curPage = res.data.resultJson.pageNum;
         this.total = res.data.resultJson.pages;
