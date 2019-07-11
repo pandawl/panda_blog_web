@@ -33,7 +33,7 @@
     <el-table :data="tableList" style="width: 100%;">
       <el-table-column prop="id" label="序号" width="65"></el-table-column>
       <el-table-column prop="title" label="标题"></el-table-column>
-      <el-table-column prop="summary" min-width="150px" label="标题"></el-table-column>
+      <el-table-column prop="summary" min-width="150px" label="概要"></el-table-column>
       <el-table-column prop="viewCount" label="阅读数" width="65"></el-table-column>
       <el-table-column prop="updateTime" label="修改时间" width="160px"></el-table-column>
       <el-table-column :formatter="formatCode" label="状态" width="120"></el-table-column>
@@ -85,7 +85,7 @@ export default {
           statusId: 1,
           label: "已发布"
         },
-       
+
         {
           statusId: 2,
           label: "已删除"
@@ -106,7 +106,7 @@ export default {
       this.searchName = "";
     },
     search(value,searchName){
- 
+
       getBlogs(this.curPage, this.pageSize,value,searchName).then(res => {
         if (res.data.resultCode == 200) {
           this.tableList = res.data.resultJson.list;
@@ -125,7 +125,7 @@ export default {
       });
     },
     deleteUpdate(id) {
-     
+
     },
     formatCode: function(row, colum) {
       return row.code === 0
@@ -190,6 +190,6 @@ export default {
   }
 };
 </script>
- 
+
 <style scoped>
 </style>
