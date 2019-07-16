@@ -8,9 +8,9 @@ mybatis:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/panda_blog?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
+    url: jdbc:mysql://188.131.223.181:3306/panda_blog?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
     username: root
-    password: root
+    password: panda
     dbcp2:
       initial-size: 5
       max-wait-millis: 10000

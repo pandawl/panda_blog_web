@@ -14,13 +14,13 @@
                <router-link :to="`/blog/category/${blog.categoryId}`">{{blog.categoryName}}</router-link>
             </i>
               <router-link :to="`/blog/detail/${blog.id}`">
-                <img src="../../../static/images/b02.jpg" :alt="blog.title" />
+                <img src="http://img.wangleihh.cn/blog/web/static/images/b02.jpg" :alt="blog.title" />
               </router-link>
           </span>
           <p class="blogtext">{{blog.summary}}...</p>
           <p class="bloginfo">
             <i class="avatar">
-              <img src="../../../static/images/wl.jpg">
+              <img src="http://img.wangleihh.cn/blog/web/static/images/wl.jpg">
             </i>
             <span>散落记忆里的时光</span>
             <span>{{blog.createTime}}</span>
@@ -77,10 +77,10 @@ export default {
 var stage = new createjs.Stage("mycanvas")
 createjs.Ticker.addEventListener("tick", stageBreakHandler);
 var img =  new Image()
-img.src = "../../../static/images/horse.png"
+img.src = "http://img.wangleihh.cn/blog/web/static/images/horse.png"
 img.onload = function(){
 	var ss = new createjs.SpriteSheet({
-		"images": ["../../../static/images/horse.png"], 
+		"images": ["http://img.wangleihh.cn/blog/web/static/images/horse.png"], 
 		"frames": [
 			[519,1352,468,225,0,-39.5,-6.05],
 			[525,694,405,225,0,-39.5,-6.05],

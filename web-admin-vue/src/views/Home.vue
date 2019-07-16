@@ -1,6 +1,6 @@
 <template>
   <el-container style="height: 100vh; border: 1px solid #eee">
-    <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+    <el-aside width="200px" style="background-color: #a7b1c2">
       <el-menu router :default-openeds="['1']">
         <el-submenu index="1">
           <template slot="title">
@@ -50,8 +50,9 @@
 
 
 <style>
+
 .el-header {
-  background-color: #b3c0d1;
+ background-color: #409eff;
   color: #333;
   line-height: 60px;
 }

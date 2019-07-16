@@ -1,7 +1,7 @@
 <template>
      <div class="whitebg paihang">
       <h2 class="htitle">点击排行</h2>
-      <section class="topnews imgscale"><a href="https://cuiqingcai.com/" target="_blank"><img src="../../../static/images/h1.jpg"><span>崔庆才博客</span></a></section>
+      <section class="topnews imgscale"><a href="https://cuiqingcai.com/" target="_blank"><img src="http://img.wangleihh.cn/blog/web/static/images/h1.jpg"><span>崔庆才博客</span></a></section>
       <ul>
         <li  v-for="blog in blogs" :key="blog.id"><i></i> <router-link :to="`/blog/detail/${blog.id}`">{{blog.title}}</router-link></li>   
       </ul>

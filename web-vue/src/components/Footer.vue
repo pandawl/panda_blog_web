@@ -8,11 +8,11 @@
       <div class="wxbox">
         <ul>
           <li>
-            <img src="../../static/images/wx.jpg" />
+            <img src="http://img.wangleihh.cn/blog/web/static/images/wx.jpg" />
             <span>微信公众号</span>
           </li>
           <li>
-            <img src="../../static/images/wll.jpg" />
+            <img src="http://img.wangleihh.cn/blog/web/static/images/wll.jpg" />
             <span>我的微信</span>
           </li>
         </ul>
@@ -34,7 +34,8 @@
           <a href="http://www.wangleihh.cn" target="_blank">www.wangleihh.cn"</a> All Rights Reserved. 丨托管于
            <a href="https://cloud.tencent.com/" target="_blank">腾讯云 </a>&
           <a href="https://www.qiniu.com/" target="_blank"> 七牛云</a>
-          |
+          | 
+          <a href="https://web.umeng.com/main.php?c=site&a=frame&siteid=1277804844"  target="_blank">站长统计 |</a>
           <a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备19027302号</a>
         </p>
         <div id="cnzz_protocol"></div>
@@ -91,7 +92,7 @@ export default {
     width: 6.875em;
     height: 6.875em;
     margin: 0 auto;
-    background: no-repeat url(../../static/images/111.jpg) left top;
+    background: no-repeat url(http://img.wangleihh.cn/blog/web/static/images/111.jpg) left top;
     -webkit-background-size: 6.875em 6.875em;
     -moz-background-size: 6.875em 6.875em;
     background-size: 6.875em 6.875em;

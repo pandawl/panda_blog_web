@@ -5,10 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="keywords" content="散落记忆里的时光,java,vue,Python,爬虫,深度学习,机器学习,数据分析,网络,IT,技术,博客,C,springboot,PHP,HTML,JS,教程" />
-    <link rel="stylesheet" href="./static/css/base1.css">
-    <link rel="stylesheet" href="./static/css/m.css">
+    <!-- <link rel="stylesheet" href="./static/css/base1.css"> -->
+    <link rel="stylesheet" href="http://img.wangleihh.cn/blog/web/static/css/base1.css">
+    <link rel="stylesheet" href="http://img.wangleihh.cn/blog/web/static/css/m.css">
     <title>散落记忆里的时光</title>
-    <script src="./static/js/js/easeljs.min.js"></script>
+    <script src="http://img.wangleihh.cn/blog/web/static/js/easeljs.min.js"></script>
     <style>
         html,
         body,
@@ -17,14 +18,14 @@
             margin: 0px;
             padding: 0px;
         }
-
+        
         .chromeframe {
             margin: 0.2em 0;
             background: #ccc;
             color: #000;
             padding: 0.2em 0;
         }
-
+        
         #loader-wrapper {
             position: fixed;
             top: 0;
@@ -33,7 +34,7 @@
             height: 100%;
             z-index: 999999;
         }
-
+        
         #loader {
             display: block;
             position: relative;
@@ -58,7 +59,7 @@
             /* Chrome, Firefox 16+, IE 10+, Opera */
             z-index: 1001;
         }
-
+        
         #loader:before {
             content: "";
             position: absolute;
@@ -81,7 +82,7 @@
             animation: spin 3s linear infinite;
             /* Chrome, Firefox 16+, IE 10+, Opera */
         }
-
+        
         #loader:after {
             content: "";
             position: absolute;
@@ -104,7 +105,7 @@
             animation: spin 1.5s linear infinite;
             /* Chrome, Firefox 16+, IE 10+, Opera */
         }
-
+        
         @-webkit-keyframes spin {
             0% {
                 -webkit-transform: rotate(0deg);
@@ -123,7 +124,7 @@
                 /* Firefox 16+, IE 10+, Opera */
             }
         }
-
+        
         @keyframes spin {
             0% {
                 -webkit-transform: rotate(0deg);
@@ -142,7 +143,7 @@
                 /* Firefox 16+, IE 10+, Opera */
             }
         }
-
+        
         #loader-wrapper .loader-section {
             position: fixed;
             top: 0;
@@ -158,16 +159,16 @@
             transform: translateX(0);
             /* Firefox 16+, IE 10+, Opera */
         }
-
+        
         #loader-wrapper .loader-section.section-left {
             left: 0;
         }
-
+        
         #loader-wrapper .loader-section.section-right {
             right: 0;
         }
         /* Loaded */
-
+        
         .loaded #loader-wrapper .loader-section.section-left {
             -webkit-transform: translateX(-100%);
             /* Chrome, Opera 15+, Safari 3.1+ */
@@ -178,7 +179,7 @@
             -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
             transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
         }
-
+        
         .loaded #loader-wrapper .loader-section.section-right {
             -webkit-transform: translateX(100%);
             /* Chrome, Opera 15+, Safari 3.1+ */
@@ -189,13 +190,13 @@
             -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
             transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
         }
-
+        
         .loaded #loader {
             opacity: 0;
             -webkit-transition: all 0.3s ease-out;
             transition: all 0.3s ease-out;
         }
-
+        
         .loaded #loader-wrapper {
             visibility: hidden;
             -webkit-transform: translateY(-100%);
@@ -208,15 +209,15 @@
             transition: all 0.3s 1s ease-out;
         }
         /* JavaScript Turned Off */
-
+        
         .no-js #loader-wrapper {
             display: none;
         }
-
+        
         .no-js h1 {
             color: #222222;
         }
-
+        
         #loader-wrapper .load_title {
             font-family: 'Open Sans';
             color: #FFF;
@@ -229,7 +230,7 @@
             opacity: 1;
             line-height: 30px;
         }
-
+        
         #loader-wrapper .load_title span {
             font-weight: normal;
             font-style: italic;
