@@ -7,7 +7,7 @@
 ### 博客列表
 ![image.png](http://img.wangleihh.cn/63fd44660cab457f949064ebb3e7fdb9.png)
 ### 博客管理
-![image.png](http://img.wangleihh.cn/5466c44f8fa441d7957def1582ba38a5.png)
+![image.png](http://img.wangleihh.cn/1f51337448f24f0a95959d5cc6f736ae.png)
 ### 标签管理
 ![image.png](http://img.wangleihh.cn/f4de39230e8d4250b6086d466cc7fc82.png)
 ### 分类管理
