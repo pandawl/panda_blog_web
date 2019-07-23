@@ -10,8 +10,8 @@
       router
     > 
       <el-menu-item class="header_index_panda" index="/">散落记忆里的时光</el-menu-item>
-  <!--     <el-menu-item index="/">技术</el-menu-item>
-      <el-menu-item index="/">技术杂谈</el-menu-item>
+      <el-menu-item index="/blog/log">Spring Boot</el-menu-item>
+      <!--     <el-menu-item index="/">技术杂谈</el-menu-item>
       <el-menu-item index="/">生活笔记</el-menu-item>
       <el-menu-item index="/">日志系统</el-menu-item>
       <el-menu-item index="/">我的书单</el-menu-item>
@@ -33,14 +33,23 @@ export default {
 .header_pa{
   width: 80%;
   margin: auto;
+ 
 }
+
 .header_index_panda {
-  font-size: 22px;
+  font-size: 25px;
   padding:0;
   text-align: left;
   margin-right: 50px;
   /* right:50px; */
 }
+.el-menu-item{
+height: 63px;
+}
+.el-menu-item :hover{
+    color: #00c1de;
+}
+
 
 /* 
 el-menu{

@@ -86,11 +86,17 @@ export default [
         component: () =>
             import ('@/views/detail/index'),
     },
-    {
+    { //关于我
         path: '/blog/about/',
         name: 'about',
         component: () =>
             import ('@/views/aboutme/index'),
+    },
+    { //日志
+        path: '/blog/log/',
+        name: 'log',
+        component: () =>
+            import ('@/views/log/index'),
     },
     {
         path: '/blog/taglist/:id',
