@@ -1,6 +1,7 @@
 package com.wang.server.dao;
 
 import com.wang.server.entity.Blog;
+import com.wang.server.entity.es.BlogES;
 import com.wang.server.vo.SearchvVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -29,5 +30,8 @@ public interface BlogMapper {
 
     List<Blog> getBlogByTime( String search);
 
+    List<BlogES> getBlogEs(@Param("start") int start, @Param("size") int size);
+
     List<String> getBlogTime( );
+
 }

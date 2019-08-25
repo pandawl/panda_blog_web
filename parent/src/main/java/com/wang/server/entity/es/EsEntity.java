@@ -18,8 +18,8 @@ public final class EsEntity<T> {
     public EsEntity() {
     }
 
-    public EsEntity(String id, T data) {
+    public EsEntity(Integer id, T data) {
         this.data = data;
-        this.id = id;
+        this.id = String.valueOf(id);
     }
 }

@@ -1,23 +1,22 @@
 package com.wang.server;
 
-import com.wang.server.dao.EmployeeRepository;
+import com.wang.server.common.util.EsUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import javax.annotation.Resource;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = ServerApplication.class)
 public class ServerApplicationTests {
 
 
-	@Resource
-	EmployeeRepository ep;
+   @Autowired
+	EsUtil esUtil;
 	@Test
 	public void contextLoads() {
-
+		esUtil.init();
 	}
 
 

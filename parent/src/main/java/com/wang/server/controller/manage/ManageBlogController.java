@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @Auther: wl
  * @Date: 2019/5/15 15:54
- * @Description:
+ * @Description: blog管理
  */
 @RestController
 @RequestMapping("/panda/manage/blog")
@@ -59,5 +59,11 @@ public class ManageBlogController {
             return ResultUtils.generateResultStr(ResultCode.DATA_ERROR, "删除异常", 0);
         }
         return ResultUtils.generateResultStr(ResultCode.SUCCESS, "删除成功", 0);
+    }
+
+    @PostMapping("/syncBlog")
+    public String syncBlog(){
+        blogService.syncBlog();
+        return ResultUtils.generateResultStr(ResultCode.SUCCESS, "同步成功",0 );
     }
 }

@@ -2,10 +2,14 @@ package com.wang.server.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.wang.server.common.EsConstant;
+import com.wang.server.common.util.EsUtil;
 import com.wang.server.dao.BlogMapper;
 import com.wang.server.dao.BlogTagsMapper;
 import com.wang.server.entity.Blog;
 import com.wang.server.entity.BlogTags;
+import com.wang.server.entity.es.BlogES;
+import com.wang.server.entity.es.EsEntity;
 import com.wang.server.service.BlogService;
 import com.wang.server.vo.BlogVo;
 import com.wang.server.vo.SearchvVo;
@@ -30,10 +34,14 @@ public class BlogServiceImpl implements BlogService {
     private BlogMapper blogMapper;
 
     @Autowired
+    private EsUtil esUtil;
+
+    @Autowired
     private BlogTagsMapper blogTagsMapper;
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
+        esUtil.deleteIndex(String.valueOf(id));
         return blogMapper.deleteByPrimaryKey(id);
     }
 
@@ -57,6 +65,8 @@ public class BlogServiceImpl implements BlogService {
                 }
 
             }
+            esUtil.insertOrUpdateOne(EsConstant.BOOKMARK_INDEX,
+                    new EsEntity(record.getId(),new BlogES(record)));
             return 1;
             //新增
         }else {
@@ -76,6 +86,8 @@ public class BlogServiceImpl implements BlogService {
                 }
 
             }
+            esUtil.insertOrUpdateOne(EsConstant.BOOKMARK_INDEX,
+                    new EsEntity(record.getId(),new BlogES(record)));
             return 1;
         }
 
@@ -168,6 +180,28 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public List<String> getBlogTime() {
         return blogMapper.getBlogTime();
+    }
+
+    /**
+     * 同步数据到es
+     */
+    @Override
+    public void syncBlog() {
+        //删除 es中的数据
+        esUtil.deleteAll(EsConstant.BOOKMARK_INDEX);
+        //新增
+        int index = 0;
+        int size = 500;
+        List<EsEntity> res = new ArrayList<>();
+        do {
+            blogMapper.getBlogEs(index,size)
+                    .forEach(item -> res.add(new EsEntity(item.getId(), item)));
+            if (res.size() >0){
+                esUtil.insertBatch(EsConstant.BOOKMARK_INDEX, res);
+            }
+          index += size;
+        }while (res.size() ==500);
+
     }
 
     private BlogVo convertBlogToVO(Blog blog){

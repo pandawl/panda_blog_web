@@ -115,11 +115,11 @@
 			<version>7.2.7</version>
 		</dependency>
 		<!--httpclient-->
-		<dependency>
+	<!--	<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.3.1</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
@@ -156,6 +156,12 @@
 			<groupId>org.elasticsearch.client</groupId>
 			<artifactId>elasticsearch-rest-client</artifactId>
 			<version>7.3.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.4.9</version>
 		</dependency>
 
 

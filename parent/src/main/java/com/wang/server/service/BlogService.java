@@ -38,4 +38,6 @@ public interface BlogService {
     PageInfo<Blog> getBlogByTime(Integer pageNum, Integer pageSize, String search);
 
     List<String> getBlogTime();
+
+    void syncBlog();
 }

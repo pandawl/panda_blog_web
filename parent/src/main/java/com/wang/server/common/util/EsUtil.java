@@ -34,11 +34,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * 类功能简述：
- * 类功能详述：
- *
- * @author fanxb
- * @date 2019/7/19 16:07
+* es
  */
 @Component
 @Slf4j
@@ -61,6 +57,7 @@ public class EsUtil {
             if (client != null) {
                 client.close();
             }
+            System.out.println(host);
             client = new RestHighLevelClient(RestClient.builder(new HttpHost(host, port, scheme)));
             if (this.indexExist(EsConstant.BOOKMARK_INDEX)) {
                 return;
@@ -212,10 +209,23 @@ public class EsUtil {
             throw new EsException(e);
         }
     }
+    public void deleteAll(String index) {
+        DeleteByQueryRequest request = new DeleteByQueryRequest(index);
+
+        //设置批量操作数量,最大为10000
+        request.setBatchSize(10000);
+        request.setConflicts("proceed");
+        try {
+            client.deleteByQuery(request, RequestOptions.DEFAULT);
+        } catch (Exception e) {
+            throw new EsException(e);
+        }
+    }
+
 
 
     public static void main(String[] args) throws Exception {
         EsUtil util = new EsUtil();
-        System.out.println(util.indexExist("bookmark"));
+       util.init();
     }
 }
