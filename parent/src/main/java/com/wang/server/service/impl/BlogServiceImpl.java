@@ -188,7 +188,7 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public void syncBlog() {
         //删除 es中的数据
-        esUtil.deleteAll(EsConstant.BOOKMARK_INDEX);
+       // esUtil.deleteAll(EsConstant.BOOKMARK_INDEX);
         //新增
         int index = 0;
         int size = 500;

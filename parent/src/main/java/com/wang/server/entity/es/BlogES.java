@@ -26,6 +26,8 @@ public class BlogES {
 
     /**html正文*/
     private String html_content;
+    public BlogES() {
+    }
 
     public BlogES(BlogVo blogVo){
         this.id = blogVo.getId();

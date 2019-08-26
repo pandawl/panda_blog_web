@@ -128,9 +128,9 @@
     </select>
 
     <select id="getBlogEs" resultType="com.wang.server.entity.es.BlogES">
-        	select b.id, b.title, b.summary,b.content,b.html_content
-    from blog b
-    order by b.id
-    limit {start},{size}
+        	select id, title, summary,content,html_content
+    from blog
+    order by id
+    limit #{start},#{size}
     </select>
 </mapper>
