@@ -1,6 +1,8 @@
 package com.wang.server;
 
-import com.wang.server.common.util.EsUtil;
+import com.github.pagehelper.PageInfo;
+import com.wang.server.entity.es.BlogES;
+import com.wang.server.service.BlogService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +14,17 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class ServerApplicationTests {
 
 
-   @Autowired
-	EsUtil esUtil;
+	@Autowired
+	private BlogService blogService;
 	@Test
 	public void contextLoads() {
-		esUtil.init();
-	}
+        PageInfo<BlogES> vue = blogService.searchBlog(1, 2, "vue");
+        System.out.println(vue.getTotal());
+        System.out.println(vue.getList());
+        System.out.println(vue.getList().size());
+
+
+    }
 
 
 

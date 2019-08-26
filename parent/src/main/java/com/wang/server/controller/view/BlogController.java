@@ -63,4 +63,13 @@ public class BlogController {
     public String getBlogTime(){
         return ResultUtils.generateResultStr(ResultCode.SUCCESS,"查询成功", blogService.getBlogTime());
     }
+
+    /**
+     * 获取归档时间
+     * @return
+     */
+    @PostMapping("/search")
+    public String getBlogTime(Integer pageNum, Integer pageSize,String search){
+        return ResultUtils.generateResultStr(ResultCode.SUCCESS,"查询成功", blogService.searchBlog(pageNum,pageSize,search));
+    }
 }

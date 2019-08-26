@@ -5,11 +5,11 @@
         <img src="../1.jpg" alt="wl" style="border-radius:50%;width:100px;margin: 0 auto;">
     </p>
     <p style="text-align: center;">散落记忆里的时光</p>
-    <p id="brief" style="text-align: center;">爱生活、爱艺术、爱书画、爱音乐、爱设计、爱编程。</p>
+    <p id="brief" style="text-align: center;">爱生活、。</p>
     <p
       id="brief"
       style="text-align: center;"
-    >人生百态，笑口常开，秉承自我，谨慎独行。静觅，静静寻觅生活的美好。</p>
+    >哪有什么岁月静好，不过是有人替你负重前行</p>
     <p style="text-align: center;">
       <a href="http://www.wangleihh.cn">
         <input

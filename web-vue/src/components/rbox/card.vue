@@ -2,9 +2,9 @@
   <div>
     <div class="card">
       <h2>我的名片</h2>
-      <p>职业：全栈攻城狮</p>
-      <p>现居：北京-回龙观</p>
-      <p>Email：18209298931@126.com</p>
+      <p>职业：攻城狮</p>
+      <p>现居：北京</p>
+      <p>Email：710815126@qq.com</p>
       <ul class="linkmore">
         <li>
           <a href="http://www.wangleihh.cn" target="_blank" class="iconfont icon-zhuye" title="网站地址"></a>
@@ -20,7 +20,7 @@
         </li>
         <li>
           <a
-            href="https://github.com/WangLeiHH"
+            href="https://github.com/OnntZnwo"
             target="_blank"
             class="iconfont icon-github"
             title="GitHub"

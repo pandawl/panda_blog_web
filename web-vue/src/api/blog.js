@@ -7,6 +7,13 @@ export const getList = (pageNum, pageSize) => {
         params: { pageNum, pageSize }
     })
 }
+export const getBlogESList = (pageNum, pageSize, search) => {
+    return request({
+        url: 'blog/search',
+        method: 'POST',
+        params: { pageNum, pageSize, search }
+    })
+}
 
 export const add = () => {
     return request({

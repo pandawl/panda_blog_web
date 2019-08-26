@@ -13,6 +13,10 @@ import com.wang.server.entity.es.EsEntity;
 import com.wang.server.service.BlogService;
 import com.wang.server.vo.BlogVo;
 import com.wang.server.vo.SearchvVo;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: wl
@@ -130,7 +135,13 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public int updateByPrimaryKey(Blog record) {
-        return 0;
+        List<BlogES> blogEs = blogMapper.getBlogEs(0, 20);
+        for (BlogES blogE : blogEs) {
+            System.out.println(blogE);
+
+        }
+        return 1;
+
     }
 
     @Override
@@ -203,6 +214,44 @@ public class BlogServiceImpl implements BlogService {
         }while (res.size() ==500);
 
     }
+    /**
+     * Description: 根据context搜索
+     *
+     * @param context context
+     * @author fanxb
+     * @date 2019/7/25 10:45
+     */
+    @Override
+    public PageInfo<BlogES> searchBlog(Integer pageNum, Integer pageSize,String context) {
+        BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
+        boolQueryBuilder.must(QueryBuilders.multiMatchQuery(context, "title", "summary", "content"));
+        SearchSourceBuilder builder = new SearchSourceBuilder();
+        if (pageNum <= 0) {
+            pageNum = 0;
+        }
+        builder.from((pageNum - 1) * pageSize);
+        builder.size(pageSize);
+        builder.query(boolQueryBuilder);
+        //设置高亮
+        String preTags = "<strong>";
+        String postTags = "</strong>";
+        HighlightBuilder highlightBuilder = new HighlightBuilder();
+        highlightBuilder.preTags(preTags);//设置前缀
+        highlightBuilder.postTags(postTags);//设置后缀
+        highlightBuilder.field(context);//设置高亮字段
+        SearchSourceBuilder.highlight();//设置高亮信息
+
+        Map<String, Object> search = esUtil.search(EsConstant.BOOKMARK_INDEX, builder, BlogES.class);
+        PageInfo<BlogES> info = new PageInfo<>((List<BlogES>) search.get("list"));
+        info.setPageSize(pageSize);
+        info.setPageNum(pageNum);
+        Long total = (Long)search.get("total");
+        info.setTotal(total);
+        info.setPages((total.intValue()+pageSize -1 )/pageSize);
+
+        return info;
+    }
+
 
     private BlogVo convertBlogToVO(Blog blog){
         BlogVo blogVo = new BlogVo();

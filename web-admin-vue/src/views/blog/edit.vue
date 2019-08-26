@@ -140,7 +140,7 @@ export default {
       this.blog.code = this.blog.code === true ? 1 : 0;
       //www.wangleihh.cn localhost
       axios
-        .post("http://www.wangleihh.cn:9999/panda/manage/blog/add", this.blog)
+        .post("http://localhost:9999/panda/manage/blog/add", this.blog)
         .then(res => {
           console.log(this.blog);
           if (res.data.resultCode == 200) {

@@ -2,6 +2,7 @@ package com.wang.server.service;
 
 import com.github.pagehelper.PageInfo;
 import com.wang.server.entity.Blog;
+import com.wang.server.entity.es.BlogES;
 import com.wang.server.vo.BlogVo;
 import com.wang.server.vo.SearchvVo;
 
@@ -40,4 +41,6 @@ public interface BlogService {
     List<String> getBlogTime();
 
     void syncBlog();
+
+    PageInfo<BlogES> searchBlog(Integer pageNum, Integer pageSize,String context);
 }

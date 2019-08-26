@@ -106,15 +106,22 @@ export default [
     },
     {
         path: '/blog/category/:id',
-        name: 'taglist',
+        name: 'categorylist',
         component: () =>
             import ('../views/category/index'),
     },
+
     {
         path: '/blog/pigeonhole/:id',
         name: 'pigeonhole',
         component: () =>
             import ('../views/pigeonhole/index'),
-    }
+    },
+    {
+        path: '/blog/search/',
+        name: 'searchlist',
+        component: () =>
+            import ('../views/search/index'),
+    },
 
 ]

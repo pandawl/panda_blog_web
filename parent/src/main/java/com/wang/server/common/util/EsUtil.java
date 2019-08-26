@@ -29,9 +29,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
 * es
@@ -57,7 +55,6 @@ public class EsUtil {
             if (client != null) {
                 client.close();
             }
-            System.out.println(host);
             client = new RestHighLevelClient(RestClient.builder(new HttpHost(host, port, scheme)));
             if (this.indexExist(EsConstant.BOOKMARK_INDEX)) {
                 return;
@@ -157,21 +154,28 @@ public class EsUtil {
      * @author fanxb
      * @date 2019/7/25 13:46
      */
-    public <T> List<T> search(String index, SearchSourceBuilder builder, Class<T> c) {
+    public <T> Map<String,Object> search(String index, SearchSourceBuilder builder, Class<T> c) {
         SearchRequest request = new SearchRequest(index);
         request.source(builder);
         try {
             SearchResponse response = client.search(request, RequestOptions.DEFAULT);
             SearchHit[] hits = response.getHits().getHits();
-            List<T> res = new ArrayList<>(hits.length);
+            HashMap<String, Object> map = new HashMap<>();
+            List<Object> res = new ArrayList<>(hits.length);
             for (SearchHit hit : hits) {
                 res.add(JSON.parseObject(hit.getSourceAsString(), c));
             }
-            return res;
+            map.put("list",  res);
+            Long totalHits = response.getHits().getTotalHits().value;
+            map.put("total", totalHits);
+            return map;
         } catch (Exception e) {
             throw new EsException(e);
         }
     }
+
+
+
 
     /**
      * Description: 删除index

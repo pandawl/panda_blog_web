@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="header-menus">
+    <div class="">
       <header-menus/>
     </div>
 
@@ -39,17 +39,5 @@ export default {
 </script>
 
 <style scoped>
-.header-menus{
-  background: rgb(30, 159, 255);
-  margin-top:5px;
-  height: 63px;
-}
-#app::before {
-    background: #000 linear-gradient(to left, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);
-    content: "";
-    height: 5px;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
+
 </style>
