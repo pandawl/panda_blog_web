@@ -57,4 +57,12 @@ export default [{
         meta: { title: '图片', icon: 'form' },
 
     },
+  {
+    path: '/blog/sync',
+    component: () =>
+      import ('../views/sync/index.vue'),
+    name: '同步es',
+    meta: { title: '同步es', icon: 'form' },
+
+  },
 ]

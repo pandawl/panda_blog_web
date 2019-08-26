@@ -18,10 +18,10 @@
           <template slot="title">
             <i class="el-icon-s-tools"></i>系统管理
           </template>
-          <el-menu-item-group>
+
             <el-menu-item index="/blog/img">日志管理</el-menu-item>
-            <el-menu-item index="2-2">访问管理</el-menu-item>
-          </el-menu-item-group>
+            <el-menu-item index="/blog/sync">数据同步</el-menu-item>
+
         </el-submenu>
       </el-menu>
     </el-aside>
@@ -31,7 +31,7 @@
         <el-dropdown>
           <i class="el-icon-setting" style="margin-right: 15px"></i>
           <el-dropdown-menu slot="dropdown">
-  
+
             <el-dropdown-item>退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
