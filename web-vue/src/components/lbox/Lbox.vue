@@ -23,5 +23,9 @@ export default {
 </script>
  
 <style scoped>
- 
+ .lbox {
+    width: 75% ;
+    float: left;
+    overflow: hidden
+}
 </style>

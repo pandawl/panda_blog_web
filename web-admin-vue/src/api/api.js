@@ -16,9 +16,8 @@ export const editUser = params => { return axios.get(`${base}/user/edit`, { para
 
 export const addUser = params => { return axios.get(`${base}/user/add`, { params: params }) }
 export const syncBlog = () => {
-  return request({
-    url: '/manage/blog/syncBlog',
-    method: 'POST',
-  })
+    return request({
+        url: '/manage/blog/syncBlog',
+        method: 'POST',
+    })
 }
-

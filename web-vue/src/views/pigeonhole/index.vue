@@ -134,7 +134,7 @@ function stageBreakHandler(event){
     },
    blogs:{handler(){
      
-     this.article = this.blogs.length >0  ?true :false
+
       this.loading = this.blogs.length >0  ?false :true
     
    }} 
@@ -145,6 +145,7 @@ function stageBreakHandler(event){
       this.dataChanged = true;
       this.$nextTick(() => {
         this.dataChanged = false;
+        window.scrollTo(0,0);
       });
     },
     initData(id) {

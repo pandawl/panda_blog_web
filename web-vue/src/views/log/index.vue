@@ -1,5 +1,5 @@
 <template>
-  <div class="head_aricle">
+  <div class="head_aricle detail_width">
     <div class="left">
       <div style="font-size:26px;font-famil:隶书;text-align:center;margin:20px">最新版 Spring Boot2 教程合集</div>
       <div id="timeline">

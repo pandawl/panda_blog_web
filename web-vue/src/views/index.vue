@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div>
-    <div class="head_aricle">
+    <div class="head_aricle detail_width">
       <Lbox />
       <Rbox />
     </div>
@@ -26,11 +26,7 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-.head_aricle {
-  width: 80%;
 
-  margin: auto;
-  margin-top: 10px;
-  overflow: hidden;
-}
+
+
 </style>

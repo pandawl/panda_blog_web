@@ -6,7 +6,7 @@
           <span class="navicon"></span>
         </h2>
         <div class="logo">
-          <router-link to="/">散落记忆里的时光</router-link>
+          <a href="/">散落记忆里的时光</a>
         </div>
         <nav>
           <ul id="starlist" :class="{'navOpen':isOpen}">
@@ -81,6 +81,7 @@ export default {
     $route(to, from) {
          this.search = "";
       this.isChoose = false;
+       this.isOpen = false;
     },
   },
   methods: {

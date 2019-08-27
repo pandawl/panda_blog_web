@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div>
+  <div class="head_aricle detail_width">
     <detail class="detail"/>
     <Rbox class="rbox"/>
   </div>

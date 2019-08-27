@@ -128,7 +128,6 @@ function stageBreakHandler(event){
   }, watch: {
   
    blogs:{handler(){
-       this.article = this.blogs.length >0  ?true :false
       this.loading = this.blogs.length >0  ?false :true
     
    }} 
@@ -139,6 +138,7 @@ function stageBreakHandler(event){
       this.dataChanged = true;
       this.$nextTick(() => {
         this.dataChanged = false;
+        window.scrollTo(0,0);
       });
     },
 
@@ -170,10 +170,8 @@ function stageBreakHandler(event){
 </script>
  
 <style scoped>
-.bloglist {
-  float: left;
-  width: 96%;
-}
+
  
+
 
 </style>

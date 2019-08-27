@@ -26,7 +26,7 @@
       <b>简介</b>
       {{blog.summary}}
     </p>
-    <div style="overflow:auto" class="con_text">
+    <div class="con_text" >
      <mavon-editor
         class="md"
         :value="blog.htmlContent"
@@ -115,6 +115,9 @@ export default {
 .article_link:hover{
   color: #b807cf;
 }
+.v-note-wrapper{
+    position: static;
 
+}
 
 </style>
