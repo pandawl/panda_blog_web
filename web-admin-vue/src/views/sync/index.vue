@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { syncBlog} from "../../api/api";
+import { syncBlog} from "../../api/blog";
 export default {
   data () {
     return {

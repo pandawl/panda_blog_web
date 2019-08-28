@@ -22,6 +22,7 @@ import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.index.reindex.DeleteByQueryRequest;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -230,6 +231,6 @@ public class EsUtil {
 
     public static void main(String[] args) throws Exception {
         EsUtil util = new EsUtil();
-       util.init();
+       util.deleteByQuery("blog",new TermQueryBuilder("id", 222));
     }
 }

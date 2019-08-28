@@ -15,6 +15,7 @@ import com.wang.server.vo.BlogVo;
 import com.wang.server.vo.SearchvVo;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
-        esUtil.deleteIndex(String.valueOf(id));
+        esUtil.deleteByQuery("blog",new TermQueryBuilder("id", id));
         return blogMapper.deleteByPrimaryKey(id);
     }
 

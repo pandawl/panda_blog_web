@@ -43,3 +43,15 @@ export const getImg = (file) => {
 
     })
 }
+export const syncBlog = () => {
+    return request({
+        url: '/manage/blog/syncBlog',
+        method: 'POST',
+    })
+}
+export const getServer = () => {
+    return request({
+        url: '/manage/blog/server',
+        method: 'GET',
+    })
+}

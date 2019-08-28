@@ -12,10 +12,12 @@
 ![image.png](http://img.wangleihh.cn/f4de39230e8d4250b6086d466cc7fc82.png)
 ### 分类管理
 ![image.png](http://img.wangleihh.cn/5cbc2dae2a394c3bb20db8fecc6754ff.png)
-
+### 服务监控
+![image.png](http://img.wangleihh.cn/c10617c4876e40d6aa0eeec91b3ec37f.png)
 
 # 开发进度
 ## 2019-08-27
 
 - 加入 elasticsearch 全文检索。
 - 适配手机端
+- blog_admin加入服务监控

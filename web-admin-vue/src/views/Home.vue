@@ -1,7 +1,7 @@
 <template>
   <el-container style="height: 100vh; border: 1px solid #eee">
     <el-aside width="200px" style="background-color: #a7b1c2">
-      <el-menu router @open="handleOpen" @close="handleClose" :default-openeds="openeds">
+      <el-menu router  :default-openeds="openeds">
         <el-submenu index="1">
           <template slot="title">
             <i class="el-icon-folder"></i>博客管理
@@ -40,10 +40,10 @@
       </el-header>
 
       <el-main>
-        <keep-alive>
-          <router-view v-if="$route.meta.keepAlive"></router-view>
-        </keep-alive>
-        <router-view v-if="!$route.meta.keepAlive"></router-view>
+     
+          <router-view></router-view>
+      
+    
       </el-main>
     </el-container>
   </el-container>

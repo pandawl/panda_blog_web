@@ -105,24 +105,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
         return DateFormatUtils.format(now, "yyyyMMdd");
     }
 
-    /**
-     * 日期型字符串转化为日期 格式
-     */
-    public static Date parseDate(Object str)
-    {
-        if (str == null)
-        {
-            return null;
-        }
-        try
-        {
-            return parseDate(str.toString(), parsePatterns);
-        }
-        catch (ParseException e)
-        {
-            return null;
-        }
-    }
+
     
     /**
      * 获取服务器启动时间

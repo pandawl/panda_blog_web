@@ -3,6 +3,7 @@ package com.wang.server.controller.manage;
 import com.wang.server.common.util.ResultCode;
 import com.wang.server.common.util.ResultUtils;
 import com.wang.server.conf.Server;
+import com.wang.server.conf.server.*;
 import com.wang.server.service.BlogService;
 import com.wang.server.vo.BlogVo;
 import com.wang.server.vo.SearchvVo;
@@ -82,13 +83,59 @@ public class ManageBlogController {
     @GetMapping("/server")
     public String server(){
         Server server = new Server();
+        ServerVo serverVo = new ServerVo();
         try {
             server.copyTo();
+            Mem mem = server.getMem();
+            Cpu cpu = server.getCpu();
+
+            Jvm jvm = server.getJvm();
+            Sys sys = server.getSys();
+            int cpuNum = cpu.getCpuNum();
+            double memTotal = mem.getTotal();
+            double memUsage = mem.getUsage();
+            double memFree = mem.getFree();
+            double memUsed = mem.getUsed();
+            double jvmTotal = jvm.getTotal();
+            double jvmUsage = jvm.getUsage();
+            double jvmFree = jvm.getFree();
+            double jvmUsed = jvm.getUsed();
+            String jvmHome = jvm.getHome();
+            String jvmName = jvm.getName();
+            String jvmRunTime = jvm.getRunTime();
+            String jvmStartTime = jvm.getStartTime();
+            String jvmVersion = jvm.getVersion();
+            double cpuFree = cpu.getFree();
+            double cpuSys = cpu.getSys();
+            double cpuTotal = cpu.getTotal();
+            double cpuUsed = cpu.getUsed();
+            serverVo.setMemTotal(memTotal);
+            serverVo.setMemUsage(memUsage);
+            serverVo.setMemFree(memFree);
+            serverVo.setMemUsed(memUsed);
+            serverVo.setJvmTotal(jvmTotal);
+            serverVo.setJvmUsage(jvmUsage);
+            serverVo.setJvmFree(jvmFree);
+            serverVo.setJvmUsed(jvmUsed);
+            serverVo.setCpuNum(cpuNum);
+            serverVo.setCpuFree(cpuFree);
+            serverVo.setCpuSys(cpuSys);
+            serverVo.setCpuTotal(cpuTotal);
+            serverVo.setCpuUsed(cpuUsed);
+            serverVo.setSys(sys);
+            serverVo.setSysFiles(server.getSysFiles());
+            serverVo.setJvmHome(jvmHome);
+            serverVo.setJvmName(jvmName);
+            serverVo.setJvmRunTime(jvmRunTime);
+            serverVo.setJvmStartTime(jvmStartTime);
+            serverVo.setJvmVersion(jvmVersion);
+
+
         } catch (Exception e) {
             e.printStackTrace();
             log.error("获取服务器信息异常");
             return ResultUtils.generateResultStr(ResultCode.DATA_ERROR, "获取服务器信息异常",0 );
         }
-        return ResultUtils.generateResultStr(ResultCode.SUCCESS, "获取服务器信息成功",server);
+        return ResultUtils.generateResultStr(ResultCode.SUCCESS, "获取服务器信息成功",serverVo);
     }
 }
