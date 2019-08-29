@@ -3,7 +3,7 @@
   <div>
     <!-- 搜索 -->
     <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
-      <el-form :inline="true">
+      <el-form :inline="true"  class="div-background">
         <el-form-item>
           <el-input placeholder="姓名" v-model="searchName"></el-input>
         </el-form-item>
@@ -47,7 +47,7 @@
         </el-dialog>
       </el-form>
     </el-col>
-    <el-table :data="tableData" style="width: 100%">
+    <el-table :data="tableData" style="width: 100%"  class="div-background">
       <el-table-column prop="id" label="id" width="180"></el-table-column>
       <el-table-column prop="categoryName" label="名称" width="180"></el-table-column>
       <el-table-column prop="updateTime" label="更新时间"></el-table-column>

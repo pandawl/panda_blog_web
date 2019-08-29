@@ -2,7 +2,7 @@
   <div>
     <!-- 搜索 -->
     <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
-      <el-form :inline="true" class="div-background">
+      <el-form :inline="true">
         <el-form-item>
           <el-select v-model="value" clearable placeholder="状态">
             <el-option
@@ -14,7 +14,7 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-input placeholder="标题" v-model="searchName"></el-input>
+          <el-input placeholder="任务名称" v-model="searchName"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="search(value,searchName)">
@@ -30,7 +30,7 @@
       </el-form>
     </el-col>
     <!-- 列表 -->
-    <el-table :data="tableList" style="width: 100%;"  class="div-background">
+    <el-table :data="tableList" style="width: 100%;">
       <el-table-column prop="id" label="序号" width="65"></el-table-column>
       <el-table-column prop="title" label="标题"></el-table-column>
       <el-table-column prop="summary" min-width="150px" label="概要"></el-table-column>
@@ -79,16 +79,16 @@ export default {
       status: [
          {
           statusId: 0,
-          label: "草稿"
+          label: "启动"
         },
         {
           statusId: 1,
-          label: "已发布"
+          label: "停止"
         },
 
         {
           statusId: 2,
-          label: "已删除"
+          label: "未启动"
         }
       ]
     };
@@ -192,5 +192,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

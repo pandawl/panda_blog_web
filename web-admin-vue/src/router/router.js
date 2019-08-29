@@ -52,7 +52,7 @@ export default [{
     {
         path: '/blog/img',
         component: () =>
-            import ('../views/img/index.vue'),
+            import ('../views/imgupload/index.vue'),
         name: '图片',
         meta: { title: '图片', icon: 'form' },
 
@@ -71,6 +71,14 @@ export default [{
             import ('../views/Lserver/index.vue'),
         name: '服务监控',
         meta: { title: '服务监控', icon: 'form' },
+
+    },
+    {
+        path: '/blog/task',
+        component: () =>
+            import ('../views/task/index.vue'),
+        name: '定时任务',
+        meta: { title: '定时任务', icon: 'form' },
 
     },
 ]

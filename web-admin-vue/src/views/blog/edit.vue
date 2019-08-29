@@ -186,3 +186,10 @@ export default {
   }
 };
 </script>
+<style scoped>
+.el-form{
+      background: #fff;
+      padding: 20px;
+      border-radius: 5px;
+}
+</style>

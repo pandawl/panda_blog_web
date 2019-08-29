@@ -21,6 +21,7 @@
 
             <el-menu-item index="/blog/img">图片上传</el-menu-item>
             <el-menu-item index="/blog/sync">数据同步</el-menu-item>
+            <el-menu-item index="/blog/task">定时任务</el-menu-item>
             <el-menu-item index="/blog/server">服务监控</el-menu-item>
 
         </el-submenu>
@@ -52,6 +53,9 @@
 
 <style>
 
+.el-main{
+      background-color: #f3f3f4;
+}
 .el-header {
  background-color: #409eff;
   color: #333;
