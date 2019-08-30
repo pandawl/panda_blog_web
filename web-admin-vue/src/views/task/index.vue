@@ -1,49 +1,77 @@
 <template>
   <div>
     <!-- 搜索 -->
-    <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
-      <el-form :inline="true">
-        <el-form-item>
-          <el-select v-model="value" clearable placeholder="状态">
-            <el-option
-              v-for="item in status"
-              :key="item.statusId"
-              :label="item.label"
-              :value="item.statusId"
-            ></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-input placeholder="任务名称" v-model="searchName"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="search(value,searchName)">
-            <i class="el-icon-search"></i>搜索
-          </el-button>
+    <div class="div-background search">
+      <el-col :span="30" class="toolbar" style="padding-bottom: 0px;">
+        <el-form :inline="true" class>
+          <el-form-item>
+            <el-select v-model="value" clearable placeholder="状态">
+              <el-option
+                v-for="item in status"
+                :key="item.statusId"
+                :label="item.label"
+                :value="item.statusId"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item>
+            <el-input placeholder="任务名称" v-model="searchName"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="search(value,searchName)">
+              <i class="el-icon-search"></i>搜索
+            </el-button>
             <el-button type="primary" @click="reset()">
-            <i class="el-icon-search"></i>重置
-          </el-button>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="add()">新增</el-button>
-        </el-form-item>
-      </el-form>
-    </el-col>
+              <i class="el-icon-search"></i>重置
+            </el-button>
+          </el-form-item>
+        </el-form>
+      </el-col>
+    </div>
     <!-- 列表 -->
-    <el-table :data="tableList" style="width: 100%;">
-      <el-table-column prop="id" label="序号" width="65"></el-table-column>
-      <el-table-column prop="title" label="标题"></el-table-column>
-      <el-table-column prop="summary" min-width="150px" label="概要"></el-table-column>
-      <el-table-column prop="viewCount" label="阅读数" width="65"></el-table-column>
-      <el-table-column prop="updateTime" label="修改时间" width="160px"></el-table-column>
-      <el-table-column :formatter="formatCode" label="状态" width="120"></el-table-column>
-      <el-table-column prop="operation" label="操作 ">
-        <template slot-scope="scope">
-          <el-button size="small" type="primary" @click="handleUpdate(scope.row.id)">编辑</el-button>
-          <el-button size="small" type="danger" @click="handleDelete(scope.row.id)">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+    <div class="div-background task-table">
+      <el-button size="small" type="primary">
+        <i class="iconfont">&#xe608;</i>新增
+      </el-button>
+      <el-button size="small" type="success">
+        <i class="iconfont">&#xe6a1;</i>一键开启
+      </el-button>
+      <el-button size="small" type="danger">
+        <i class="iconfont">&#xe617;</i>一键关闭
+      </el-button>
+
+      <el-table :data="tableList" class="elTable" style="width: 100%;">
+        <el-table-column fixed prop="jobName" label="任务名称" :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column prop="cronExpression" label="时间表达式" :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column prop="beanClass" label="执行类" width="300px" :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column align="center" :formatter="formatCode" label="状态"></el-table-column>
+        <el-table-column fixed="right" label="操作 " width="300px">
+          <template slot-scope="scope">
+            <div v-if="scope.row.jobStatus == 1">
+              <el-button size="small" type="warning" @click="handleUpdate(scope.row.id)">
+                <i class="iconfont">&#xe65a;</i>关闭
+              </el-button>
+            </div>
+            <div v-else>
+              <el-button
+                size="small"
+                style="background-color:#1ab394;border-color: #1ab394; color: #FFFFFF;"
+                @click="handleUpdate(scope.row.id)"
+              >
+                <i class="iconfont">&#xe7ad;</i>编辑
+              </el-button>
+              <el-button size="small" type="primary" @click="handleUpdate(scope.row.id)">
+                <i class="iconfont">&#xe7ec;</i>启动
+              </el-button>
+              <el-button size="small" type="danger" @click="handleDelete(scope.row.id)">
+                <i class="iconfont">&#xe612;</i>删除
+              </el-button>
+            </div>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+
     <Pager
       v-if="!dataChanged"
       ref="pager"
@@ -57,7 +85,7 @@
 </template>
 
 <script>
-import { getBlogs, deleteBlogById } from "../../api/blog";
+import { getTask } from "../../api/task";
 import Pager from "../../components/Pager";
 export default {
   name: "",
@@ -77,37 +105,36 @@ export default {
       pageSize: 10, //每页记录数
       dataChanged: false,
       status: [
-         {
+        {
           statusId: 0,
-          label: "启动"
+          label: "未启动"
         },
         {
           statusId: 1,
-          label: "停止"
+          label: "启动"
         },
 
         {
           statusId: 2,
-          label: "未启动"
+          label: "停止"
         }
       ]
     };
   },
   methods: {
     handleUpdate(id) {
-      this.$router.push("/blog/edit/"+id);
+      this.$router.push("/blog/edit/" + id);
     },
     add() {
       this.$router.push("/blog/edit/");
     },
-    reset(){
+    reset() {
       this.getBlog();
       this.value = "";
       this.searchName = "";
     },
-    search(value,searchName){
-
-      getBlogs(this.curPage, this.pageSize,value,searchName).then(res => {
+    search(value, searchName) {
+      getTask(this.curPage, this.pageSize, value, searchName).then(res => {
         if (res.data.resultCode == 200) {
           this.tableList = res.data.resultJson.list;
           this.curPage = res.data.resultJson.pageNum;
@@ -124,21 +151,19 @@ export default {
         this.dataChanged = false;
       });
     },
-    deleteUpdate(id) {
-
-    },
+    deleteUpdate(id) {},
     formatCode: function(row, colum) {
-      return row.code === 0
-        ? "草稿"
-        : row.code === 1
-        ? "已发布"
-        : row.code === 2
-        ? "删除"
+      return row.jobStatus == 0
+        ? "未启动"
+        : row.jobStatus == 1
+        ? "启动"
+        : row.jobStatus == 2
+        ? "停止"
         : "未知";
     },
     doFilter() {},
     getBlog() {
-      getBlogs(this.curPage, this.pageSize).then(res => {
+      getTask(this.curPage, this.pageSize).then(res => {
         if (res.data.resultCode == 200) {
           this.tableList = res.data.resultJson.list;
           this.curPage = res.data.resultJson.pageNum;
@@ -169,7 +194,7 @@ export default {
       });
     },
     gotoPage(curPage) {
-      getBlogs(curPage, this.pageSize).then(res => {
+      getTask(curPage, this.pageSize).then(res => {
         this.tableList = res.data.resultJson.list;
         this.curPage = res.data.resultJson.pageNum;
         this.total = res.data.resultJson.pages;
@@ -179,17 +204,20 @@ export default {
     },
     changeRowNum(pageSize) {
       this.pageSize = pageSize;
-       getBlogs(this.curPage, this.pageSize).then(res => {
-      this.tableList = res.data.resultJson.list;
-      this.curPage = res.data.resultJson.pageNum;
-      this.total = res.data.resultJson.pages;
-      this.pageSize = res.data.resultJson.pageSize;
-      this.refresh();
-    });
+      getTask(this.curPage, this.pageSize).then(res => {
+        this.tableList = res.data.resultJson.list;
+        this.curPage = res.data.resultJson.pageNum;
+        this.total = res.data.resultJson.pages;
+        this.pageSize = res.data.resultJson.pageSize;
+        this.refresh();
+      });
     }
   }
 };
 </script>
 
 <style scoped>
+.search {
+  height: 50px;
+}
 </style>

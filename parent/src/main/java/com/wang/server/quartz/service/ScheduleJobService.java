@@ -3,6 +3,7 @@ package com.wang.server.quartz.service;
 import com.github.pagehelper.PageInfo;
 import com.wang.server.quartz.entity.ScheduleJob;
 import com.wang.server.quartz.entity.ScheduleJobLog;
+import com.wang.server.vo.SearchvVo;
 import org.quartz.JobExecutionContext;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public interface ScheduleJobService {
      *
      * @return
      */
-    PageInfo<ScheduleJob> getAllJobs(int offset, int limit);
+    PageInfo<ScheduleJob> getAllJobs(int pageNum, int pageSize);
 
     /**
      * 初始化查询(查询所有的任务)
@@ -32,7 +33,7 @@ public interface ScheduleJobService {
     /**
      * 根据条件查询
      */
-    List<ScheduleJob> getJobList(String jobName, String jobStatus, String id, int offset, int limit);
+    PageInfo<ScheduleJob> getJobList(int pageNum, int pageSize, SearchvVo searchvVo);
 
 
     /**

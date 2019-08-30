@@ -30,10 +30,12 @@
       </el-form>
     </el-col>
     <!-- 列表 -->
-    <el-table :data="tableList" style="width: 100%;"  class="div-background">
+
+    <el-table :data="tableList" style="width: 100%;"  class="div-background elTable">
+    
       <el-table-column prop="id" label="序号" width="65"></el-table-column>
       <el-table-column prop="title" label="标题"></el-table-column>
-      <el-table-column prop="summary" min-width="150px" label="概要"></el-table-column>
+      <el-table-column prop="summary" min-width="150px" :show-overflow-tooltip="true" label="概要"></el-table-column>
       <el-table-column prop="viewCount" label="阅读数" width="65"></el-table-column>
       <el-table-column prop="updateTime" label="修改时间" width="160px"></el-table-column>
       <el-table-column :formatter="formatCode" label="状态" width="120"></el-table-column>

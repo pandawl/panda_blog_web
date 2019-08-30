@@ -4,3 +4,15 @@
     border-radius: 5px;
     padding: 20px;
 }
+
+.elTable th {
+    padding: 5px 0 !important;
+    height: 20px;
+    line-height: 20px;
+}
+
+.elTable td {
+    padding: 5px 0 !important;
+    height: 20px;
+    line-height: 20px;
+}

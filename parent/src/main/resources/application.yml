@@ -1,5 +1,5 @@
 server:
-  port: 9993
+  port: 9999
   servlet-path: /
   max-http-header-size: 10000000
 mybatis:
@@ -10,7 +10,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://188.131.223.181:3306/panda_blog?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
     username: root
-    password: 123456
+    password: panda
     dbcp2:
       initial-size: 5
       max-wait-millis: 10000
@@ -33,7 +33,7 @@ spring:
       cluster-name: my-application
       cluster-nodes: 127.0.0.1:9300
 logging:
-  level.com.wang.server.dao:
+  level.com.wang.server.dao: debug
 
 
 debug: true

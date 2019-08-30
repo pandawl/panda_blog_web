@@ -47,7 +47,7 @@
         </el-dialog>
       </el-form>
     </el-col>
-    <el-table :data="tableData" style="width: 100%"  class="div-background">
+    <el-table :data="tableData" style="width: 100%"  class="div-background elTable">
       <el-table-column prop="id" label="id" width="180"></el-table-column>
       <el-table-column prop="tagName" label="名称" width="180"></el-table-column>
       <el-table-column prop="updateTime" label="更新时间"></el-table-column>

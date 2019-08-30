@@ -7,10 +7,12 @@ import com.wang.server.dao.ScheduleJobMapper;
 import com.wang.server.quartz.entity.ScheduleJob;
 import com.wang.server.quartz.entity.ScheduleJobLog;
 import com.wang.server.quartz.service.ScheduleJobService;
+import com.wang.server.vo.SearchvVo;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -53,24 +55,22 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
     }
 
     @Override
-    public List<ScheduleJob> getJobList(String jobName, String jobStatus, String id, int offset, int limit) {
- /*       ConditionQuery query = new ConditionQuery();
-        if (StringUtils.isNotBlank(jobName)) {
-            query.add(Restrictions.like("jobName", jobName, MatchMode.ANYWHERE));
+    public PageInfo<ScheduleJob> getJobList(int pageNum, int pageSize, SearchvVo searchvVo) {
+        PageHelper.startPage(pageNum, pageSize);
+        Example example = new Example(ScheduleJob.class);
+        Example.Criteria criteria = example.createCriteria();
+        if (null != searchvVo){
+            if (null != searchvVo.getValue()){
+                criteria.andEqualTo("jobStatus", searchvVo.getValue());
+            }
+            if (null != searchvVo.getSearchName()){
+                criteria.andLike("jobName", "%"+searchvVo.getSearchName()+"%");
+            }
         }
-        if (StringUtils.isNotBlank(jobStatus)) {
-            query.add(Restrictions.eq("jobStatus", Integer.valueOf(jobStatus)));
-        }
-        if (StringUtils.isNotBlank(id)) {
-            query.add(Restrictions.eq("id", Integer.valueOf(id)));
-        }
+        List<ScheduleJob> jobs = jobMapper.selectByExample(example);
+        PageInfo<ScheduleJob> info = new PageInfo<>(jobs);
+        return info;
 
-        query.add(Restrictions.isNull("type"));
-        OrderBy orderBy = new OrderBy();
-        orderBy.add(Order.desc("createTime"));
-        List<ScheduleJob> lists = listPageByConditionQueryInOrderWithOffset(ScheduleJob.class, query, orderBy, offset, limit);
-        return lists;*/
- return null;
     }
 
 
@@ -78,9 +78,9 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
     public List<ScheduleJob> getJobs(String ids) {
       /*  String sql = "select * from t_s_task where id in (" + ids + ")";
         List<ScheduleJob> list = findListbySql(sql, ScheduleJob.class);
-        return list;*/return null;
+        return list;*/
+        return null;
     }
-
 
 
     @Override
@@ -90,18 +90,19 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 
     @Override
     public void updateJob(ScheduleJob job) {
-      /*  updateEntitie(job);*/
+        /*  updateEntitie(job);*/
     }
 
     @Override
     public void deleteJob(Integer id) {
-    /*    deleteEntityById(ScheduleJob.class, id);*/
+        /*    deleteEntityById(ScheduleJob.class, id);*/
     }
 
 
     @Override
     public ScheduleJob getScheduleJobById(int id) {
-      /*  return get(ScheduleJob.class, id);*/return null;
+        /*  return get(ScheduleJob.class, id);*/
+        return null;
     }
 
     /**
@@ -110,7 +111,7 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
      * @param jobId
      */
     @Override
-    public void writeLog(Integer jobId, String type, int userId,String ip) {
+    public void writeLog(Integer jobId, String type, int userId, String ip) {
       /*  ScheduleJobLog scheduleJobLog = new ScheduleJobLog();
         scheduleJobLog.setContent(type);
         scheduleJobLog.setCreateTime(new Date());
@@ -172,7 +173,8 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
         sql.append(" order by l.create_time desc");
         sql.append(" LIMIT " + offset + " , " + limit);
         List scheduleJobLogs = listBySQL(sql.toString());
-        return scheduleJobLogs;*/return null;
+        return scheduleJobLogs;*/
+        return null;
     }
 
     /**
@@ -209,7 +211,8 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
             sql.append(" AND l.create_time < '" + endTime + "'  ");
         }
         int count = getCountBySql(sql.toString());
-        return count;*/return 0;
+        return count;*/
+        return 0;
     }
 
     /**
@@ -247,7 +250,8 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
         }
 
         int count = getCountBySql(sql.toString());
-        return count;*/return 0;
+        return count;*/
+        return 0;
     }
 
 
