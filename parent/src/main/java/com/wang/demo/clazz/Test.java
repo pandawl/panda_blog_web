@@ -7,10 +7,11 @@ package com.wang.demo.clazz;
  */
 public class Test {
         //不对外开放的
-        class memberInnerClass{
-            public void memberInner(){
-                System.out.println("成员内部类");
-            }
+        public static void main(String[] args) {
+           int i = 1;
+
+
+
         }
 
 }

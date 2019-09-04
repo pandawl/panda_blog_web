@@ -7,3 +7,17 @@ export const getTask = (pageNum, pageSize, value, searchName) => {
         params: { pageNum, pageSize, value, searchName }
     })
 }
+export const startTask = (id) => {
+    return request({
+        url: '/task/start',
+        method: 'POST',
+        params: id
+    })
+}
+export const stopTask = (id) => {
+    return request({
+        url: '/task/stop/one',
+        method: 'POST',
+        params: id
+    })
+}

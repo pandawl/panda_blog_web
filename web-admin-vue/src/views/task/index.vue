@@ -48,7 +48,7 @@
         <el-table-column fixed="right" label="操作 " width="300px">
           <template slot-scope="scope">
             <div v-if="scope.row.jobStatus == 1">
-              <el-button size="small" type="warning" @click="handleUpdate(scope.row.id)">
+              <el-button size="small" type="warning" @click="handleStop(scope.row.id)">
                 <i class="iconfont">&#xe65a;</i>关闭
               </el-button>
             </div>
@@ -60,7 +60,7 @@
               >
                 <i class="iconfont">&#xe7ad;</i>编辑
               </el-button>
-              <el-button size="small" type="primary" @click="handleUpdate(scope.row.id)">
+              <el-button size="small" type="primary" @click="handleStart(scope.row.id)">
                 <i class="iconfont">&#xe7ec;</i>启动
               </el-button>
               <el-button size="small" type="danger" @click="handleDelete(scope.row.id)">
@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import { getTask } from "../../api/task";
+import { getTask,startTask,stopTask } from "../../api/task";
 import Pager from "../../components/Pager";
 export default {
   name: "",
@@ -171,6 +171,46 @@ export default {
           this.pageSize = res.data.resultJson.pageSize;
         }
         this.refresh();
+      });
+    },
+    handleStop(id) {
+      stopTask({ id }).then(res => {
+        if (res.data.resultCode == 200) {
+          this.$message({
+            message: res.data.resultMessage || "停止成功",
+            type: "success",
+            showClose: true,
+            duration: 1000
+          });
+          this.getBlog();
+        } else {
+          this.$message({
+            message: res.data.resultMessage || "停止失败",
+            type: "error",
+            showClose: true,
+            duration: 1000
+          });
+        }
+      });
+    },
+    handleStart(id) {
+      startTask({ id }).then(res => {
+        if (res.data.resultCode == 200) {
+          this.$message({
+            message: res.data.resultMessage || "启动成功",
+            type: "success",
+            showClose: true,
+            duration: 1000
+          });
+          this.getBlog();
+        } else {
+          this.$message({
+            message: res.data.resultMessage || "启动失败",
+            type: "error",
+            showClose: true,
+            duration: 1000
+          });
+        }
       });
     },
     handleDelete(id) {

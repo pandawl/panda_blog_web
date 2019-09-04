@@ -15,9 +15,7 @@ import com.wang.server.vo.BlogVo;
 import com.wang.server.vo.SearchvVo;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +28,7 @@ import java.util.Map;
 /**
  * @Auther: wl
  * @Date: 2019/5/15 15:58
- * @Description:
+ * @Description: 由于服务器内存2G，开启es占用内存过高，因此注释掉新增、修改、删除es，有需要可以打开。
  */
 @Service
 @Transactional
@@ -47,7 +45,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
-        esUtil.deleteByQuery("blog",new TermQueryBuilder("id", id));
+       // esUtil.deleteByQuery("blog",new TermQueryBuilder("id", id));
         return blogMapper.deleteByPrimaryKey(id);
     }
 
@@ -71,8 +69,8 @@ public class BlogServiceImpl implements BlogService {
                 }
 
             }
-            esUtil.insertOrUpdateOne(EsConstant.BOOKMARK_INDEX,
-                    new EsEntity(record.getId(),new BlogES(record)));
+          //  esUtil.insertOrUpdateOne(EsConstant.BOOKMARK_INDEX,
+              //      new EsEntity(record.getId(),new BlogES(record)));
             return 1;
             //新增
         }else {
@@ -92,8 +90,8 @@ public class BlogServiceImpl implements BlogService {
                 }
 
             }
-            esUtil.insertOrUpdateOne(EsConstant.BOOKMARK_INDEX,
-                    new EsEntity(record.getId(),new BlogES(record)));
+         //   esUtil.insertOrUpdateOne(EsConstant.BOOKMARK_INDEX,
+         //           new EsEntity(record.getId(),new BlogES(record)));
             return 1;
         }
 
@@ -200,7 +198,8 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public void syncBlog() {
         //删除 es中的数据
-       // esUtil.deleteAll(EsConstant.BOOKMARK_INDEX);
+        List<Blog> blogs = blogMapper.selectAll(null);
+        esUtil.deleteBatch(EsConstant.BOOKMARK_INDEX,blogs);
         //新增
         int index = 0;
         int size = 500;
@@ -233,15 +232,6 @@ public class BlogServiceImpl implements BlogService {
         builder.from((pageNum - 1) * pageSize);
         builder.size(pageSize);
         builder.query(boolQueryBuilder);
-        //设置高亮
-        String preTags = "<strong>";
-        String postTags = "</strong>";
-        HighlightBuilder highlightBuilder = new HighlightBuilder();
-        highlightBuilder.preTags(preTags);//设置前缀
-        highlightBuilder.postTags(postTags);//设置后缀
-        highlightBuilder.field(context);//设置高亮字段
-        SearchSourceBuilder.highlight();//设置高亮信息
-
         Map<String, Object> search = esUtil.search(EsConstant.BOOKMARK_INDEX, builder, BlogES.class);
         PageInfo<BlogES> info = new PageInfo<>((List<BlogES>) search.get("list"));
         info.setPageSize(pageSize);

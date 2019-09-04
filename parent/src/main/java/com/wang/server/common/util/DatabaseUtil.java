@@ -11,9 +11,18 @@ public class DatabaseUtil {
     //本实例支持Linux环境和Windows环境
     public static void main(String[] args) throws Exception {
         //测试备份
-        String command1 = "mysqldump  -h188.131.223.181 -uroot -ppanda  panda_blog";//参数依次是IP、账号、密码、数据库名
-        String savePath1 = "D:/demo.sql";
-        boolean b1 = new DatabaseUtil().backup(command1, savePath1);
+       String command1 = "mysqldump  -h188.131.223.181 -uroot -ppanda  panda_blog";//参数依次是IP、账号、密码、数据库名
+        String savePath = "d:/usr";
+        File saveFile = new File(savePath);
+
+        if (!saveFile.exists()) {// 如果目录不存在
+
+            saveFile.mkdirs();// 创建文件夹
+
+        }
+        savePath += "/panda_blog.sql";
+
+        boolean b1 = new DatabaseUtil().backup(command1, savePath);
         if(b1){
             System.out.println("备份成功");
         }else {

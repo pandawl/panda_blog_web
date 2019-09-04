@@ -3,6 +3,7 @@ package com.wang.server.quartz.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.wang.server.dao.ScheduleJobLogMapper;
 import com.wang.server.dao.ScheduleJobMapper;
 import com.wang.server.quartz.entity.ScheduleJob;
 import com.wang.server.quartz.entity.ScheduleJobLog;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,6 +32,9 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 
     @Autowired
     ScheduleJobMapper jobMapper;
+
+    @Autowired
+    ScheduleJobLogMapper logMapper;
 
     /**
      * 操作日志
@@ -90,7 +95,8 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 
     @Override
     public void updateJob(ScheduleJob job) {
-        /*  updateEntitie(job);*/
+        jobMapper.updateByPrimaryKey(job);
+
     }
 
     @Override
@@ -101,8 +107,8 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 
     @Override
     public ScheduleJob getScheduleJobById(int id) {
-        /*  return get(ScheduleJob.class, id);*/
-        return null;
+        ScheduleJob job = jobMapper.selectByPrimaryKey(id);
+        return job;
     }
 
     /**
@@ -111,17 +117,17 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
      * @param jobId
      */
     @Override
-    public void writeLog(Integer jobId, String type, int userId, String ip) {
-      /*  ScheduleJobLog scheduleJobLog = new ScheduleJobLog();
+    public void writeLog(Integer jobId, String type,String ip) {
+        ScheduleJobLog scheduleJobLog = new ScheduleJobLog();
         scheduleJobLog.setContent(type);
         scheduleJobLog.setCreateTime(new Date());
         scheduleJobLog.setLogType(LOG_TYPE_ONE);
-        scheduleJobLog.setUserId(userId);
+
         if (null != jobId) {
             scheduleJobLog.setJobId(jobId);
         }
         scheduleJobLog.setIp(ip);
-        saveOrUpdate(scheduleJobLog);*/
+        logMapper.insert(scheduleJobLog);
     }
 
     /**

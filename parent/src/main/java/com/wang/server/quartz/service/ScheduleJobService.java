@@ -82,7 +82,7 @@ public interface ScheduleJobService {
      *
      * @param id
      */
-    void writeLog(Integer id, String s, int userId, String ip);
+    void writeLog(Integer id, String s, String ip);
 
 
     /**

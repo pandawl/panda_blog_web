@@ -214,18 +214,7 @@ public class EsUtil {
             throw new EsException(e);
         }
     }
-    public void deleteAll(String index) {
-        DeleteByQueryRequest request = new DeleteByQueryRequest(index);
 
-        //设置批量操作数量,最大为10000
-        request.setBatchSize(10000);
-        request.setConflicts("proceed");
-        try {
-            client.deleteByQuery(request, RequestOptions.DEFAULT);
-        } catch (Exception e) {
-            throw new EsException(e);
-        }
-    }
 
 
 
