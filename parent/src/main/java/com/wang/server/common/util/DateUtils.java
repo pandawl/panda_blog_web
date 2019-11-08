@@ -6,6 +6,8 @@ import org.apache.commons.lang.time.DateFormatUtils;
 import java.lang.management.ManagementFactory;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -40,6 +42,11 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
         return new Date();
     }
 
+
+    public static String formatFullTime(LocalDateTime localDateTime, String pattern) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
+        return localDateTime.format(dateTimeFormatter);
+    }
     /**
      * 获取当前日期, 默认格式为yyyy-MM-dd
      *
