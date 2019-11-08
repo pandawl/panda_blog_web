@@ -9,7 +9,6 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -33,18 +32,10 @@ public class BackupBlogTask implements Job {
         long preStart = System.currentTimeMillis();
         scheduleJobService.logs(context, "开始备份"+todayStr+"日Blog");
 
-        String command = "docker exec -it mysql mysqldump  -uroot -ppanda --opt  panda_blog";//参数依次是IP、账号、密码、数据库名
-        String savePath = "/usr/local/panda/blog/backup/"+todayStr;
-        File saveFile = new File(savePath);
 
-        if (!saveFile.exists()) {// 如果目录不存在
-
-            saveFile.mkdirs();// 创建文件夹
-
-        }
-         savePath += "/panda_blog.sql";
+        String command = "sh panda_blog.sh";
         
-        boolean b1 = new DatabaseUtil().backup(command, savePath);
+        boolean b1 = new DatabaseUtil().shell(command);
         if(b1){
             log.info("备份{}日blog成功",todayStr);
         }else {

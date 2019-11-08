@@ -25,7 +25,6 @@ public class ImgUploadController {
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
     public String uploadImage(@RequestParam(value="file", required=false) MultipartFile file, HttpServletRequest request) {
-
         if(file.isEmpty()) {
           return ResultUtils.generateResultStr(ResultCode.PARAM_ERROR, "图片不能为空", 0);
 

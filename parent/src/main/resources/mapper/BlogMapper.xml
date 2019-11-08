@@ -124,7 +124,9 @@
         order by b.id desc
     </select>
     <select id="getBlogTime" resultType="java.lang.String">
-        	SELECT DISTINCT CONCAT(YEAR(create_time),'年',MONTH(create_time),'月') AS `month` FROM blog ORDER BY month desc
+        /*        	SELECT DISTINCT CONCAT(YEAR(create_time),'年',MONTH(create_time),'月') AS `month` FROM blog ORDER BY month desc
+*/
+        SELECT  DISTINCT DATE_FORMAT(create_time,'%Y-%m') month from blog  ORDER BY month desc
     </select>
 
     <select id="getBlogEs" resultType="com.wang.server.entity.es.BlogES">

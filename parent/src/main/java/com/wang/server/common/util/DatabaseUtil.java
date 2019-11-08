@@ -106,6 +106,21 @@ public class DatabaseUtil {
         return flag;
     }
 
+    public boolean shell(String command){
+        boolean flag;
+        Runtime r = Runtime.getRuntime();
+        try {
+
+            Process p = r.exec(new String[]{"sh",
+                    "/home/panda/panda_blog.sh"});
+            flag = true;
+        } catch (IOException ex) {
+            flag = false;
+        }
+        return flag;
+
+    }
+
     /**
      * mysql的还原方法
      *

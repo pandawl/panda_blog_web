@@ -37,7 +37,7 @@
 
     <el-form-item>
       <div id="main">
-        <mavon-editor ref="md" @imgAdd="$imgAdd"  v-model="blog.content" />
+        <mavon-editor  ref="md" @imgAdd="$imgAdd"  v-model="blog.content" />
       </div>
     </el-form-item>
     <el-form-item>
@@ -114,7 +114,6 @@ export default {
 
       var formData = new FormData();
       formData.append("file",$file)
-
         getImg(formData).then(res => {
           // console.log(JSON.stringify(url))
           // 第二步.将返回的url替换到文本原位置![...](./0) -> ![...](url)
@@ -125,9 +124,7 @@ export default {
            * 3. 由于vue运行访问的路径只能在static下，so，我就把图片保存到它这里了
            */
 
-               let _res = res.data.resultJson;
-               console.log(_res);
-        // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
+               let _res = res.data.resultJson;// 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
         this.$refs.md.$img2Url(pos, _res);
         });
     },

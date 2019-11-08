@@ -35,13 +35,14 @@ export const getBlog = (id) => {
     })
 }
 export const getImg = (file) => {
-    return request({
-        url: '/manage/img/upload',
-        method: 'POST',
-        data: file,
-        headers: { 'Content-Type': 'multipart/form-data' },
+  return request({
+    url: '/manage/img/upload',
+    method: 'POST',
+    headers: { 'Content-Type': 'multipart/form-data' },
+    data: file,
 
-    })
+
+  })
 }
 export const syncBlog = () => {
     return request({

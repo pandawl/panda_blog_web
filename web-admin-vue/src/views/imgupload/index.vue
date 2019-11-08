@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-upload
-      action="http://localhost:9999/panda/manage/img/upload"
+      action="http://www.wangleihh.cn:9999/panda/manage/img/upload"
       list-type="picture-card"
       :on-preview="handlePictureCardPreview"
       :on-remove="handleRemove"
