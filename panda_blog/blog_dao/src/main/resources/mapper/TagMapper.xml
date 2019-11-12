@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.panda.dao.TagMapper" >
+  <resultMap id="BaseResultMap" type="com.panda.pojo.blog.Tag" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="tag_name" property="tagName" jdbcType="VARCHAR" />
+    <result column="tag_desc" property="tagDesc" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tag
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.panda.pojo.blog.Tag"  >
+    insert into tag (tag_name, tag_desc,
+      create_time, update_time
+      )
+    values (#{record.tagName,jdbcType=VARCHAR}, #{record.tagDesc,jdbcType=VARCHAR},
+      #{record.createTime,jdbcType=TIMESTAMP}, #{record.updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.panda.pojo.blog.Tag" >
+    update tag
+    set tag_name = #{record.tagName,jdbcType=VARCHAR},
+      tag_desc = #{record.tagDesc,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    where id = #{record.id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, tag_name, tag_desc
+    from tag
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select id, tag_name, tag_desc,create_time, update_time
+    from tag
+    where 1 =1
+
+     and tag_name like '%${search}%'
+
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap">
+    select id, tag_name, tag_desc,create_time, update_time
+    from tag
+    where tag_name = #{tag_name}
+  </select>
+</mapper>

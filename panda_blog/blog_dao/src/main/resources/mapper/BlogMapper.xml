@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.panda.dao.BlogMapper">
+    <resultMap id="BaseResultMap" type="com.panda.pojo.blog.Blog">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="category_id" property="categoryId" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="summary" property="summary" jdbcType="VARCHAR"/>
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="author" property="author" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="INTEGER"/>
+        <result column="view_count" property="viewCount" jdbcType="INTEGER"/>
+        <result column="like_count" property="likeCount" jdbcType="INTEGER"/>
+        <result column="comment_count" property="commentCount" jdbcType="INTEGER"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+        <result column="html_content" property="htmlContent" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.panda.pojo.blog.Blog" useGeneratedKeys="true" keyProperty="id">
+    insert into blog (id, category_id, title,
+      summary, img_url, author,
+      code, view_count, like_count,
+      comment_count, is_deleted, create_time,
+      update_time, content,html_content)
+    values (#{id,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+      #{summary,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR},
+      #{code,jdbcType=INTEGER}, #{viewCount,jdbcType=INTEGER}, #{likeCount,jdbcType=INTEGER},
+      #{commentCount,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR},#{htmlContent,jdbcType=LONGVARCHAR})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.panda.pojo.blog.Blog">
+    update blog
+    set category_id = #{categoryId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      code = #{code,jdbcType=INTEGER},
+      view_count = #{viewCount,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      comment_count = #{commentCount,jdbcType=INTEGER},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR},
+      html_content = #{htmlContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+   select b.id,b.category_id, c.category_name categoryName , b.title, b.summary, b.img_url, b.author, b.code, b.view_count, b.like_count,
+    b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content,b.html_content
+    from blog b
+    left join category c on  b.category_id = c.id
+    where b.id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+   select b.id,b.category_id, c.category_name categoryName , b.title, b.summary, b.img_url, b.author, b.code, b.view_count, b.like_count,
+    b.comment_count, b.is_deleted, b.content,b.html_content
+    from blog b
+    left join category c on  b.category_id = c.id
+    where b.id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select b.id, c.category_name categoryName ,b.category_id, b.title, b.summary, b.img_url, b.author, b.code, b.view_count, b.like_count,
+    b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content,b.html_content
+    from blog b
+    left join category c on  b.category_id = c.id
+    <where>
+        <if test="search.value != null">
+          and b.code = #{search.value}
+        </if>
+        <if test="search.searchName != null and search.searchName != ''">
+          and b.title like '%${search.searchName}%'
+        </if>
+    </where>
+
+    order by b.id desc
+
+  </select>
+    <select id="getLast" resultType="com.panda.pojo.blog.Blog">
+     select id, title from blog where id &lt;#{id,jdbcType=INTEGER} ORDER BY id DESC LIMIT 1;
+   </select>
+    <select id="getNext" resultType="com.panda.pojo.blog.Blog">
+     select id, title from blog where id &gt;#{id,jdbcType=INTEGER}  LIMIT 1;
+    </select>
+    <select id="selectByTag" resultType="com.panda.pojo.blog.Blog">
+        select b.id, c.category_name categoryName , b.category_id,b.title, b.summary, b.img_url, b.author, b.code, b.view_count, b.like_count,
+        b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content,tag.tag_name,b.html_content
+        from blog b
+        left join blog_tags t on  b.id = t.blog_id
+        left join category c on  b.category_id = c.id
+        left join tag on t.tag_id = tag.id
+        <where>
+
+                and t.tag_id = #{search}
+
+        </where>
+        order by b.id desc
+    </select>
+    <select id="selectByCategory" resultType="com.panda.pojo.blog.Blog">
+        select b.id, c.category_name categoryName ,b.category_id, b.title, b.summary, b.img_url, b.author, b.code, b.view_count, b.like_count,
+        b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content,b.html_content
+        from blog b
+        left join category c on  b.category_id = c.id
+        <where>
+            and b.category_id = #{search}
+        </where>
+        order by b.id desc
+
+    </select>
+    <select id="getBlogByTime" resultType="com.panda.pojo.blog.Blog">
+        select b.id, c.category_name categoryName ,b.category_id, b.title, b.summary, b.img_url, b.author, b.code, b.view_count, b.like_count,
+        b.comment_count, b.is_deleted, b.create_time, b.update_time, b.content,b.html_content
+        from blog b
+        left join category c on  b.category_id = c.id
+        <where>
+            and b.create_time like concat('%', #{search},'%')
+        </where>
+        order by b.id desc
+    </select>
+    <select id="getBlogTime" resultType="java.lang.String">
+        /*        	SELECT DISTINCT CONCAT(YEAR(create_time),'年',MONTH(create_time),'月') AS `month` FROM blog ORDER BY month desc
+*/
+        SELECT  DISTINCT DATE_FORMAT(create_time,'%Y-%m') month from blog  ORDER BY month desc
+    </select>
+
+    <select id="getBlogEs" resultType="com.panda.vo.es.BlogES">
+        	select id, title, summary,content,html_content
+    from blog
+    order by id
+    limit #{start},#{size}
+    </select>
+</mapper>

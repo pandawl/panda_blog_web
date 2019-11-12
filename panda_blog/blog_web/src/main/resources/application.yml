@@ -1,0 +1,51 @@
+server:
+  port: 9999
+  max-http-header-size: 10000000
+  servlet:
+    context-path:  /
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  config-location: classpath:conf/Mybatis.xml
+spring:
+  # 是否开启 SQL日志输出，生产环境建议关闭，有性能损耗
+
+  datasource:
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:mysql://123.57.128.7:3306/panda_blog?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
+    username: root
+    password: 121564
+    dbcp2:
+      initial-size: 5
+      max-wait-millis: 10000
+      max-idle: 20
+      min-idle: 5
+      soft-min-evictable-idle-time-millis: 300000
+      time-between-eviction-runs-millis: 60000
+  redis:
+    host: 123.57.128.7
+    port: 6379
+    password:
+    jedis:
+      pool:
+        min-idle: 8
+        max-idle: 500
+        max-active: 2000
+        max-wait: 10000
+    timeout: 0
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署
+  freemarker:
+    cache: false    #页面不加载缓存，修改即时生效
+
+
+  data:
+    elasticsearch:
+      cluster-name: my-application
+      cluster-nodes: 127.0.0.1:9300
+
+
+es:
+  host: 188.131.223.181
+  port: 9200
+  scheme: http
