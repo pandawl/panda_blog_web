@@ -10,9 +10,9 @@ import com.panda.pojo.blog.Blog;
 import com.panda.pojo.blog.BlogTags;
 import com.panda.service.BlogService;
 import com.panda.vo.BlogVo;
+import com.panda.vo.EsEntity;
 import com.panda.vo.SearchvVo;
 import com.panda.vo.es.BlogES;
-import com.panda.vo.EsEntity;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -222,7 +222,7 @@ public class BlogServiceImpl implements BlogService {
      * @date 2019/7/25 10:45
      */
     @Override
-    public PageInfo<BlogES> searchBlog(Integer pageNum, Integer pageSize,String context) {
+    public PageInfo<BlogES> searchBlog(Integer pageNum, Integer pageSize, String context) {
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
         boolQueryBuilder.must(QueryBuilders.multiMatchQuery(context, "title", "summary", "content"));
         SearchSourceBuilder builder = new SearchSourceBuilder();
