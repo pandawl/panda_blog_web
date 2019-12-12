@@ -204,14 +204,14 @@ public final class RequestUtil {
      * @param request 请求
      * @return
      */
-    public static  String getParmsByReader(HttpServletRequest request) {
+    public static String getParmsByReader(HttpServletRequest request) {
 
         String str, wholeStr = "";
         try {
             System.out.println("获取reader之前");
             BufferedReader br = request.getReader();
             System.out.println("获取reader之后");
-            System.out.println("reader:"+br);
+            System.out.println("reader:" + br);
             while ((str = br.readLine()) != null) {
                 wholeStr += str;
             }

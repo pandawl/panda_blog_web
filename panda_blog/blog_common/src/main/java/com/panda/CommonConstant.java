@@ -4,7 +4,6 @@ package com.panda;
  * 公共相关常量
  *
  * @author: shq
- *
  */
 public final class CommonConstant {
 
@@ -93,7 +92,7 @@ public final class CommonConstant {
     /**
      * MD5加密键组合
      */
-    public static final String MD5_KEY               = "ANT_CHINA";
+    public static final String MD5_KEY = "ANT_CHINA";
     // 四元组统计常量
 
     public static final String CA_S = "_channel";

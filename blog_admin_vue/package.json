@@ -14,12 +14,14 @@
     "apexcharts": "^2.6.0",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
-    "vue-apexcharts": "^1.2.7",
-    "vuedraggable": "^2.16.0",
     "date-fns": "^1.29.0",
     "enquire.js": "^2.1.6",
+    "mavon-editor": "^2.7.7",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-apexcharts": "^1.2.7",
+    "vue-router": "^3.0.1",
+    "vuedraggable": "^2.16.0",
+    "webpack-dev-server": "^2.9.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -55,7 +57,6 @@
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
-    "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0"
   },
   "engines": {

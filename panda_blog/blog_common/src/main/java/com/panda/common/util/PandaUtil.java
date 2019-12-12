@@ -1,10 +1,13 @@
 package com.panda.common.util;
 
 
+import com.google.common.collect.Lists;
 import com.panda.function.CacheSelector;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
@@ -38,7 +41,6 @@ public class PandaUtil {
             return databaseSelector.get();
         }
     }
-
 
 
     /**
@@ -93,6 +95,15 @@ public class PandaUtil {
                 result.append(arr[i]);
         });
         return StringUtils.lowerCase(result.toString());
+    }
+
+    public static void main(String[] args) {
+        //lambda表达式
+        List<Integer> nums = Lists.newArrayList(1, 1, null, 2, 3, 4, null, 5, 6, 7, 8, 9, 10);
+        ArrayList<Integer> collect = nums.stream().filter(num -> num != null).collect(() -> new ArrayList<Integer>(), (list, item) -> list.add(item), (list1, list2) -> list1.addAll(list2));
+        System.out.println(collect);
+        camelToUnderscore("camelToUnderscore");
+
     }
 
 }

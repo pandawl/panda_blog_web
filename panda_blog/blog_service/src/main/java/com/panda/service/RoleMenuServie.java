@@ -1,11 +1,10 @@
-/*
 package com.panda.service;
 
 import com.panda.pojo.blog.RoleMenu;
 
 import java.util.List;
 
-public interface RoleMenuServie  {
+public interface RoleMenuServie {
 
     void deleteRoleMenusByRoleId(String[] roleIds);
 
@@ -13,4 +12,3 @@ public interface RoleMenuServie  {
 
     List<RoleMenu> getRoleMenusByRoleId(String roleId);
 }
-*/

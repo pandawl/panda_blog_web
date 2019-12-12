@@ -1,12 +1,12 @@
 package com.panda.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.panda.pojo.quartz.ScheduleJob;
-import tk.mybatis.mapper.common.Mapper;
 
 /**
  * @Auther: wl
  * @Date: 2019/8/29 11:25
  * @Description:
  */
-public interface ScheduleJobMapper extends Mapper<ScheduleJob> {
+public interface ScheduleJobMapper extends BaseMapper<ScheduleJob> {
 }

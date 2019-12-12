@@ -1,15 +1,16 @@
-/*
 package com.panda.service;
 
 
-import com.panda.pojo.blog.QueryRequest;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.panda.pojo.QueryRequest;
 import com.panda.pojo.blog.Role;
 
 import java.util.List;
 
-public interface RoleService {
+public interface RoleService extends IService<Role> {
 
-    List<Role> findRoles(Role role, QueryRequest request);
+    IPage<Role> findRoles(Role role, QueryRequest request);
 
     List<Role> findUserRole(String userName);
 
@@ -21,4 +22,3 @@ public interface RoleService {
 
     void updateRole(Role role) throws Exception;
 }
-*/

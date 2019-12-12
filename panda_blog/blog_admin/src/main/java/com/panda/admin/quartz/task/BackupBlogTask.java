@@ -23,28 +23,29 @@ public class BackupBlogTask implements Job {
 
     @Autowired
     ScheduleJobService scheduleJobService;
+
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date today = new Date();
         String todayStr = sdf.format(today);
-        log.info("开始备份{}日Blog",todayStr);
+        log.info("开始备份{}日Blog", todayStr);
         long preStart = System.currentTimeMillis();
-        scheduleJobService.logs(context, "开始备份"+todayStr+"日Blog");
+        scheduleJobService.logs(context, "开始备份" + todayStr + "日Blog");
 
 
         String command = "sh panda_blog.sh";
-        
+
         boolean b1 = new DatabaseUtil().shell(command);
-        if(b1){
-            log.info("备份{}日blog成功",todayStr);
-        }else {
-            log.error("备份{}日blog失败",todayStr);
+        if (b1) {
+            log.info("备份{}日blog成功", todayStr);
+        } else {
+            log.error("备份{}日blog失败", todayStr);
         }
 
         long preEnd = System.currentTimeMillis();
         log.info("备份Blog完毕，用时:{}秒", (preEnd - preStart) / 1000);
-        scheduleJobService.logs(context,"备份"+todayStr+"Blog完毕,用时"+(preEnd - preStart) / 1000+"秒");
+        scheduleJobService.logs(context, "备份" + todayStr + "Blog完毕,用时" + (preEnd - preStart) / 1000 + "秒");
 
     }
 }

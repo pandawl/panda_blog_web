@@ -21,8 +21,8 @@ public class ResourceController {
     @Autowired
     private ResourceService resourceService;
 
-    @RequestMapping(value = "/list",method = RequestMethod.POST)
-    public String getResource(){
-        return ResultUtils.generateResultStr(ResultCode.SUCCESS, "查询成功",resourceService.getResource());
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    public String getResource() {
+        return ResultUtils.generateResultStr(ResultCode.SUCCESS, "查询成功", resourceService.getResource());
     }
 }

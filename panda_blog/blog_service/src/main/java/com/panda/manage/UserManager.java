@@ -1,12 +1,12 @@
-package com.panda.manage;/*
 package com.panda.manage;
 
 
+import com.panda.TreeUtil;
 import com.panda.common.util.PandaUtil;
-import com.panda.common.util.TreeUtil;
 import com.panda.pojo.blog.Menu;
 import com.panda.pojo.blog.Role;
 import com.panda.pojo.blog.User;
+import com.panda.pojo.blog.UserConfig;
 import com.panda.pojo.router.RouterMeta;
 import com.panda.pojo.router.VueRouter;
 import com.panda.service.*;
@@ -18,11 +18,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-*/
 /**
  * 封装一些和 User相关的业务操作
- *//*
-
+ */
 @Service
 public class UserManager {
 
@@ -38,28 +36,24 @@ public class UserManager {
     private UserConfigService userConfigService;
 
 
-    */
-/**
+    /**
      * 通过用户名获取用户基本信息
      *
      * @param username 用户名
      * @return 用户基本信息
-     *//*
-
+     */
     public User getUser(String username) {
         return PandaUtil.selectCacheByTemplate(
                 () -> this.cacheService.getUser(username),
                 () -> this.userService.findByName(username));
     }
 
-    */
-/**
+    /**
      * 通过用户名获取用户角色集合
      *
      * @param username 用户名
      * @return 角色集合
-     *//*
-
+     */
     public Set<String> getUserRoles(String username) {
         List<Role> roleList = PandaUtil.selectCacheByTemplate(
                 () -> this.cacheService.getRoles(username),
@@ -67,14 +61,12 @@ public class UserManager {
         return roleList.stream().map(Role::getRoleName).collect(Collectors.toSet());
     }
 
-    */
-/**
+    /**
      * 通过用户名获取用户权限集合
      *
      * @param username 用户名
      * @return 权限集合
-     *//*
-
+     */
     public Set<String> getUserPermissions(String username) {
         List<Menu> permissionList = PandaUtil.selectCacheByTemplate(
                 () -> this.cacheService.getPermissions(username),
@@ -82,14 +74,12 @@ public class UserManager {
         return permissionList.stream().map(Menu::getPerms).collect(Collectors.toSet());
     }
 
-    */
-/**
+    /**
      * 通过用户名构建 Vue路由
      *
      * @param username 用户名
      * @return 路由集合
-     *//*
-
+     */
     public ArrayList<VueRouter<Menu>> getUserRouters(String username) {
         List<VueRouter<Menu>> routes = new ArrayList<>();
         List<Menu> menus = this.menuService.findUserMenus(username);
@@ -107,29 +97,23 @@ public class UserManager {
         return TreeUtil.buildVueRouter(routes);
     }
 
-    */
-/**
+    /**
      * 通过用户 ID获取前端系统个性化配置
      *
      * @param userId 用户 ID
      * @return 前端系统个性化配置
-     *//*
-
-  */
-/*  public UserConfig getUserConfig(String userId) {
+     */
+    public UserConfig getUserConfig(String userId) {
         return PandaUtil.selectCacheByTemplate(
                 () -> this.cacheService.getUserConfig(userId),
                 () -> this.userConfigService.findByUserId(userId));
     }
-*//*
 
-    */
-/**
+    /**
      * 将用户相关信息添加到 Redis缓存中
      *
      * @param user user
-     *//*
-
+     */
     public void loadUserRedisCache(User user) throws Exception {
         // 缓存用户
         cacheService.saveUser(user.getUsername());
@@ -138,16 +122,14 @@ public class UserManager {
         // 缓存用户权限
         cacheService.savePermissions(user.getUsername());
         // 缓存用户个性化配置
-        cacheService.saveUserConfigs(String.valueOf(user.getUserId()));
+        cacheService.saveUserConfigs(String.valueOf(user.getId()));
     }
 
-    */
-/**
+    /**
      * 将用户角色和权限添加到 Redis缓存中
      *
      * @param userIds userIds
-     *//*
-
+     */
     public void loadUserPermissionRoleRedisCache(List<String> userIds) throws Exception {
         for (String userId : userIds) {
             User user = userService.getById(userId);
@@ -158,13 +140,11 @@ public class UserManager {
         }
     }
 
-    */
-/**
+    /**
      * 通过用户 id集合批量删除用户 Redis缓存
      *
      * @param userIds userIds
-     *//*
-
+     */
     public void deleteUserRedisCache(String... userIds) throws Exception {
         for (String userId : userIds) {
             User user = userService.getById(userId);
@@ -178,4 +158,3 @@ public class UserManager {
     }
 
 }
-*/

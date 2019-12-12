@@ -16,7 +16,6 @@ public class DESUtil {
     private final static String DES = "DES";
 
     /**
-     *
      * @param src
      * @param key
      * @return
@@ -33,7 +32,6 @@ public class DESUtil {
     }
 
     /**
-     *
      * @param src
      * @param key
      * @return
@@ -83,7 +81,7 @@ public class DESUtil {
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         String salt = "nim*Password%salt";
         String str = DESUtil.encrypt("1234", salt);
         System.out.println(str);

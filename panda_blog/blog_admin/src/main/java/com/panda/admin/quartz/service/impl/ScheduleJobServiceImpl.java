@@ -1,8 +1,8 @@
 package com.panda.admin.quartz.service.impl;
 
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.panda.admin.quartz.service.ScheduleJobService;
 import com.panda.dao.ScheduleJobLogMapper;
 import com.panda.dao.ScheduleJobMapper;
@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
 import java.util.List;
@@ -28,7 +27,7 @@ import java.util.List;
  */
 @Service
 @Slf4j
-public class ScheduleJobServiceImpl implements ScheduleJobService {
+public class ScheduleJobServiceImpl extends ServiceImpl<ScheduleJobMapper, ScheduleJob> implements ScheduleJobService {
 
     @Autowired
     ScheduleJobMapper jobMapper;
@@ -47,22 +46,19 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 
 
     @Override
-    public PageInfo<ScheduleJob> getAllJobs(int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-        List<ScheduleJob> jobs = jobMapper.selectAll();
-        PageInfo<ScheduleJob> info = new PageInfo<>(jobs);
-        return info;
+    public List<ScheduleJob> getAllJobs(int pageNum, int pageSize) {
+        List<ScheduleJob> jobs = jobMapper.selectList(new QueryWrapper<>());
+        return jobs;
     }
 
     @Override
     public List<ScheduleJob> getAllSchedJobs() {
-        return jobMapper.selectAll();
+        return jobMapper.selectList(new QueryWrapper<>());
     }
 
     @Override
-    public PageInfo<ScheduleJob> getJobList(int pageNum, int pageSize, SearchvVo searchvVo) {
-        PageHelper.startPage(pageNum, pageSize);
-        Example example = new Example(ScheduleJob.class);
+    public List<ScheduleJob> getJobList(int pageNum, int pageSize, SearchvVo searchvVo) {
+/*        Example example = new Example(ScheduleJob.class);
         Example.Criteria criteria = example.createCriteria();
         if (null != searchvVo){
             if (null != searchvVo.getValue()){
@@ -73,8 +69,8 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
             }
         }
         List<ScheduleJob> jobs = jobMapper.selectByExample(example);
-        PageInfo<ScheduleJob> info = new PageInfo<>(jobs);
-        return info;
+        return jobs;*/
+        return null;
 
     }
 
@@ -95,7 +91,7 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 
     @Override
     public void updateJob(ScheduleJob job) {
-        jobMapper.updateByPrimaryKey(job);
+        // jobMapper.updateByPrimaryKey(job);
 
     }
 
@@ -107,8 +103,8 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 
     @Override
     public ScheduleJob getScheduleJobById(int id) {
-        ScheduleJob job = jobMapper.selectByPrimaryKey(id);
-        return job;
+        //  ScheduleJob job = jobMapper.selectByPrimaryKey(id);
+        return null;
     }
 
     /**
@@ -117,7 +113,7 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
      * @param jobId
      */
     @Override
-    public void writeLog(Integer jobId, String type,String ip) {
+    public void writeLog(Integer jobId, String type, String ip) {
         ScheduleJobLog scheduleJobLog = new ScheduleJobLog();
         scheduleJobLog.setContent(type);
         scheduleJobLog.setCreateTime(new Date());

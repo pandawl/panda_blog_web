@@ -5,6 +5,7 @@ import java.io.StringWriter;
 
 /**
  * exception工具类
+ *
  * @author C
  */
 public class ExceptionUtil {//NOPMD

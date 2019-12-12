@@ -10,7 +10,6 @@ export const saveBlog = (params) => {
 }
 
 export const getBlogs = (pageNum, pageSize, value, searchName) => {
-
     return request({
         url: '/manage/blog/list',
         method: 'POST',

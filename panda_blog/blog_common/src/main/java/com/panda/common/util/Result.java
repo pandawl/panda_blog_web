@@ -3,47 +3,47 @@ package com.panda.common.util;
 import com.google.gson.GsonBuilder;
 
 public class Result<T> {
-	
-	private int resultCode;
-	
-	private String resultMessage;
-	
-	private T resultJson;
 
-	public Result(int code, String message, T resultJson) {
-		this.resultCode = code;
-		this.resultMessage = message;
-		this.resultJson = resultJson;
-	}
+    private int resultCode;
 
-	public int getResultCode() {
-		return this.resultCode;
-	}
+    private String resultMessage;
 
-	public void setResultCode(int resultCode) {
-		this.resultCode = resultCode;
-	}
+    private T resultJson;
 
-	public String getResultMessage() {
-		return this.resultMessage;
-	}
+    public Result(int code, String message, T resultJson) {
+        this.resultCode = code;
+        this.resultMessage = message;
+        this.resultJson = resultJson;
+    }
 
-	public void setResultMessage(String resultMessage) {
-		this.resultMessage = resultMessage;
-	}
+    public int getResultCode() {
+        return this.resultCode;
+    }
 
-	public T getResultJson() {
-		return this.resultJson;
-	}
+    public void setResultCode(int resultCode) {
+        this.resultCode = resultCode;
+    }
 
-	public void setResultJson(T resultJson) {
-		this.resultJson = resultJson;
-	}
+    public String getResultMessage() {
+        return this.resultMessage;
+    }
 
-	public String toString() {
-		return  new GsonBuilder()
-				.setDateFormat("yyyy-MM-dd HH:mm:ss")
-				.create().toJson(this);
-	}
-	
+    public void setResultMessage(String resultMessage) {
+        this.resultMessage = resultMessage;
+    }
+
+    public T getResultJson() {
+        return this.resultJson;
+    }
+
+    public void setResultJson(T resultJson) {
+        this.resultJson = resultJson;
+    }
+
+    public String toString() {
+        return new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                .create().toJson(this);
+    }
+
 }

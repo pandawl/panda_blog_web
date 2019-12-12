@@ -1,13 +1,18 @@
 package com.panda.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.panda.EsConstant;
+import com.panda.SortUtil;
 import com.panda.common.util.EsUtil;
+import com.panda.common.util.FebsConstant;
 import com.panda.dao.BlogMapper;
 import com.panda.dao.BlogTagsMapper;
+import com.panda.pojo.QueryRequest;
 import com.panda.pojo.blog.Blog;
 import com.panda.pojo.blog.BlogTags;
+import com.panda.pojo.blog.User;
 import com.panda.service.BlogService;
 import com.panda.vo.BlogVo;
 import com.panda.vo.EsEntity;
@@ -32,7 +37,7 @@ import java.util.Map;
  */
 @Service
 @Transactional
-public class BlogServiceImpl implements BlogService {
+public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements BlogService {
 
     @Autowired
     private BlogMapper blogMapper;
@@ -45,7 +50,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
-       // esUtil.deleteByQuery("blog",new TermQueryBuilder("id", id));
+        // esUtil.deleteByQuery("blog",new TermQueryBuilder("id", id));
         return blogMapper.deleteByPrimaryKey(id);
     }
 
@@ -53,13 +58,13 @@ public class BlogServiceImpl implements BlogService {
     public int insert(BlogVo record) {
 
         //修改
-        if (record.getId() != null){
+        if (record.getId() != null) {
             record.setUpdateTime(new Date());
             int count = blogMapper.updateByPrimaryKey(record);
             if (count <= 0) {
                 return 0;
             }
-                blogTagsMapper.deleteByBlogId(record.getId());
+            blogTagsMapper.deleteByBlogId(record.getId());
             if (record.getTags().size() > 0) {
                 for (int i = 0; i < record.getTags().size(); i++) {
                     BlogTags blogTags = new BlogTags();
@@ -69,11 +74,11 @@ public class BlogServiceImpl implements BlogService {
                 }
 
             }
-          //  esUtil.insertOrUpdateOne(EsConstant.BOOKMARK_INDEX,
-              //      new EsEntity(record.getId(),new BlogES(record)));
+            //  esUtil.insertOrUpdateOne(EsConstant.BOOKMARK_INDEX,
+            //      new EsEntity(record.getId(),new BlogES(record)));
             return 1;
             //新增
-        }else {
+        } else {
             record.setCreateTime(new Date());
             record.setUpdateTime(new Date());
             int count = blogMapper.insert(record);
@@ -90,8 +95,8 @@ public class BlogServiceImpl implements BlogService {
                 }
 
             }
-         //   esUtil.insertOrUpdateOne(EsConstant.BOOKMARK_INDEX,
-         //           new EsEntity(record.getId(),new BlogES(record)));
+            //   esUtil.insertOrUpdateOne(EsConstant.BOOKMARK_INDEX,
+            //           new EsEntity(record.getId(),new BlogES(record)));
             return 1;
         }
 
@@ -109,27 +114,27 @@ public class BlogServiceImpl implements BlogService {
         noBlog.setTitle("");
         //上一篇 前端显示为倒叙
         Blog last = blogMapper.getNext(id);
-        if (null != last){
+        if (null != last) {
             blogVo.setLast(last);
-        }else {
+        } else {
             blogVo.setLast(noBlog);
         }
         //下一篇
         Blog next = blogMapper.getLast(id);
-        if (null != next){
+        if (null != next) {
             blogVo.setNext(next);
-        }else {
+        } else {
             blogVo.setNext(noBlog);
         }
         return blogVo;
     }
 
     @Override
-    public PageInfo<Blog> selectAll(Integer pageNum, Integer pageSize, SearchvVo search) {
-        PageHelper.startPage(pageNum, pageSize);
-        List<Blog> blogs = blogMapper.selectAll(search);
-        PageInfo<Blog> info = new PageInfo<>(blogs);
-        return info;
+    public IPage<Blog> selectAll(SearchvVo search, QueryRequest request) {
+        Page<User> page = new Page<>();
+        SortUtil.handlePageSort(request, page, null, FebsConstant.ORDER_ASC, false);
+        IPage<Blog> blogs = blogMapper.selectAll(page, search);
+        return blogs;
     }
 
     @Override
@@ -160,31 +165,28 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public PageInfo<Blog> selectByTag(Integer pageNum, Integer pageSize, Integer search) {
-        PageHelper.startPage(pageNum, pageSize);
-        List<Blog> blogs = blogMapper.selectByTag(search);
-        PageInfo<Blog> info = new PageInfo<>(blogs);
-        return info;
-    }
-    @Override
-    public PageInfo<Blog> selectByCategory(Integer pageNum, Integer pageSize, Integer search) {
-        PageHelper.startPage(pageNum, pageSize);
-        List<Blog> blogs = blogMapper.selectByCategory(search);
-        PageInfo<Blog> info = new PageInfo<>(blogs);
-        return info;
+    public IPage<Blog> selectByTag(Integer pageNum, Integer pageSize, Integer search) {
+        Page<User> page = new Page<>();
+        return blogMapper.selectByTag(page, search);
+
     }
 
     @Override
-    public PageInfo<Blog> getBlogByTime(Integer pageNum, Integer pageSize, String search) {
-        PageHelper.startPage(pageNum, pageSize);
+    public IPage<Blog> selectByCategory(Integer pageNum, Integer pageSize, Integer search) {
+        Page<User> page = new Page<>();
+        return blogMapper.selectByCategory(page, search);
+
+    }
+
+    @Override
+    public IPage<Blog> getBlogByTime(Integer pageNum, Integer pageSize, String search) {
+        Page<User> page = new Page<>();
         String s = search.split("年")[1].split("月")[0];
-        if(s.length() ==1){
-            s= 0+s ;
+        if (s.length() == 1) {
+            s = 0 + s;
         }
-        search = search.split("年")[0]+'-'+s;
-        List<Blog> blogs = blogMapper.getBlogByTime(search);
-        PageInfo<Blog> info = new PageInfo<>(blogs);
-        return info;
+        search = search.split("年")[0] + '-' + s;
+        return blogMapper.getBlogByTime(page, search);
     }
 
     @Override
@@ -198,22 +200,23 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public void syncBlog() {
         //删除 es中的数据
-        List<Blog> blogs = blogMapper.selectAll(null);
-        esUtil.deleteBatch(EsConstant.BOOKMARK_INDEX,blogs);
+        IPage<Blog> blogs = blogMapper.selectAll(null, null);
+        esUtil.deleteBatch(EsConstant.BOOKMARK_INDEX, blogs.getRecords());
         //新增
         int index = 0;
         int size = 500;
         List<EsEntity> res = new ArrayList<>();
         do {
-            blogMapper.getBlogEs(index,size)
+            blogMapper.getBlogEs(index, size)
                     .forEach(item -> res.add(new EsEntity(item.getId(), item)));
-            if (res.size() >0){
+            if (res.size() > 0) {
                 esUtil.insertBatch(EsConstant.BOOKMARK_INDEX, res);
             }
-          index += size;
-        }while (res.size() ==500);
+            index += size;
+        } while (res.size() == 500);
 
     }
+
     /**
      * Description: 根据context搜索
      *
@@ -222,7 +225,7 @@ public class BlogServiceImpl implements BlogService {
      * @date 2019/7/25 10:45
      */
     @Override
-    public PageInfo<BlogES> searchBlog(Integer pageNum, Integer pageSize, String context) {
+    public IPage<BlogES> searchBlog(Integer pageNum, Integer pageSize, String context) {
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
         boolQueryBuilder.must(QueryBuilders.multiMatchQuery(context, "title", "summary", "content"));
         SearchSourceBuilder builder = new SearchSourceBuilder();
@@ -233,18 +236,19 @@ public class BlogServiceImpl implements BlogService {
         builder.size(pageSize);
         builder.query(boolQueryBuilder);
         Map<String, Object> search = esUtil.search(EsConstant.BOOKMARK_INDEX, builder, BlogES.class);
-        PageInfo<BlogES> info = new PageInfo<>((List<BlogES>) search.get("list"));
-        info.setPageSize(pageSize);
-        info.setPageNum(pageNum);
-        Long total = (Long)search.get("total");
+        Page<BlogES> info = new Page<>();
+
+        info.setRecords((List<BlogES>) search.get("list"));
+        info.setPages(pageNum);
+        Long total = (Long) search.get("total");
         info.setTotal(total);
-        info.setPages((total.intValue()+pageSize -1 )/pageSize);
+        info.setPages((total.intValue() + pageSize - 1) / pageSize);
 
         return info;
     }
 
 
-    private BlogVo convertBlogToVO(Blog blog){
+    private BlogVo convertBlogToVO(Blog blog) {
         BlogVo blogVo = new BlogVo();
         blogVo.setId(blog.getId());
         blogVo.setCategoryId(blog.getCategoryId());

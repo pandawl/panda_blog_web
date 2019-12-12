@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class LoginController {
 
     @RequestMapping(value = "")
-    private String login(String userName,String password){
+    private String login(String userName, String password) {
 
-        if (null == userName || null == password){
+        if (null == userName || null == password) {
             return ResultUtils.generateResultStr(ResultCode.PARAM_ERROR, "用户名，密码不能为空", null);
         }
 

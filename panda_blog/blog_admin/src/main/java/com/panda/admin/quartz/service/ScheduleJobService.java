@@ -1,6 +1,6 @@
 package com.panda.admin.quartz.service;
 
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.panda.pojo.quartz.ScheduleJob;
 import com.panda.pojo.quartz.ScheduleJobLog;
 import com.panda.vo.SearchvVo;
@@ -10,18 +10,19 @@ import java.util.List;
 
 /**
  * 定时任务接口
+ *
  * @Authur fkj
  * @Create 2018/11/14
  * ====================
  */
-public interface ScheduleJobService {
+public interface ScheduleJobService extends IService<ScheduleJob> {
 
     /**
      * 获取所有的定时任务
      *
      * @return
      */
-    PageInfo<ScheduleJob> getAllJobs(int pageNum, int pageSize);
+    List<ScheduleJob> getAllJobs(int pageNum, int pageSize);
 
     /**
      * 初始化查询(查询所有的任务)
@@ -33,11 +34,12 @@ public interface ScheduleJobService {
     /**
      * 根据条件查询
      */
-    PageInfo<ScheduleJob> getJobList(int pageNum, int pageSize, SearchvVo searchvVo);
+    List<ScheduleJob> getJobList(int pageNum, int pageSize, SearchvVo searchvVo);
 
 
     /**
      * 根据id查询任务列表
+     *
      * @param ids
      * @return
      */
@@ -52,6 +54,7 @@ public interface ScheduleJobService {
 
     /**
      * 更新一条定时任务
+     *
      * @param job
      */
 
@@ -59,6 +62,7 @@ public interface ScheduleJobService {
 
     /**
      * 删除一条定时任务
+     *
      * @param id
      */
     void deleteJob(Integer id);
@@ -72,6 +76,7 @@ public interface ScheduleJobService {
 
     /**
      * 根据任务id查询任务
+     *
      * @param id
      * @return
      */
@@ -94,13 +99,15 @@ public interface ScheduleJobService {
 
     /**
      * 记录运行日志
-     *  @param jobExecutionContext
+     *
+     * @param jobExecutionContext
      */
     void logs(JobExecutionContext jobExecutionContext, String content);
 
 
     /**
      * 查询日志总条数
+     *
      * @param userName
      * @param startTime
      * @param endTime
@@ -111,6 +118,7 @@ public interface ScheduleJobService {
 
     /**
      * 批量删除日志
+     *
      * @param ids
      */
     void deteteLOg(String ids);
@@ -122,6 +130,7 @@ public interface ScheduleJobService {
 
     /**
      * 查询任务的总条数
+     *
      * @param
      */
 

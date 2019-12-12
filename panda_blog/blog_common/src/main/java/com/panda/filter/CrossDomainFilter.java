@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-@WebFilter(filterName = "CrossDomainFilter",urlPatterns = "/*")
+@WebFilter(filterName = "CrossDomainFilter", urlPatterns = "/*")
 public class CrossDomainFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

@@ -78,6 +78,7 @@ public class MyDateUtils {
 
     /**
      * 获取指定日期的前7天
+     *
      * @param specifiedDay
      * @return
      * @throws ParseException
@@ -87,11 +88,10 @@ public class MyDateUtils {
         Date date = new SimpleDateFormat("yyyy-MM-dd").parse(specifiedDay);
         c.setTime(date);
         int day = c.get(Calendar.DATE);
-        c.set(Calendar.DATE, day -7);
+        c.set(Calendar.DATE, day - 7);
         String dayAfter = new SimpleDateFormat("yyyy-MM-dd").format(c.getTime());
         return dayAfter;
     }
-
 
 
     /**
@@ -125,6 +125,7 @@ public class MyDateUtils {
         String dayAfter = new SimpleDateFormat("yyyy-MM-dd").format(c.getTime());
         return dayAfter;
     }
+
     /**
      * 获得指定日期的前一年
      *
@@ -143,6 +144,7 @@ public class MyDateUtils {
 
     /**
      * 获取开始结束时间内每一天
+     *
      * @param dBegin1
      * @param dEnd1
      * @return
@@ -169,6 +171,7 @@ public class MyDateUtils {
         }
         return lDate;
     }
+
     public static void main(String[] args) throws ParseException {
 
 

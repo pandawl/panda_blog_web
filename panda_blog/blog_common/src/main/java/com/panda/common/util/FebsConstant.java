@@ -6,18 +6,18 @@ package com.panda.common.util;
 public class FebsConstant {
 
     // user缓存前缀
-    public static final String USER_CACHE_PREFIX = "febs.cache.user.";
+    public static final String USER_CACHE_PREFIX = "panda.cache.user.";
     // user角色缓存前缀
-    public static final String USER_ROLE_CACHE_PREFIX = "febs.cache.user.role.";
+    public static final String USER_ROLE_CACHE_PREFIX = "panda.cache.user.role.";
     // user权限缓存前缀
-    public static final String USER_PERMISSION_CACHE_PREFIX = "febs.cache.user.permission.";
+    public static final String USER_PERMISSION_CACHE_PREFIX = "panda.cache.user.permission.";
     // user个性化配置前缀
-    public static final String USER_CONFIG_CACHE_PREFIX = "febs.cache.user.config.";
+    public static final String USER_CONFIG_CACHE_PREFIX = "panda.cache.user.config.";
     // token缓存前缀
-    public static final String TOKEN_CACHE_PREFIX = "febs.cache.token.";
+    public static final String TOKEN_CACHE_PREFIX = "panda.cache.token.";
 
     // 存储在线用户的 zset前缀
-    public static final String ACTIVE_USERS_ZSET_PREFIX = "febs.user.active";
+    public static final String ACTIVE_USERS_ZSET_PREFIX = "panda.user.active";
 
     // 排序规则： descend 降序
     public static final String ORDER_DESC = "descend";

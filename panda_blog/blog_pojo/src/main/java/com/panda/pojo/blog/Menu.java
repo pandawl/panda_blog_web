@@ -1,7 +1,7 @@
-/*
 package com.panda.pojo.blog;
 
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.wuwenze.poi.annotation.Excel;
 import com.wuwenze.poi.annotation.ExcelField;
 import lombok.Data;
@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-
+@TableName("t_menu")
 @Excel("菜单信息表")
 public class Menu implements Serializable {
 
@@ -61,4 +61,4 @@ public class Menu implements Serializable {
     private transient String createTimeFrom;
     private transient String createTimeTo;
 
-}*/
+}

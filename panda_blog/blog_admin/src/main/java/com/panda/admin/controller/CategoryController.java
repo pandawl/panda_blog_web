@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @Auther: wl
  * @Date: 2019/5/17 12:01
- * @Description:
- *//*
+ * @Description: 根据id查询新增删除修改
+ **//*
 
 @RestController
 @RequestMapping("/panda/manage/category")

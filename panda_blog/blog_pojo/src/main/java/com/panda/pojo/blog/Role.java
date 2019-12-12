@@ -1,4 +1,3 @@
-/*
 package com.panda.pojo.blog;
 
 import com.wuwenze.poi.annotation.Excel;
@@ -37,4 +36,4 @@ public class Role implements Serializable {
     private transient String createTimeTo;
     private transient String menuId;
 
-}*/
+}

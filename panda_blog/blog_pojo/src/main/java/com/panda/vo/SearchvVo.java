@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class SearchvVo {
 
-  private Integer value;
+    private Integer value;
 
-  private String searchName;
+    private String searchName;
 }

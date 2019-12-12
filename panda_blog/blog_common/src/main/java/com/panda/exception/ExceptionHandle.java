@@ -1,3 +1,4 @@
+/*
 package com.panda.exception;
 
 import com.panda.common.util.Result;
@@ -6,13 +7,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+*/
 /**
  * 类功能简述：
  * 类功能详述：
  *
  * @author fanxb
  * @date 2019/3/19 18:12
- */
+ *//*
+
 @RestControllerAdvice
 public class ExceptionHandle {
 
@@ -31,3 +34,4 @@ public class ExceptionHandle {
         return new Result(ce.getCode(), ce.getMessage(), null);
     }
 }
+*/

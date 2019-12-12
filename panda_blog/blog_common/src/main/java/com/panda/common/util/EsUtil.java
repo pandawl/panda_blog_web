@@ -33,7 +33,7 @@ import javax.annotation.PostConstruct;
 import java.util.*;
 
 /**
-* es
+ * es
  */
 @Component
 @Slf4j
@@ -155,7 +155,7 @@ public class EsUtil {
      * @author fanxb
      * @date 2019/7/25 13:46
      */
-    public <T> Map<String,Object> search(String index, SearchSourceBuilder builder, Class<T> c) {
+    public <T> Map<String, Object> search(String index, SearchSourceBuilder builder, Class<T> c) {
         SearchRequest request = new SearchRequest(index);
         request.source(builder);
         try {
@@ -166,7 +166,7 @@ public class EsUtil {
             for (SearchHit hit : hits) {
                 res.add(JSON.parseObject(hit.getSourceAsString(), c));
             }
-            map.put("list",  res);
+            map.put("list", res);
             Long totalHits = response.getHits().getTotalHits().value;
             map.put("total", totalHits);
             return map;
@@ -174,8 +174,6 @@ public class EsUtil {
             throw new EsException(e);
         }
     }
-
-
 
 
     /**
@@ -216,10 +214,8 @@ public class EsUtil {
     }
 
 
-
-
     public static void main(String[] args) throws Exception {
         EsUtil util = new EsUtil();
-       util.deleteByQuery("blog",new TermQueryBuilder("id", 222));
+        util.deleteByQuery("blog", new TermQueryBuilder("id", 222));
     }
 }

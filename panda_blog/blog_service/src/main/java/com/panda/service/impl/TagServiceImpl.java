@@ -28,7 +28,7 @@ public class TagServiceImpl implements TagService {
     @Override
     public int insert(Tag record) {
         Tag tag = tagMapper.selectByName(record.getTagName());
-        if (null !=tag){
+        if (null != tag) {
             return -1;
         }
         record.setCreateTime(new Date());

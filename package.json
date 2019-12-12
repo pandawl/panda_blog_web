@@ -16,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/WangLeiHH/springboot-demo/issues"
   },
-  "homepage": "https://github.com/WangLeiHH/springboot-demo#readme"
+  "homepage": "https://github.com/WangLeiHH/springboot-demo#readme",
+  "devDependencies": {
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
+    "webpack": "^4.41.2"
+  },
+  "dependencies": {
+    "vuedraggable": "^2.23.2",
+    "vuex": "^3.1.2"
+  }
 }

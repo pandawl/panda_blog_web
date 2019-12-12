@@ -1,15 +1,16 @@
-package com.panda.service.impl;/*
 package com.panda.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.panda.TreeUtil;
 import com.panda.common.util.FebsConstant;
-import com.panda.common.util.TreeUtil;
 import com.panda.dao.MenuMapper;
 import com.panda.manage.UserManager;
 import com.panda.pojo.blog.Menu;
 import com.panda.pojo.blog.Tree;
 import com.panda.service.MenuService;
-import com.wang.server.base.service.BaseService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,28 +23,28 @@ import java.util.*;
 @Slf4j
 @Service("menuService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class MenuServiceImpl extends BaseService implements MenuService {
+public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements MenuService {
 
     @Autowired
     private UserManager userManager;
-    @Autowired
-    private MenuMapper menuMapper;
 
     @Override
     public List<Menu> findUserPermissions(String username) {
-        return this.menuMapper.findUserPermissions(username);
+        return this.baseMapper.findUserPermissions(username);
     }
 
     @Override
     public List<Menu> findUserMenus(String username) {
-        return this.menuMapper.findUserMenus(username);
+        return this.baseMapper.findUserMenus(username);
     }
 
     @Override
     public Map<String, Object> findMenus(Menu menu) {
         Map<String, Object> result = new HashMap<>();
         try {
-            List<Menu> menus = this.findMenuList(menu);
+            LambdaQueryWrapper<Menu> queryWrapper = new LambdaQueryWrapper<>();
+            findMenuCondition(queryWrapper, menu);
+            List<Menu> menus = baseMapper.selectList(queryWrapper);
 
             List<Tree<Menu>> trees = new ArrayList<>();
             List<String> ids = new ArrayList<>();
@@ -69,8 +70,10 @@ public class MenuServiceImpl extends BaseService implements MenuService {
 
     @Override
     public List<Menu> findMenuList(Menu menu) {
-
-        return findMenuList(menu);
+        LambdaQueryWrapper<Menu> queryWrapper = new LambdaQueryWrapper<>();
+        findMenuCondition(queryWrapper, menu);
+        queryWrapper.orderByAsc(Menu::getMenuId);
+        return this.baseMapper.selectList(queryWrapper);
     }
 
     @Override
@@ -86,10 +89,10 @@ public class MenuServiceImpl extends BaseService implements MenuService {
     public void updateMenu(Menu menu) throws Exception {
         menu.setModifyTime(new Date());
         setMenu(menu);
-        updateMenu(menu);
+        baseMapper.updateById(menu);
 
         // 查找与这些菜单/按钮关联的用户
-        List<String> userIds = menuMapper.findUserIdsByMenuId(String.valueOf(menu.getMenuId()));
+        List<String> userIds = this.baseMapper.findUserIdsByMenuId(String.valueOf(menu.getMenuId()));
         // 重新将这些用户的角色和权限缓存到 Redis中
         this.userManager.loadUserPermissionRoleRedisCache(userIds);
     }
@@ -100,7 +103,7 @@ public class MenuServiceImpl extends BaseService implements MenuService {
         this.delete(Arrays.asList(menuIds));
         for (String menuId : menuIds) {
             // 查找与这些菜单/按钮关联的用户
-            List<String> userIds = menuMapper.findUserIdsByMenuId(String.valueOf(menuId));
+            List<String> userIds = this.baseMapper.findUserIdsByMenuId(String.valueOf(menuId));
             // 重新将这些用户的角色和权限缓存到 Redis中
             this.userManager.loadUserPermissionRoleRedisCache(userIds);
         }
@@ -137,17 +140,28 @@ public class MenuServiceImpl extends BaseService implements MenuService {
         }
     }
 
-
+    private void findMenuCondition(LambdaQueryWrapper<Menu> queryWrapper, Menu menu) {
+        if (StringUtils.isNotBlank(menu.getMenuName())) {
+            queryWrapper.eq(Menu::getMenuName, menu.getMenuName());
+        }
+        if (StringUtils.isNotBlank(menu.getType())) {
+            queryWrapper.eq(Menu::getType, menu.getType());
+        }
+        if (StringUtils.isNotBlank(menu.getCreateTimeFrom()) && StringUtils.isNotBlank(menu.getCreateTimeTo())) {
+            queryWrapper
+                    .ge(Menu::getCreateTime, menu.getCreateTimeFrom())
+                    .le(Menu::getCreateTime, menu.getCreateTimeTo());
+        }
+    }
 
 
     private void delete(List<String> menuIds) {
-        List<Menu> menus = new ArrayList<>();
-        for (String menuId : menuIds) {
-            menuMapper.deleteByPrimaryKey(menuId);
-            menus.add(menuMapper.selectByPrimaryKey(menuIds));
+        removeByIds(menuIds);
 
-        }
-        if (!menus.isEmpty()) {
+        LambdaQueryWrapper<Menu> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.in(Menu::getParentId, menuIds);
+        List<Menu> menus = baseMapper.selectList(queryWrapper);
+        if (CollectionUtils.isNotEmpty(menus)) {
             List<String> menuIdList = new ArrayList<>();
             menus.forEach(m -> menuIdList.add(String.valueOf(m.getMenuId())));
             this.delete(menuIdList);
@@ -155,4 +169,3 @@ public class MenuServiceImpl extends BaseService implements MenuService {
     }
 
 }
-*/

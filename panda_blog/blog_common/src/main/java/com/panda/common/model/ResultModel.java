@@ -11,13 +11,12 @@ import java.io.Serializable;
  * 通用返回对象
  *
  * @author: shq
- *
  */
 public class ResultModel implements Serializable {
 
-    private int        code;
+    private int code;
 
-    private String     message;
+    private String message;
 
     private JSONObject data;
 
@@ -33,11 +32,11 @@ public class ResultModel implements Serializable {
     }
 
 
-
     public ResultModel(final int code, final String message) {
         this.code = code;
         this.message = message;
     }
+
     public ResultModel(final ResultCode resultCode, final String message) {
         this.code = code;
         this.message = message;

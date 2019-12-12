@@ -1,4 +1,3 @@
-package com.panda.service.impl;/*
 package com.panda.service.impl;
 
 
@@ -7,11 +6,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.panda.common.util.SortUtil;
+import com.panda.SortUtil;
 import com.panda.dao.RoleMapper;
 import com.panda.dao.RoleMenuMapper;
 import com.panda.manage.UserManager;
-import com.panda.pojo.blog.QueryRequest;
+import com.panda.pojo.QueryRequest;
 import com.panda.pojo.blog.Role;
 import com.panda.pojo.blog.RoleMenu;
 import com.panda.service.RoleMenuServie;
@@ -57,7 +56,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             }
             Page<Role> page = new Page<>();
             SortUtil.handlePageSort(request, page, true);
-            return this.page(page,queryWrapper);
+            return this.page(page, queryWrapper);
         } catch (Exception e) {
             log.error("获取角色信息失败", e);
             return null;
@@ -127,4 +126,3 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         });
     }
 }
-*/

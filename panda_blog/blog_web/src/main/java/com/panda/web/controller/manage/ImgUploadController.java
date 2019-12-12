@@ -25,14 +25,14 @@ public class ImgUploadController {
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
-    public String uploadImage(@RequestParam(value="file", required=false) MultipartFile file, HttpServletRequest request) {
-        if(file.isEmpty()) {
-          return ResultUtils.generateResultStr(ResultCode.PARAM_ERROR, "图片不能为空", 0);
+    public String uploadImage(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request) {
+        if (file.isEmpty()) {
+            return ResultUtils.generateResultStr(ResultCode.PARAM_ERROR, "图片不能为空", 0);
 
         }
 
         try {
-            String fileUrl=qiniuService.saveImage(file);
+            String fileUrl = qiniuService.saveImage(file);
             return ResultUtils.generateResultStr(ResultCode.SUCCESS, "新增成功", fileUrl);
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,3 +1,4 @@
+/*
 package com.panda.web.quartz.config;
 
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+*/
 /**
  * 定时任务调度类
  *
@@ -19,7 +21,26 @@ import java.util.List;
  * @Create 2018/11/14
  * ================================
  * @update 2018/11/21 初始化调度器
- */
+ * <p>
+ * 服务重启后初始化任务
+ * <p>
+ * 开启一个任务
+ * @param scheduleJob
+ * <p>
+ * 暂停一个任务
+ * @param scheduleJob
+ * <p>
+ * 启动所有定时任务
+ * <p>
+ * 停止所有任务
+ * <p>
+ * 删除一个任务
+ * <p>
+ * 验证cron表达式是否有效
+ * @param expression
+ * @return
+ *//*
+
 
 @Slf4j
 @Service
@@ -31,9 +52,11 @@ public class ScheduleJobMethod implements InitializingBean {
     @Autowired
     SchedulerFactoryBean schedulerFactoryBean;
 
-    /**
-     * 服务重启后初始化任务
-     */
+    */
+/**
+ * 服务重启后初始化任务
+ *//*
+
     public void init() {
         Scheduler scheduler = schedulerFactoryBean.getScheduler();
         List<ScheduleJob> list = scheduleJobService.getAllSchedJobs();
@@ -140,10 +163,12 @@ public class ScheduleJobMethod implements InitializingBean {
     }
 
 
-    /**
-     * 开启一个任务
-     * @param scheduleJob
-     */
+    */
+/**
+ * 开启一个任务
+ * @param scheduleJob
+ *//*
+
     public void runJobNow(ScheduleJob scheduleJob) {
         Scheduler scheduler = schedulerFactoryBean.getScheduler();
         JobKey jobKey = JobKey.jobKey(String.valueOf(scheduleJob.getId()), scheduleJob.getJobGroup());
@@ -158,11 +183,13 @@ public class ScheduleJobMethod implements InitializingBean {
         }
     }
 
-    /**
-     * 暂停一个任务
-     *
-     * @param scheduleJob
-     */
+    */
+/**
+ * 暂停一个任务
+ *
+ * @param scheduleJob
+ *//*
+
     public void standJobNow(ScheduleJob scheduleJob) {
         Scheduler scheduler = schedulerFactoryBean.getScheduler();
         JobKey jobKey = JobKey.jobKey(String.valueOf(scheduleJob.getId()), scheduleJob.getJobGroup());
@@ -175,9 +202,11 @@ public class ScheduleJobMethod implements InitializingBean {
         }
     }
 
-    /**
-     * 启动所有定时任务
-     */
+    */
+/**
+ * 启动所有定时任务
+ *//*
+
     public void startJobs() {
         try {
             Scheduler scheduler = schedulerFactoryBean.getScheduler();
@@ -189,9 +218,11 @@ public class ScheduleJobMethod implements InitializingBean {
         }
     }
 
-    /**
-     * 停止所有任务
-     */
+    */
+/**
+ * 停止所有任务
+ *//*
+
     public void shutdownJobs() {
         try {
             Scheduler scheduler = schedulerFactoryBean.getScheduler();
@@ -205,9 +236,11 @@ public class ScheduleJobMethod implements InitializingBean {
         }
     }
 
-    /**
-     * 删除一个任务
-     */
+    */
+/**
+ * 删除一个任务
+ *//*
+
     public void removeJob(List<ScheduleJob> list) {
         try {
             Scheduler scheduler = schedulerFactoryBean.getScheduler();
@@ -231,12 +264,14 @@ public class ScheduleJobMethod implements InitializingBean {
     }
 
 
-    /**
-     * 验证cron表达式是否有效
-     *
-     * @param expression
-     * @return
-     */
+    */
+/**
+ * 验证cron表达式是否有效
+ *
+ * @param expression
+ * @return
+ *//*
+
     public Boolean isVaild(String expression) {
         boolean bool = CronExpression.isValidExpression(expression);
         return bool;
@@ -247,3 +282,4 @@ public class ScheduleJobMethod implements InitializingBean {
        // init();
     }
 }
+*/

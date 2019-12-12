@@ -30,7 +30,7 @@ public class CategoryServiceImpl implements CategoryService {
     public int insert(Category record) {
 
         Category category = categoryMapper.selectByName(record.getCategoryName());
-        if (null !=category){
+        if (null != category) {
             return -1;
         }
         record.setCreateTime(new Date());

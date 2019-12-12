@@ -37,6 +37,7 @@ public class JWTUtil {
         } catch (Exception e) {
             log.info("token is invalid{}", e.getMessage());
             return false;
+
         }
     }
 

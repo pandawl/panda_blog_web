@@ -5,7 +5,8 @@
 <generatorConfiguration>
 
     <!--classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 可选 -->
-    <classPathEntry location="D:\Develop\Environment\apache-maven-3.3.9-bin\repository\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar"/>
+    <classPathEntry
+            location="D:\Develop\Environment\apache-maven-3.3.9-bin\repository\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar"/>
 
     <!-- 一个数据库一个context,defaultModelType="flat" 大数据字段，不分表 -->
     <context id="MysqlTables" targetRuntime="MyBatis3Simple" defaultModelType="flat">

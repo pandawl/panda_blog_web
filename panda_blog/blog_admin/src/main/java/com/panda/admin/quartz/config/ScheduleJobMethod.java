@@ -142,6 +142,7 @@ public class ScheduleJobMethod implements InitializingBean {
 
     /**
      * 开启一个任务
+     *
      * @param scheduleJob
      */
     public void runJobNow(ScheduleJob scheduleJob) {
@@ -244,6 +245,6 @@ public class ScheduleJobMethod implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-       // init();
+        // init();
     }
 }

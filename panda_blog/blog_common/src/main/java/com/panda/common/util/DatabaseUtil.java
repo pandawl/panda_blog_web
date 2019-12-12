@@ -11,7 +11,7 @@ public class DatabaseUtil {
     //本实例支持Linux环境和Windows环境
     public static void main(String[] args) throws Exception {
         //测试备份
-       String command1 = "mysqldump  -h188.131.223.181 -uroot -ppanda  panda_blog";//参数依次是IP、账号、密码、数据库名
+        String command1 = "mysqldump  -h188.131.223.181 -uroot -ppanda  panda_blog";//参数依次是IP、账号、密码、数据库名
         String savePath = "d:/usr";
         File saveFile = new File(savePath);
 
@@ -23,9 +23,9 @@ public class DatabaseUtil {
         savePath += "/panda_blog.sql";
 
         boolean b1 = new DatabaseUtil().backup(command1, savePath);
-        if(b1){
+        if (b1) {
             System.out.println("备份成功");
-        }else {
+        } else {
             System.out.println("备份失败");
         }
 
@@ -106,7 +106,7 @@ public class DatabaseUtil {
         return flag;
     }
 
-    public boolean shell(String command){
+    public boolean shell(String command) {
         boolean flag;
         Runtime r = Runtime.getRuntime();
         try {

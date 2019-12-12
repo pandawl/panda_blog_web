@@ -75,7 +75,7 @@ public class JobController {
         /**加入调度器开启任务*/
         scheduleJobMethod.runJobNow(scheduleJob);
         String ip = IpUtils.getIpAddr(request);
-        scheduleJobService.writeLog(scheduleJob.getId(), OPERATE_START,ip);
+        scheduleJobService.writeLog(scheduleJob.getId(), OPERATE_START, ip);
         return ResultUtils.generateResultStr(ResultCode.SUCCESS, "启动成功", 0);
 
     }
@@ -95,7 +95,7 @@ public class JobController {
             scheduleJob.setJobStatus(JOB_STATE_STOP);
             scheduleJobService.updateJob(scheduleJob);
             scheduleJobMethod.standJobNow(scheduleJob);
-            String ip= IpUtils.getIpAddr(request);
+            String ip = IpUtils.getIpAddr(request);
             scheduleJobService.writeLog(scheduleJob.getId(), OPERATE_STOP, ip);
             return ResultUtils.generateResultStr(ResultCode.SUCCESS, "停止成功", 0);
         }

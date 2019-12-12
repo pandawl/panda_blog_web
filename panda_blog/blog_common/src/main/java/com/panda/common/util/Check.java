@@ -1,7 +1,6 @@
 package com.panda.common.util;
 
 
-
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -11,8 +10,6 @@ import java.util.Map;
  * 非空检查工具类
  *
  * @author shq
- *
- *
  */
 public final class Check implements Serializable {
 
@@ -179,6 +176,7 @@ public final class Check implements Serializable {
 
     /**
      * 判断Long值是非空
+     *
      * @param value
      * @return true long值是非空或不为0
      */
@@ -188,6 +186,7 @@ public final class Check implements Serializable {
 
     /**
      * 判断Long值是否为空
+     *
      * @param value Long值是null或0
      * @return
      */

@@ -16,4 +16,6 @@ public class PandaProperties {
     private boolean openAopLog = true;
 
     private SwaggerProperties swagger = new SwaggerProperties();
+
+
 }

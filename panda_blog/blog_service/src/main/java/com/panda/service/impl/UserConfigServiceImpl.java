@@ -1,6 +1,4 @@
-package com.panda.service.impl;/*
 package com.panda.service.impl;
-
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.panda.dao.UserConfigMapper;
@@ -55,4 +53,3 @@ public class UserConfigServiceImpl extends ServiceImpl<UserConfigMapper, UserCon
         cacheService.saveUserConfigs(String.valueOf(userConfig.getUserId()));
     }
 }
-*/

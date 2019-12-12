@@ -43,8 +43,8 @@ public class QiniuServiceImpl implements QiniuService {
     }
 
 
-
     private static String QINIU_IMAGE_DOMAIN = "http://img.wangleihh.cn/";
+
     @Override
     public String saveImage(MultipartFile file) throws IOException {
         try {

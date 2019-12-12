@@ -15,10 +15,13 @@ import java.util.HashMap;
 */
 /**
  * 创建一个二维码
- *Title: CreateCode
- *Description:
+ * Title: CreateCode
+ * Description:
+ *
  * @author gxder
  * @date 2018年9月19日
+ * <p>
+ * 定义二维码的参数
  *//*
 
 public class CreateCode {
@@ -34,8 +37,8 @@ public class CreateCode {
         String format = "jpg"; // 图片的格式
         */
 /**
-         * 定义二维码的参数
-         *//*
+ * 定义二维码的参数
+ *//*
 
         HashMap hints = new HashMap();
         hints.put(EncodeHintType.CHARACTER_SET, "utf-8"); // 指定字符编码为“utf-8”
@@ -78,7 +81,7 @@ public class CreateCode {
             inputStream.read(file_buff);
             long time = new Date().getTime();*//*
 
-    */
+ */
 /*      String  path = FastDFSUtils.uploadToFastDFS(file_buff, "二维码"+time+"."+format);*//*
 
            return path;

@@ -29,6 +29,7 @@ public class ScheduleConfig {
         factory.setJobFactory(springJobFactory);
         return factory;
     }
+
     @Bean
     public Scheduler scheduler() {
         return schedulerFactoryBean().getScheduler();

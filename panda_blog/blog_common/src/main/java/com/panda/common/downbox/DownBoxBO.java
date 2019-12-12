@@ -12,6 +12,7 @@ public class DownBoxBO {
     private String value;
 
     private String code;
+
     public int getId() {
         return id;
     }

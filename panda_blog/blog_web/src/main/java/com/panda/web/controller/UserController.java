@@ -20,15 +20,15 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addUser(){
-      return  ResultUtils.generateResultStr(ResultCode.SUCCESS, "操作成功", null);
+    public String addUser() {
+        return ResultUtils.generateResultStr(ResultCode.SUCCESS, "操作成功", null);
     }
 
     @ResponseBody
     @RequestMapping(value = "/getUser", method = RequestMethod.POST)
-    public String getUser(String id){
-    User user = new User();
+    public String getUser(String id) {
+        User user = new User();
 
-      return  ResultUtils.generateResultStr(ResultCode.SUCCESS, "操作成功", user);
+        return ResultUtils.generateResultStr(ResultCode.SUCCESS, "操作成功", user);
     }
 }

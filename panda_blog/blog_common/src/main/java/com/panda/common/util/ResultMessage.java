@@ -20,8 +20,8 @@ public enum ResultMessage {
     }
 
     public String getMsg(String extendMsg) {
-        if(!StringUtils.isEmpty(extendMsg)){
-            return msg + "," +extendMsg;
+        if (!StringUtils.isEmpty(extendMsg)) {
+            return msg + "," + extendMsg;
         }
 
         return msg;
@@ -35,7 +35,7 @@ public enum ResultMessage {
         this.msg = msg;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         System.out.println(ResultMessage.PROGRAM_EXCEPTION.getMsg("aaa"));
         System.out.println(ResultMessage.PROGRAM_EXCEPTION.getMsg());
     }

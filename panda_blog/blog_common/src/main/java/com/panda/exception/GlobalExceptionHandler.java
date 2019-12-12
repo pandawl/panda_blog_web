@@ -1,9 +1,24 @@
 package com.panda.exception;
 
-import com.panda.common.util.Result;
+import com.baomidou.mybatisplus.core.toolkit.StringPool;
+import com.panda.PandaResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.UnauthorizedException;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Path;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Mr.wl
@@ -12,19 +27,72 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  */
 @RestControllerAdvice
 @Slf4j
+@Order(value = Ordered.HIGHEST_PRECEDENCE)//过滤器最早执行
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(Exception.class)
-    public Result validationErrorHandler(Exception e) {
-        CustomException cu ;
-        if (e instanceof  CustomException){
-            log.error("捕获到自定义异常:{}",e.getMessage(),e);
-            cu = (CustomException) e;
-        }else {
+    @ExceptionHandler(value = Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public PandaResponse handleException(Exception e) {
+        log.error("系统内部异常，异常信息：", e);
+        return new PandaResponse().message("系统内部异常");
+    }
 
-            log.error("捕获到意外错误:{}", e.getMessage(), e);
-            cu = new CustomException("服务器异常");
+    @ExceptionHandler(value = PandaException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public PandaResponse handleParamsInvalidException(PandaException e) {
+        log.error("系统错误：{}", e.getMessage());
+        return new PandaResponse().message(e.getMessage());
+    }
+
+    /**
+     * 统一处理请求参数校验(实体对象传参)
+     *
+     * @param e BindException
+     * @return FebsResponse
+     */
+    @ExceptionHandler(BindException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public PandaResponse validExceptionHandler(BindException e) {
+        StringBuilder message = new StringBuilder();
+        List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
+        for (FieldError error : fieldErrors) {
+            message.append(error.getField()).append(error.getDefaultMessage()).append(StringPool.COMMA);
         }
-        return  new Result(cu.getCode(),cu.getMessage(),null);
+        message = new StringBuilder(message.substring(0, message.length() - 1));
+        return new PandaResponse().message(message.toString());
+
+    }
+
+    /**
+     * 统一处理请求参数校验(普通传参)
+     *
+     * @param e ConstraintViolationException
+     * @return FebsResponse
+     */
+    @ExceptionHandler(value = ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public PandaResponse handleConstraintViolationException(ConstraintViolationException e) {
+        StringBuilder message = new StringBuilder();
+        Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+        for (ConstraintViolation<?> violation : violations) {
+            Path path = violation.getPropertyPath();
+            String[] pathArr = StringUtils.splitByWholeSeparatorPreserveAllTokens(path.toString(), StringPool.DOT);
+            message.append(pathArr[1]).append(violation.getMessage()).append(StringPool.COMMA);
+        }
+        message = new StringBuilder(message.substring(0, message.length() - 1));
+        return new PandaResponse().message(message.toString());
+    }
+
+    @ExceptionHandler(value = LimitAccessException.class)
+    @ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
+    public PandaResponse handleLimitAccessException(LimitAccessException e) {
+        log.warn(e.getMessage());
+        return new PandaResponse().message(e.getMessage());
+    }
+
+    @ExceptionHandler(value = UnauthorizedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public void handleUnauthorizedException(Exception e) {
+        log.error("权限不足，{}", e.getMessage());
     }
 }

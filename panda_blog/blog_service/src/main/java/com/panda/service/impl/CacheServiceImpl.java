@@ -1,11 +1,9 @@
-package com.panda.service.impl;/*
 package com.panda.service.impl;
 
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.panda.common.util.FebsConstant;
-import com.panda.dao.TagMapper;
 import com.panda.dao.UserMapper;
 import com.panda.pojo.blog.Menu;
 import com.panda.pojo.blog.Role;
@@ -16,14 +14,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Service("cacheService")
 public class CacheServiceImpl implements CacheService {
-
-    @Resource
-    private TagMapper tagMapper;
 
     @Autowired
     private RedisService redisService;
@@ -156,4 +150,3 @@ public class CacheServiceImpl implements CacheService {
         redisService.del(FebsConstant.USER_CONFIG_CACHE_PREFIX + userId);
     }
 }
-*/

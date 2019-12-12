@@ -9,6 +9,12 @@ public class ShiroProperties {
      */
     private Long jwtTimeOut = 86400L;
 
+
+    /**
+     * 令牌默认刷新时间
+     */
+    private Long refreshCheckTime = 120L;
+
     public String getAnonUrl() {
         return anonUrl;
     }
@@ -23,5 +29,13 @@ public class ShiroProperties {
 
     public void setJwtTimeOut(Long jwtTimeOut) {
         this.jwtTimeOut = jwtTimeOut;
+    }
+
+    public Long getRefreshCheckTime() {
+        return refreshCheckTime;
+    }
+
+    public void setRefreshCheckTime(Long refreshCheckTime) {
+        this.refreshCheckTime = refreshCheckTime;
     }
 }

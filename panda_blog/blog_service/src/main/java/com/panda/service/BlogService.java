@@ -1,7 +1,8 @@
 package com.panda.service;
 
 
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.panda.pojo.QueryRequest;
 import com.panda.pojo.blog.Blog;
 import com.panda.vo.BlogVo;
 import com.panda.vo.SearchvVo;
@@ -22,26 +23,27 @@ public interface BlogService {
 
     BlogVo selectByPrimaryKey(Integer id);
 
-    PageInfo<Blog> selectAll(Integer pageNum, Integer pageSize, SearchvVo search);
+    IPage<Blog> selectAll(SearchvVo search, QueryRequest request);
 
     int updateByPrimaryKey(Blog record);
 
     /**
      * 回显
+     *
      * @param id
      * @return
      */
     BlogVo selectByid(Integer id);
 
-    PageInfo<Blog> selectByTag(Integer pageNum, Integer pageSize, Integer search);
+    IPage<Blog> selectByTag(Integer pageNum, Integer pageSize, Integer search);
 
-    PageInfo<Blog> selectByCategory(Integer pageNum, Integer pageSize, Integer search);
+    IPage<Blog> selectByCategory(Integer pageNum, Integer pageSize, Integer search);
 
-    PageInfo<Blog> getBlogByTime(Integer pageNum, Integer pageSize, String search);
+    IPage<Blog> getBlogByTime(Integer pageNum, Integer pageSize, String search);
 
     List<String> getBlogTime();
 
     void syncBlog();
 
-    PageInfo<BlogES> searchBlog(Integer pageNum, Integer pageSize, String context);
+    IPage<BlogES> searchBlog(Integer pageNum, Integer pageSize, String context);
 }

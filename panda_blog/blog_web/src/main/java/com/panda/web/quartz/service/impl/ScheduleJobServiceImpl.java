@@ -1,3 +1,4 @@
+/*
 package com.panda.web.quartz.service.impl;
 
 
@@ -18,6 +19,7 @@ import tk.mybatis.mapper.entity.Example;
 import java.util.Date;
 import java.util.List;
 
+*/
 /**
  * 定时任务实现接口
  *
@@ -25,7 +27,31 @@ import java.util.List;
  * @Create 2018/11/14
  * =====================
  * @update 2018/11/22 对删除进行批处理
- */
+ * <p>
+ * 操作日志
+ * <p>
+ * 运行日志
+ * <p>
+ * 记录操作任务日志
+ * @param jobId
+ * <p>
+ * 记录运行日志
+ * @param jobExecutionContext
+ * <p>
+ * 查询所有的定时任务的操作日志
+ * @return 查询日志总条数
+ * @param userName
+ * @param startTime
+ * @param endTime
+ * @param logType
+ * @return 批量删除日志
+ * @return ids
+ * <p>
+ * 批量删除任务
+ * 逻辑删除
+ * @param id
+ *//*
+
 @Service
 @Slf4j
 public class ScheduleJobServiceImpl implements ScheduleJobService {
@@ -36,13 +62,17 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
     @Autowired
     ScheduleJobLogMapper logMapper;
 
-    /**
-     * 操作日志
-     */
+    */
+/**
+ * 操作日志
+ *//*
+
     protected static final int LOG_TYPE_ONE = 0;
-    /**
-     * 运行日志
-     */
+    */
+/**
+ * 运行日志
+ *//*
+
     protected static final int LOG_TYPE_TWO = 1;
 
 
@@ -81,16 +111,20 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 
     @Override
     public List<ScheduleJob> getJobs(String ids) {
-      /*  String sql = "select * from t_s_task where id in (" + ids + ")";
+      */
+/*  String sql = "select * from t_s_task where id in (" + ids + ")";
         List<ScheduleJob> list = findListbySql(sql, ScheduleJob.class);
-        return list;*/
+        return list;*//*
+
         return null;
     }
 
 
     @Override
     public void inserJob(ScheduleJob job) {
-        /*save(job);*/
+        */
+/*save(job);*//*
+
     }
 
     @Override
@@ -101,7 +135,9 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 
     @Override
     public void deleteJob(Integer id) {
-        /*    deleteEntityById(ScheduleJob.class, id);*/
+        */
+/*    deleteEntityById(ScheduleJob.class, id);*//*
+
     }
 
 
@@ -111,11 +147,13 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
         return job;
     }
 
-    /**
-     * 记录操作任务日志
-     *
-     * @param jobId
-     */
+    */
+/**
+ * 记录操作任务日志
+ *
+ * @param jobId
+ *//*
+
     @Override
     public void writeLog(Integer jobId, String type,String ip) {
         ScheduleJobLog scheduleJobLog = new ScheduleJobLog();
@@ -130,32 +168,39 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
         logMapper.insert(scheduleJobLog);
     }
 
-    /**
-     * 记录运行日志
-     *
-     * @param jobExecutionContext
-     */
+    */
+/**
+ * 记录运行日志
+ *
+ * @param jobExecutionContext
+ *//*
+
     @Override
     public void logs(JobExecutionContext jobExecutionContext, String content) {
-     /*   ScheduleJob scheduleJob = (ScheduleJob) jobExecutionContext.getJobDetail().getJobDataMap().get("scheduleJob");
+     */
+/*   ScheduleJob scheduleJob = (ScheduleJob) jobExecutionContext.getJobDetail().getJobDataMap().get("scheduleJob");
         int jobId = scheduleJob.getId();
         ScheduleJobLog scheduleJobLog = new ScheduleJobLog();
         scheduleJobLog.setContent(content);
         scheduleJobLog.setLogType(LOG_TYPE_TWO);
         scheduleJobLog.setCreateTime(new Date());
         scheduleJobLog.setJobId(jobId);
-        save(scheduleJobLog);*/
+        save(scheduleJobLog);*//*
+
     }
 
 
-    /**
-     * 查询所有的定时任务的操作日志
-     *
-     * @return
-     */
+    */
+/**
+ * 查询所有的定时任务的操作日志
+ *
+ * @return
+ *//*
+
     @Override
     public List<ScheduleJobLog> findAllOperLog(String userName, String startTime, String endTime, String logType, int offset, int limit) {
-    /*    StringBuilder sql = new StringBuilder();
+    */
+/*    StringBuilder sql = new StringBuilder();
         sql.append(" SELECT  l.*,  " +
                 "    (CASE   WHEN l.log_type = 1 THEN 'system' ELSE u.username  " +
                 "    END) username,  t.job_name  " +
@@ -179,21 +224,25 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
         sql.append(" order by l.create_time desc");
         sql.append(" LIMIT " + offset + " , " + limit);
         List scheduleJobLogs = listBySQL(sql.toString());
-        return scheduleJobLogs;*/
+        return scheduleJobLogs;*//*
+
         return null;
     }
 
-    /**
-     * 查询日志总条数
-     *
-     * @param userName
-     * @param startTime
-     * @param endTime
-     * @param logType
-     * @return
-     */
+    */
+/**
+ * 查询日志总条数
+ *
+ * @param userName
+ * @param startTime
+ * @param endTime
+ * @param logType
+ * @return
+ *//*
+
     @Override
     public int getCountBySqls(String userName, String startTime, String endTime, String logType) {
+*/
 /*        StringBuilder sql = new StringBuilder();
         sql.append(" SELECT                                 ");
         sql.append("    count(1)                            ");
@@ -217,32 +266,40 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
             sql.append(" AND l.create_time < '" + endTime + "'  ");
         }
         int count = getCountBySql(sql.toString());
-        return count;*/
+        return count;*//*
+
         return 0;
     }
 
-    /**
-     * 批量删除日志
-     *
-     * @return ids
-     */
+    */
+/**
+ * 批量删除日志
+ *
+ * @return ids
+ *//*
+
     @Override
     public void deteteLOg(String ids) {
-       /* String sql = "delete from t_s_task_log where id in (" + ids + ")";
-        executeSQL(sql);*/
+       */
+/* String sql = "delete from t_s_task_log where id in (" + ids + ")";
+        executeSQL(sql);*//*
+
     }
 
 
     @Override
     public void deteteAllLOg() {
-       /* String sql = "delete  from t_s_task_log where 1=1";
-        executeSQL(sql);*/
+       */
+/* String sql = "delete  from t_s_task_log where 1=1";
+        executeSQL(sql);*//*
+
     }
 
 
     @Override
     public int countAlls(String departmentname, String statu) {
-      /*  StringBuilder sql = new StringBuilder();
+      */
+/*  StringBuilder sql = new StringBuilder();
         sql.append(" SELECT                                 ");
         sql.append("    count(1) ");
         sql.append(" FROM                                   ");
@@ -256,19 +313,23 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
         }
 
         int count = getCountBySql(sql.toString());
-        return count;*/
+        return count;*//*
+
         return 0;
     }
 
 
-    /**
-     * 批量删除任务
-     * 逻辑删除
-     *
-     * @param id
-     */
+    */
+/**
+ * 批量删除任务
+ * 逻辑删除
+ *
+ * @param id
+ *//*
+
     @Override
     public void deleteJobs(String id) {
     }
 
 }
+*/

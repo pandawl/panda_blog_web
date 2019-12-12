@@ -1,12 +1,12 @@
-/*
 package com.panda.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.panda.pojo.blog.Menu;
 
 import java.util.List;
 import java.util.Map;
 
-public interface MenuService  {
+public interface MenuService extends IService<Menu> {
 
     List<Menu> findUserPermissions(String username);
 
@@ -20,14 +20,11 @@ public interface MenuService  {
 
     void updateMenu(Menu menu) throws Exception;
 
-    */
-/**
+    /**
      * 递归删除菜单/按钮
      *
      * @param menuIds menuIds
-     *//*
-
+     */
     void deleteMeuns(String[] menuIds) throws Exception;
 
 }
-*/

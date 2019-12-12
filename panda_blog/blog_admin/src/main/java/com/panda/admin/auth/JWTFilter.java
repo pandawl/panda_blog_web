@@ -1,4 +1,3 @@
-/*
 package com.panda.admin.auth;
 
 import com.panda.admin.properties.PandaProperties;
@@ -21,12 +20,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-*/
 /**
  * @Auther: wl
  * @Date: 2019/11/14 15:11
  * @Description:
- *//*
+ */
 
 @Slf4j
 public class JWTFilter extends BasicHttpAuthenticationFilter {
@@ -43,10 +41,12 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         //获取自定义文件中放行的url
         String[] anonUrl = StringUtils.splitByWholeSeparatorPreserveAllTokens(properties.getShiro().getAnonUrl(), ",");
         boolean match = false;
+        log.info(httpRequest.getRequestURI());
         for (String url : anonUrl) {
             //url匹配上 直接放行
             if (pathMatcher.match(url, httpRequest.getRequestURI())) {
                 match = true;
+                break;
             }
         }
         if (match) {
@@ -75,6 +75,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         String token = httpServletRequest.getHeader(TOKEN);
         JWTToken jwtToken = new JWTToken(PandaUtil.decryptToken(token));
         try {
+            // 提交给realm进行登入，如果错误他会抛出异常并被捕获
             getSubject(request, response).login(jwtToken);
             return true;
         } catch (AuthenticationException e) {
@@ -82,10 +83,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
             return false;
         }
     }
-    */
-/**
-     * 对跨域提供支持
-     *//*
+
 
     @Override
     protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
@@ -119,4 +117,3 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         return false;
     }
 }
-*/

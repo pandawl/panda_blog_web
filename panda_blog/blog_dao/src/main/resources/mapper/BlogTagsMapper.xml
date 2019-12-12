@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.panda.dao.BlogTagsMapper" >
-  <resultMap id="BaseResultMap" type="com.panda.pojo.blog.BlogTags" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="tag_id" property="tag_id" jdbcType="INTEGER" />
-    <result column="blog_id" property="blog_id" jdbcType="INTEGER" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from blog_tags
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByBlogId" parameterType="java.lang.Integer" >
-    delete from blog_tags
-    where blog_id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.panda.pojo.blog.BlogTags" >
-    insert into blog_tags (id, tag_id, blog_id
-      )
-    values (#{id,jdbcType=INTEGER}, #{tag_id,jdbcType=INTEGER}, #{blog_id,jdbcType=INTEGER}
-      )
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="com.panda.pojo.blog.BlogTags" >
-    update blog_tags
-    set tag_id = #{tag_id,jdbcType=INTEGER},
-      blog_id = #{blog_id,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select id, tag_id, blog_id
-    from blog_tags
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
-    select id, tag_id, blog_id
-    from blog_tags
-  </select>
-  <select id="selectByBlogId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-    select id, tag_id, blog_id
-    from blog_tags
-    where blog_id = #{id,jdbcType=INTEGER}
-  </select>
+<mapper namespace="com.panda.dao.BlogTagsMapper">
+    <resultMap id="BaseResultMap" type="com.panda.pojo.blog.BlogTags">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="tag_id" property="tag_id" jdbcType="INTEGER"/>
+        <result column="blog_id" property="blog_id" jdbcType="INTEGER"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from blog_tags
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByBlogId" parameterType="java.lang.Integer">
+        delete from blog_tags
+        where blog_id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.panda.pojo.blog.BlogTags">
+        insert into blog_tags (id, tag_id, blog_id
+        )
+        values (#{id,jdbcType=INTEGER}, #{tag_id,jdbcType=INTEGER}, #{blog_id,jdbcType=INTEGER}
+        )
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.panda.pojo.blog.BlogTags">
+        update blog_tags
+        set tag_id = #{tag_id,jdbcType=INTEGER},
+        blog_id = #{blog_id,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select id, tag_id, blog_id
+        from blog_tags
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, tag_id, blog_id
+        from blog_tags
+    </select>
+    <select id="selectByBlogId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select id, tag_id, blog_id
+        from blog_tags
+        where blog_id = #{id,jdbcType=INTEGER}
+    </select>
 </mapper>

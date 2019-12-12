@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import routes from './router'
-import { setTitle } from '../lib/util';
 
 
 Vue.use(Router)

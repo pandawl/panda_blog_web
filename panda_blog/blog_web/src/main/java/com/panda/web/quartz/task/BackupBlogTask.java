@@ -1,3 +1,4 @@
+/*
 package com.panda.web.quartz.task;
 
 import com.panda.common.util.DatabaseUtil;
@@ -12,11 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+*/
 /**
  * @Auther: wl
  * @Date: 2019/9/2 16:42
  * @Description: 备份数据库
- */
+ *//*
+
 @Slf4j
 @DisallowConcurrentExecution
 public class BackupBlogTask implements Job {
@@ -48,3 +51,4 @@ public class BackupBlogTask implements Job {
 
     }
 }
+*/

@@ -37,7 +37,7 @@ public class SessionFilter implements Filter {
         if (ingorePath.contains(url)) {
             chain.doFilter(request, response);
         } *//*
-*/
+ */
 /*else {
             CustomerReg info = null;
             String token = request.getParameter("token");
@@ -52,9 +52,9 @@ public class SessionFilter implements Filter {
             }
             if (info == null) {
                *//*
-*/
+ */
 /**//*
-*/
+ */
 /* response.setCharacterEncoding("utf-8");
                 response.setContentType("application/json; charset=utf-8");
                 PrintWriter writer = response.getWriter();
@@ -63,40 +63,40 @@ public class SessionFilter implements Filter {
                 writer.flush();
                 writer.close();
                 return;*//*
-*/
+ */
 /**//*
-*/
+ */
 /*
             } else {
                 *//*
-*/
+ */
 /**//*
-*/
+ */
 /*String[] urls = url.split("/");
                 String model_url = null;
                 if (urls.length >= 3) {
                     model_url = urls[urls.length - 2];
                 }*//*
-*/
+ */
 /**//*
-*/
+ */
 /*
                 request.setAttribute(Constants.USER_LOGIN_INFO, info);
             *//*
-*/
+ */
 /**//*
-*/
+ */
 /*    request.setAttribute(Constants.MODEL_URL, model_url);*//*
-*/
+ */
 /**//*
-*/
+ */
 /*
 
             }
             chain.doFilter(request, response);*//*
-*/
+ */
 /*
-*//*
+ *//*
 
 
 
