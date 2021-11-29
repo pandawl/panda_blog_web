@@ -16,7 +16,7 @@
     "babel-polyfill": "^6.26.0",
     "date-fns": "^1.29.0",
     "enquire.js": "^2.1.6",
-    "mavon-editor": "^2.7.7",
+    "mavon-editor": "^2.8.2",
     "vue": "^2.5.2",
     "vue-apexcharts": "^1.2.7",
     "vue-router": "^3.0.1",
