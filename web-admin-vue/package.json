@@ -14,7 +14,7 @@
     "axios": "^0.18.0",
     "body-parser": "^1.19.0",
     "element-ui": "^2.8.2",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "js-cookie": "^2.2.0",
     "mavon-editor": "^2.7.4",
     "moment": "^2.24.0",
